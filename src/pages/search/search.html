@@ -5,16 +5,20 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-searchbar
-    [(ngModel)]="myInput"
-    [showCancelButton]="shouldShowCancel"
-    (ionInput)="onInput($event)"
-    (ionCancel)="onCancel($event)">
-  </ion-searchbar>
-
+  <ion-navbar color='primary'>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar color='primary'>
+    <ion-searchbar
+      placeholder="Search here"
+      showCancelButton color="danger"
+      (ionInput)="onInput($event)"
+      (ionCancel)="onCancel($event)">
+    </ion-searchbar>
+  </ion-toolbar>
 </ion-header>
-
 
 <ion-content padding>
 

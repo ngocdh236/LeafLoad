@@ -1,6 +1,7 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ENV } from '@environment';
+import { of } from 'rxjs/observable/of';
 
 /*
   Generated class for the MediaDataProvider provider.
@@ -12,13 +13,10 @@ import { ENV } from '@environment';
 export class MediaDataProvider {
   apiUrl = ENV.API_BASE_URL;
   mediaURL = `${this.apiUrl}/uploads/`;
+  searchURL = `${this.apiUrl}/media/search/`;
 
   constructor(public http: HttpClient) {
   }
-
-/*  public getAllMedia() {
-    return this.http.get(this.apiUrl + '/media?start=50&limit=50');
-  }*/
 
   public getMediaFiles(page: number, numberOfFilesPerRequest: number) {
     const start = page * numberOfFilesPerRequest;
@@ -32,4 +30,13 @@ export class MediaDataProvider {
     }
     return this.http.get(this.apiUrl + '/media/user', settings);
   }
+
+  public searchMediaFiles(keyWord: string) {
+    const settings = {
+      headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token')).set('Conten-Type', 'application/x-www-form-urlencoded')
+    }
+    const dictValue = {title: `${keyWord}`, description: `${keyWord}`};
+    return this.http.post(this.searchURL, dictValue);
+  }
+
 }
