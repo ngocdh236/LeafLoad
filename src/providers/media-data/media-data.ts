@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-=======
-import { HttpClient } from '@angular/common/http';
->>>>>>> c1e3d2cc007483e9272c2eeb5d99849abe32a2da
 import { Injectable } from '@angular/core';
 
 /*
@@ -28,7 +24,6 @@ export class MediaDataProvider {
     return this.http.get(this.apiUrl + `/media?start=${start}&limit=${numberOfFilesPerRequest}`);
   }
 
-<<<<<<< HEAD
   public getMediaFilesOfCurrentUser(page: number, numberOfFilesPerRequest: number) {
     const start = page * numberOfFilesPerRequest;
     const settings = {
@@ -36,6 +31,4 @@ export class MediaDataProvider {
     }
     return this.http.get(this.apiUrl + '/media/user', settings);
   }
-=======
->>>>>>> c1e3d2cc007483e9272c2eeb5d99849abe32a2da
 }
