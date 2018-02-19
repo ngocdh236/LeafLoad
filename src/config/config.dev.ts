@@ -1,3 +1,3 @@
 export const ENV = {
-  API_URL: 'http://media.mw.metropolia.fi/wbma'
+  API_BASE_URL: 'http://media.mw.metropolia.fi/wbma'
 };
