@@ -1,9 +1,37 @@
 <ion-header>
-
+  <ion-navbar>
+    <ion-title text-center>LeafLoad</ion-title>
+  </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
+  <form (submit) = "login()">
+    <ion-item>
+      <ion-input [(ngModel)]="user.username" name="username" type="text" placeholder="Username" #username="ngModel"
+                 required></ion-input>
+    </ion-item>
 
+    <ion-item>
+      <ion-input [(ngModel)]="user.password" name="password" type="password" placeholder="Password" #password="ngModel"
+                 required></ion-input>
+    </ion-item>
+
+    <div padding-left padding-top>
+      <button ion-button type="submit" block>Login</button>
+    </div>
+    <br>
+    <div padding text-center><h6 ion-text color="danger">{{status}}</h6></div>
+
+  </form>
+
+  <div>
+    <button ion-button block clear (click)="signUp()">Sign Up</button>
+  </div>
+
+  <div>
+    <button ion-button block clear (click)="skip()">Skip</button>
+  </div>
 
 </ion-content>
+
+

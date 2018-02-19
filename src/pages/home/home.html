@@ -4,6 +4,22 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  <ion-item no-lines *ngFor="let media of mediaArray">
+    <img [src]="media.thumbnail">
+    <h2>{{media.title}}</h2>
+    <p>{{media.description}}</p>
 
+    <button style="background: transparent">
+      <ion-icon tabIcon="heart-outline"></ion-icon>
+    </button>
+
+    <button style="background: transparent">
+      <ion-icon name="ios-text-outline"></ion-icon>
+    </button>
+  </ion-item>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
