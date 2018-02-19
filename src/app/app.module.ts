@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import {IonicApp, IonicModule, IonicErrorHandler, NavController} from 'ionic-angular';
 import { MyApp } from './app.component';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from "./interceptors/token.interceptor";
+
 import {ProfilePage} from "../pages/profile/profile";
 import {UploadPage} from "../pages/upload/upload";
 import { HomePage } from '../pages/home/home';
@@ -48,6 +51,7 @@ import {SearchPage} from "../pages/search/search";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     UserDataProvider,
     MediaDataProvider,
   ]
