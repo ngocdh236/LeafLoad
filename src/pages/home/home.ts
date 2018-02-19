@@ -8,9 +8,9 @@ import {MediaDataProvider} from "../../providers/media-data/media-data";
 })
 export class HomePage {
   mediaArray: any[] = [];
-  numberOfFilesPerRequest = 10;
   currentPage = 0;
-  infiniteScroll: any; // TODO: Get this reference from HTML
+  numberOfFilesPerRequest = 10;
+  infiniteScroll: any;
 
   constructor(public navCtrl: NavController, public mediaData: MediaDataProvider) {
     this.currentPage = 0;
@@ -18,11 +18,8 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    console.log("ViewDidLoad");
     this.loadMediaFiles(this.currentPage);
   }
-
-
 
   loadMediaFiles(page: number) {
     this.mediaData.getMediaFiles(this.currentPage, this.numberOfFilesPerRequest).subscribe(res => {
@@ -33,7 +30,6 @@ export class HomePage {
         const thumbName = temp[0] + '-tn320.png';
         media.thumbnail = this.mediaData.mediaURL + thumbName;
         this.mediaArray.push(media);
-
       });
 
       // Increase the current page index
@@ -50,7 +46,6 @@ export class HomePage {
 
   doInfinite(infiniteScroll) {
     this.infiniteScroll = infiniteScroll;
-
     this.loadMediaFiles(this.currentPage);
   }
 }
