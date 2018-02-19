@@ -46,5 +46,6 @@ export class HomePage {
 
   doInfinite(infiniteScroll) {
     this.infiniteScroll = infiniteScroll;
+    this.loadMediaFiles(this.currentPage);
   }
 }
