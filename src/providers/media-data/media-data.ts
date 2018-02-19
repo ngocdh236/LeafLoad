@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ENV } from '@environment';
 
 /*
   Generated class for the MediaDataProvider provider.
@@ -9,8 +10,8 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class MediaDataProvider {
-  apiUrl = 'http://media.mw.metropolia.fi/wbma';
-  mediaURL = 'http://media.mw.metropolia.fi/wbma/uploads/';
+  apiUrl = ENV.API_URL;
+  mediaURL = `${this.apiUrl}/uploads/``;
 
   constructor(public http: HttpClient) {
   }
