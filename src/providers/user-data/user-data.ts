@@ -11,7 +11,7 @@ import { ENV } from '@environment';
 */
 @Injectable()
 export class UserDataProvider {
-  apiUrl = ENV.API_URL;
+  apiUrl = ENV.API_BASE_URL;
 
   constructor(public http: HttpClient) {
   }
@@ -32,5 +32,9 @@ export class UserDataProvider {
     };
 
     return this.http.post(this.apiUrl + '/users', user, settings);
+  }
+
+  public getUsername() {
+
   }
 }
