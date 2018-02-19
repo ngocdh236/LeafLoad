@@ -11,7 +11,7 @@ import { ENV } from '@environment';
 @Injectable()
 export class MediaDataProvider {
   apiUrl = ENV.API_URL;
-  mediaURL = `${this.apiUrl}/uploads/``;
+  mediaURL = `${this.apiUrl}/uploads/`;
 
   constructor(public http: HttpClient) {
   }
