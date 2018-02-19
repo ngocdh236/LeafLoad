@@ -22,6 +22,26 @@
     <br>
     <div padding text-center><h6 ion-text color="danger">{{status}}</h6></div>
 
+<<<<<<< HEAD
+=======
+  <form (submit) = "login()">
+    <ion-item>
+      <ion-input [(ngModel)]="user.username" name="username" type="text" placeholder="Username" #username="ngModel"
+                 required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input [(ngModel)]="user.password" name="password" type="password" placeholder="Password" #password="ngModel"
+                 required></ion-input>
+    </ion-item>
+
+    <div padding-left padding-top>
+      <button ion-button type="submit" block>Login</button>
+    </div>
+    <br>
+    <div padding text-center><h6 ion-text color="danger">{{status}}</h6></div>
+
+>>>>>>> c1e3d2cc007483e9272c2eeb5d99849abe32a2da
   </form>
 
   <div>

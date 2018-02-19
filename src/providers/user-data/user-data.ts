@@ -32,9 +32,12 @@ export class UserDataProvider {
 
     return this.http.post(this.apiUrl + '/users', user, settings);
   }
+<<<<<<< HEAD
 
   public getUsername() {
 
   }
 
+=======
+>>>>>>> c1e3d2cc007483e9272c2eeb5d99849abe32a2da
 }
