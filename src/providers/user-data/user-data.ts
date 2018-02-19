@@ -1,6 +1,7 @@
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {User} from "../../interfaces/User";
+import { ENV } from '@environment';
 
 /*
   Generated class for the UserDataProvider provider.
@@ -10,7 +11,7 @@ import {User} from "../../interfaces/User";
 */
 @Injectable()
 export class UserDataProvider {
-  apiUrl = 'http://media.mw.metropolia.fi/wbma';
+  apiUrl = ENV.API_URL;
 
   constructor(public http: HttpClient) {
   }
