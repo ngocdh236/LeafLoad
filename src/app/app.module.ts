@@ -20,6 +20,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {SignupPage} from "../pages/signup/signup";
 import {SearchPage} from "../pages/search/search";
 import { LoginTemplatePage } from "../pages/login-template/login-template";
+import { PostTemplatePage } from "../pages/post-template/post-template";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { LoginTemplatePage } from "../pages/login-template/login-template";
     LoginPage,
     SignupPage,
     SearchPage,
-    LoginTemplatePage
+    LoginTemplatePage,
+    PostTemplatePage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { LoginTemplatePage } from "../pages/login-template/login-template";
     LoginPage,
     SignupPage,
     SearchPage,
-    LoginTemplatePage
+    LoginTemplatePage,
+    PostTemplatePage
   ],
   providers: [
     StatusBar,
