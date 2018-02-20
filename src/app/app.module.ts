@@ -19,6 +19,7 @@ import { MediaDataProvider } from '../providers/media-data/media-data';
 import {HttpClientModule} from "@angular/common/http";
 import {SignupPage} from "../pages/signup/signup";
 import {SearchPage} from "../pages/search/search";
+import { LoginTemplatePage } from "../pages/login-template/login-template";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {SearchPage} from "../pages/search/search";
     TabsPage,
     LoginPage,
     SignupPage,
-    SearchPage
+    SearchPage,
+    LoginTemplatePage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import {SearchPage} from "../pages/search/search";
     TabsPage,
     LoginPage,
     SignupPage,
-    SearchPage
+    SearchPage,
+    LoginTemplatePage
   ],
   providers: [
     StatusBar,
@@ -53,7 +56,7 @@ import {SearchPage} from "../pages/search/search";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     UserDataProvider,
-    MediaDataProvider,
+    MediaDataProvider
   ]
 })
 export class AppModule {}

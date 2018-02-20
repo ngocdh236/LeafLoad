@@ -37,4 +37,10 @@ export class UserDataProvider {
   public getUsername() {
 
   }
+
+  public isUserLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
+
+    return token != null && token.trim() !== '';
+  }
 }

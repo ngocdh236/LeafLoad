@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild  } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {MediaDataProvider} from "../../providers/media-data/media-data";
-
+import { MediaDataProvider } from "../../providers/media-data/media-data";
+import { UserDataProvider } from "../../providers/user-data/user-data";
+import { LoginPage } from "../login/login";
+import { HttpErrorResponse } from "@angular/common/http";
+import { UserDataProvider } from "../../providers/user-data/user-data";
+import { LoginTemplatePage } from "../login-template/login-template";
 /**
  * Generated class for the SearchPage page.
  *
@@ -16,30 +20,56 @@ import {MediaDataProvider} from "../../providers/media-data/media-data";
 })
 export class SearchPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private mediaData: MediaDataProvider) {
+  @ViewChild(LoginTemplatePage) loginTemplate;
+
+  isUserLoggedIn: boolean = false;
+  loginPage: any = LoginPage;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private mediaData: MediaDataProvider, private userDataProvider: UserDataProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchPage');
+    loginTemplate.shouldShowSkipButton = false;
+    loginTemplate.shouldShowSignUpButton = false;
+    this.isUserLoggedIn = false;
+    //this.isUserLoggedIn = this.userDataProvider.isUserLoggedIn();
+    //console.log(`Is user logged in: ${this.userDataProvider.isUserLoggedIn()}`);
   }
 
   onInput(ev: any) {
-    console.log("typing something...");
     let keyword = ev.target.value;
     if (keyword && keyword.trim() !== '') {
       this.mediaData.searchMediaFiles(keyword).subscribe(res => {
-        console.log(res);
+
       }, (error) => {
-        console.log(error);
+
       });
     } else {
       // Revert search result
-
     }
   }
 
+  onLogin(ev: any) {
+    this.userDataProvider.login(ev).subscribe(response => {
+      localStorage.setItem('token', response['token']);
+      console.log(`Error: ${this.loginTemplate}`);
+      this.isUserLoggedIn = true;
+    }, (error: HttpErrorResponse) => {
+      this.loginTemplate.updateAlert(error.error.message);
+      console.log(`Error: ${this.loginTemplate}`);
+    });
+  }
+
+  onSignUp(event: any) {
+
+  }
+
   onCancel(ev: any) {
-    console.log("On cancel");
+
+  }
+
+  onSkip(ev: any) {
+
   }
 
 }

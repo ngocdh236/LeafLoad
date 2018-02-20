@@ -1,0 +1,28 @@
+<ion-content padding>
+  <form (submit) = "emitLoginEvent()">
+    <ion-item>
+      <ion-input [(ngModel)]="user.username" name="username" type="text" placeholder="Username" #username="ngModel"
+                 required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input [(ngModel)]="user.password" name="password" type="password" placeholder="Password" #password="ngModel"
+                 required></ion-input>
+    </ion-item>
+
+    <div padding-left padding-top>
+      <button ion-button type="submit" block [disabled]="!username.valid || !password.valid">Login</button>
+    </div>
+    <br>
+    <div padding text-center><h6 ion-text color="danger">{{status}}</h6></div>
+  </form>
+
+  <div [hidden]="!shouldShowSignUpButton">
+    <button ion-button block clear (click)="emitSignUpEvent()">Sign Up</button>
+  </div>
+
+  <div [hidden]="!shouldShowSkipButton">
+    <button ion-button block clear (click)="skip()">Skip</button>
+  </div>
+
+</ion-content>
