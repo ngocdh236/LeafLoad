@@ -30,7 +30,6 @@ export class HomePage {
         const thumbName = temp[0] + '-tn320.png';
         media.thumbnail = this.mediaData.mediaURL + thumbName;
         this.mediaArray.push(media);
-
       });
 
       // Increase the current page index
@@ -47,5 +46,6 @@ export class HomePage {
 
   doInfinite(infiniteScroll) {
     this.infiniteScroll = infiniteScroll;
+    this.loadMediaFiles(this.currentPage);
   }
 }
