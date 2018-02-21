@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {MediaDataProvider} from "../../providers/media-data/media-data";
+import { PostTemplatePage } from "../post-template/post-template";
 
 @Component({
   selector: 'page-home',
@@ -48,4 +49,13 @@ export class HomePage {
     this.infiniteScroll = infiniteScroll;
     this.loadMediaFiles(this.currentPage);
   }
+
+  like(event: any) {
+    console.log("like event");
+  }
+
+  comment(event: any) {
+    console.log("comment event");
+  }
+
 }

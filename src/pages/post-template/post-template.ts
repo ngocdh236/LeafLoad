@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
@@ -14,12 +14,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'post-template.html',
 })
 export class PostTemplatePage {
+  @Input() mediaData: any;
+
+  @Output() like: EventEmitter<any> = new EventEmitter();
+  @Output() comment: EventEmitter<any> = new EventEmitter();
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PostTemplatePage');
+
   }
 
+  emitLikeEvent() {
+    this.like.emit(this.mediaData);
+  }
+
+  emitCommentEvent() {
+    this.comment.emit(this.mediaData);
+  }
 }

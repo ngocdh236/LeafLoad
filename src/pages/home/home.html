@@ -6,22 +6,7 @@
 
 <ion-content>
   <div class="media-card" no-lines *ngFor="let media of mediaArray">
-    <h5>username</h5>
-    <img [src]="media.thumbnail">
-    <h5>{{media.title}}</h5>
-    <p>{{media.description}}</p>
-
-    <button class="card-interaction" ion-button icon-left clear small>
-      <ion-icon name="ios-heart-outline"></ion-icon>
-      <div>12</div>
-    </button>
-
-    <button class="card-interaction" ion-button icon-left clear small>
-      <ion-icon name="ios-text-outline"></ion-icon>
-      <div>4</div>
-    </button>
-
-    <p class="card-interaction">11h ago</p>
+    <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($comment)"></page-post-template>
   </div>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
