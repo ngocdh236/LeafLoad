@@ -4,7 +4,6 @@ import { MediaDataProvider } from "../../providers/media-data/media-data";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { LoginPage } from "../login/login";
 import { HttpErrorResponse } from "@angular/common/http";
-import { UserDataProvider } from "../../providers/user-data/user-data";
 import { LoginTemplatePage } from "../login-template/login-template";
 /**
  * Generated class for the SearchPage page.
@@ -29,8 +28,8 @@ export class SearchPage {
   }
 
   ionViewDidLoad() {
-    loginTemplate.shouldShowSkipButton = false;
-    loginTemplate.shouldShowSignUpButton = false;
+    this.loginTemplate.shouldShowSkipButton = false;
+    this.loginTemplate.shouldShowSignUpButton = false;
     this.isUserLoggedIn = false;
     //this.isUserLoggedIn = this.userDataProvider.isUserLoggedIn();
     //console.log(`Is user logged in: ${this.userDataProvider.isUserLoggedIn()}`);

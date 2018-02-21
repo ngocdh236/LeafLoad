@@ -46,7 +46,7 @@ export class LoginTemplatePage {
     this.signUp.emit(null);
   }
 
-  skip() {
+  emitSkipEvent() {
     this.skip.emit(null);
   }
 
