@@ -15,10 +15,6 @@ export class MediaDataProvider {
   constructor(public http: HttpClient) {
   }
 
-/*  public getAllMedia() {
-    return this.http.get(this.apiUrl + '/media?start=50&limit=50');
-  }*/
-
   public getMediaFiles(page: number, numberOfFilesPerRequest: number) {
     const start = page * numberOfFilesPerRequest;
     return this.http.get(this.apiUrl + `/media?start=${start}&limit=${numberOfFilesPerRequest}`);
