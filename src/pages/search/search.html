@@ -20,6 +20,12 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-content [hidden]="!isUserLoggedIn" padding>
+  <div class="media-card" no-lines *ngFor="let media of mediaArray">
+    <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($comment)"></page-post-template>
+  </div>
+</ion-content>
+
 <ion-content [hidden]="isUserLoggedIn" padding>
     <ion-item>
       <ion-label>Please login to continue searching:</ion-label>
