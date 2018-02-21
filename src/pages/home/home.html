@@ -1,25 +1,68 @@
-<ion-header>
+<ion-header no-border>
   <ion-navbar>
     <ion-title text-center>LeafLoad</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-item no-lines *ngFor="let media of mediaArray">
+  <div class="media-card" no-lines *ngFor="let media of mediaArray">
+    <h5>username</h5>
     <img [src]="media.thumbnail">
-    <h2>{{media.title}}</h2>
+    <h5>{{media.title}}</h5>
     <p>{{media.description}}</p>
 
-    <button style="background: transparent">
-      <ion-icon tabIcon="heart-outline"></ion-icon>
+    <button class="card-interaction" ion-button icon-left clear small>
+      <ion-icon name="ios-heart-outline"></ion-icon>
+      <div>12</div>
     </button>
 
-    <button style="background: transparent">
+    <button class="card-interaction" ion-button icon-left clear small>
       <ion-icon name="ios-text-outline"></ion-icon>
+      <div>4</div>
     </button>
-  </ion-item>
+
+    <p class="card-interaction">11h ago</p>
+  </div>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
+
+<!--<ion-content>-->
+  <!--<ion-card *ngFor="let media of mediaArray">-->
+    <!--<ion-item>-->
+      <!--<h2>username</h2>-->
+    <!--</ion-item>-->
+
+    <!--<img [src]="media.thumbnail">-->
+
+    <!--<ion-card-content>-->
+      <!--<h2>{{media.title}}</h2>-->
+      <!--<p>{{media.description}}</p>-->
+    <!--</ion-card-content>-->
+
+    <!--<ion-row>-->
+      <!--<ion-col>-->
+        <!--<button ion-button icon-left clear small>-->
+          <!--<ion-icon name="ios-heart-outline"></ion-icon>-->
+          <!--<div>12</div>-->
+        <!--</button>-->
+      <!--</ion-col>-->
+      <!--<ion-col>-->
+        <!--<button ion-button icon-left clear small>-->
+          <!--<ion-icon name="ios-text-outline"></ion-icon>-->
+          <!--<div>4</div>-->
+        <!--</button>-->
+      <!--</ion-col>-->
+      <!--<ion-col center text-center>-->
+        <!--<ion-note>-->
+          <!--11h ago-->
+        <!--</ion-note>-->
+      <!--</ion-col>-->
+    <!--</ion-row>-->
+  <!--</ion-card>-->
+  <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)">-->
+    <!--<ion-infinite-scroll-content></ion-infinite-scroll-content>-->
+  <!--</ion-infinite-scroll>-->
+<!--</ion-content>-->
