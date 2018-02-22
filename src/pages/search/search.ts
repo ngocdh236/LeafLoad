@@ -23,6 +23,7 @@ export class SearchPage {
 
   isUserLoggedIn: boolean = false;
   loginPage: any = LoginPage;
+  mediaArray: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private mediaData: MediaDataProvider, private userDataProvider: UserDataProvider) {
   }
@@ -38,24 +39,25 @@ export class SearchPage {
   onInput(ev: any) {
     let keyword = ev.target.value;
     if (keyword && keyword.trim() !== '') {
+      this.mediaArray = [];
       this.mediaData.searchMediaFiles(keyword).subscribe(res => {
-
+        this.mediaArray = res;
+        console.log(res);
       }, (error) => {
 
       });
     } else {
       // Revert search result
+      this.mediaArray = [];
     }
   }
 
   onLogin(ev: any) {
     this.userDataProvider.login(ev).subscribe(response => {
       localStorage.setItem('token', response['token']);
-      console.log(`Error: ${this.loginTemplate}`);
       this.isUserLoggedIn = true;
     }, (error: HttpErrorResponse) => {
       this.loginTemplate.updateAlert(error.error.message);
-      console.log(`Error: ${this.loginTemplate}`);
     });
   }
 
@@ -68,6 +70,14 @@ export class SearchPage {
   }
 
   onSkip(ev: any) {
+
+  }
+
+  like(ev: any) {
+
+  }
+
+  comment(ev: any) {
 
   }
 
