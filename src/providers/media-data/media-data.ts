@@ -39,4 +39,13 @@ export class MediaDataProvider {
     return this.http.post(this.searchURL, dictValue);
   }
 
+  public likeMediaFile(file_id: number) {
+    const settings = {
+      headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token'))
+    }
+    const body = {
+      file_id: file_id
+    }
+    return this.http.post(this.apiUrl + '/favourites', body, settings);
+  }
 }

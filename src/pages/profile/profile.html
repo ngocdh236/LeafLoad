@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header no-border>
 
   <ion-navbar>
     <ion-title text-center>Username</ion-title>
@@ -7,18 +7,33 @@
 </ion-header>
 
 <ion-content>
-  <!--<ion-item>-->
-    <!--<img width="120" height="120" style="border-radius: 100%;" src="assets/imgs/gray.jpg">-->
-  <!--</ion-item>-->
+  <!--<div class="user-info">-->
+    <!--<ion-avatar id="avatar">-->
+      <!--<img src="assets/icon/favicon.ico">-->
+    <!--</ion-avatar>-->
+    <!--<div class="body">-->
+      <!--<p class="figures">12 posts</p>-->
+      <!--<p class="figures">12 likes</p>-->
+      <!--<button ion-button color="dark" clear click="modify-user-data()">Edit Profile</button>-->
+    <!--</div>-->
+  <!--</div>-->
+  <div class="media-card" no-lines *ngFor="let media of mediaArray">
+    <h5 class="media-content">username</h5>
+    <div class="media"><img [src]="media.thumbnail"></div>
 
-  <ion-list>
-    <ion-item no-lines *ngFor="let media of mediaArray">
-      <p>username</p>
-      <img [src]="media.thumbnail">
-      <h4>{{media.title}}</h4>
-      <p>{{media.description}}</p>
-    </ion-item>
-  </ion-list>
+    <button class="interaction" ion-button color="dark" icon-left clear large click="like()">
+      <ion-icon name="ios-heart-outline"></ion-icon>
+    </button>
+
+    <button class="interaction" ion-button color="dark" icon-left clear large click="comment()">
+      <ion-icon name="ios-text-outline"></ion-icon>
+    </button>
+
+    <h6 class="media-content">12 likes</h6>
+    <h6 class="media-content">{{media.title}}</h6>
+    <p class="media-content">{{media.description}}</p>
+    <ion-note>11h ago</ion-note>
+  </div>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

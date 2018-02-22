@@ -1,7 +1,51 @@
 page-profile {
+  font-size: 14px;
+  width: 100%;
 
-  img {
+  .media-card {
     width: 100%;
-    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+
+    .media {
+      width: 100%;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .media-content {
+      width: 100%;
+      padding-left: 10px;
+      margin: 10px;
+    }
+
+    ion-note {
+      padding-left: 20px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    .interaction {
+      width: 15%;
+    }
+  }
+  .user-info {
+    padding: 50px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    #avatar {
+      width: 45%;
+    }
+    .body {
+      width: 50%;
+      display: flex;
+      flex-wrap: wrap;
+      .figures {
+        width: 50%;
+      }
+    }
   }
 }

@@ -11,6 +11,7 @@ export class HomePage {
   currentPage = 0;
   numberOfFilesPerRequest = 10;
   infiniteScroll: any;
+  currentFile_id: number;
 
   constructor(public navCtrl: NavController, public mediaData: MediaDataProvider) {
     this.currentPage = 0;
@@ -47,5 +48,9 @@ export class HomePage {
   doInfinite(infiniteScroll) {
     this.infiniteScroll = infiniteScroll;
     this.loadMediaFiles(this.currentPage);
+  }
+
+  likeMediaFile(file_id: number) {
+
   }
 }
