@@ -1,16 +1,15 @@
-<h5>username</h5>
-<img [src]="mediaData.thumbnail">
-<h5>{{mediaData.title}}</h5>
-<p>{{mediaData.description}}</p>
+<h5 class="media-content">username</h5>
+<div class="media"><img [src]="mediaData.thumbnail"></div>
 
-<button class="card-interaction" ion-button icon-left clear small (click)="emitLikeEvent()">
+<button class="interaction" ion-button color="dark" icon-left clear large (click)="emitLikeEvent()">
   <ion-icon name="ios-heart-outline"></ion-icon>
-  <div>12</div>
 </button>
 
-<button class="card-interaction" ion-button icon-left clear small (click)="emitCommentEvent()">
+<button class="interaction" ion-button color="dark" icon-left clear large (click)="emitCommentEvent()">
   <ion-icon name="ios-text-outline"></ion-icon>
-  <div>4</div>
 </button>
 
-<p class="card-interaction">11h ago</p>
+<h6 class="media-content">12 likes</h6>
+<h6 class="media-content">{{mediaData.title}}</h6>
+<p class="media-content">{{mediaData.description}}</p>
+<ion-note>11h ago</ion-note>

@@ -51,16 +51,12 @@ export class HomePage {
     this.loadMediaFiles(this.currentPage);
   }
 
-  likeMediaFile(file_id: number) {
-
-  }
-
   like(event: any) {
-    console.log("like event");
+    console.log(event.file_id);
   }
 
   comment(event: any) {
     console.log("comment event");
   }
-  
+
 }

@@ -51,4 +51,14 @@ export class ProfilePage {
       }
       });
   }
+
+  like(ev: any) {
+
+  }
+
+  comment(ev: any) {
+
+  }
+
+
 }
