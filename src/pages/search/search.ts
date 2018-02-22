@@ -23,7 +23,7 @@ export class SearchPage {
 
   isUserLoggedIn: boolean = false;
   loginPage: any = LoginPage;
-  mediaArray: any[] = [];
+  mediaArray: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private mediaData: MediaDataProvider, private userDataProvider: UserDataProvider) {
   }
