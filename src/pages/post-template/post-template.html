@@ -1,5 +1,5 @@
 <h5>username</h5>
-<img [src]="mediaData.thumbnail">
+<img [src]="(mediaData.filename | thumbnail: 'large')">
 <h5>{{mediaData.title}}</h5>
 <p>{{mediaData.description}}</p>
 

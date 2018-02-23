@@ -21,10 +21,12 @@ import {SignupPage} from "../pages/signup/signup";
 import {SearchPage} from "../pages/search/search";
 import { LoginTemplatePage } from "../pages/login-template/login-template";
 import { PostTemplatePage } from "../pages/post-template/post-template";
+import { ThumbnailPipe } from "../pipes/thumbnail/thumbnail";
 
 @NgModule({
   declarations: [
     MyApp,
+    ThumbnailPipe,
     HomePage,
     UploadPage,
     ProfilePage,
