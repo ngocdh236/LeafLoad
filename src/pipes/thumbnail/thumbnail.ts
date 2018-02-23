@@ -18,7 +18,7 @@ export class ThumbnailPipe implements PipeTransform {
     }
 
     let filename = value.split(".")[0];
-    console.log(filename);
+    
     switch(size) {
       case 'screenshot': {
         filename = `${filename}.png`;
@@ -45,7 +45,7 @@ export class ThumbnailPipe implements PipeTransform {
         filename = `${filename}-tn320.png`;
       }
     }
-    console.log(filename);
+
     return `${ENV.API_BASE_URL}/uploads/${filename}`;
   }
 }
