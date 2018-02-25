@@ -29,11 +29,11 @@ export class PostTemplatePage {
     this.comments$ = this.mediaProvider.getCommentsForFile(this._mediaData.file_id);
     this.likes$ = this.mediaProvider.getLikesForMediaFile(this._mediaData.file_id);
     this.mediaProvider.getCommentsForFile(this._mediaData.file_id).subscribe(res => {
-      this.comments = res;
+      this.comments = res as any[];
       this.isLoadingComments = false;
     });
     this.mediaProvider.getLikesForMediaFile(this._mediaData.file_id).subscribe(res => {
-      this.likes = res;
+      this.likes = res as any[];
       this.isLoadingLikes = false;
     });
   };
@@ -45,15 +45,15 @@ export class PostTemplatePage {
   comments$: Observable<any>;
   likes$: Observable<any>;
 
-  likes: any;
-  comments: any;
+  likes: any[] = [];
+  comments: any[] = [];
 
   isLoadingLikes: boolean = true;
   isLoadingComments: boolean = true;
 
   public get liked() {
     if (this.likes != null && this.likes.length > 0) {
-      let myLike: any[] = this.likes.filter(aLike => aLike.user_id == 17);
+      let myLike: any[] = this.likes.filter(aLike => aLike.user_id == 27);
       if (myLike.length != 0) {
           return true;
       }
@@ -74,7 +74,7 @@ export class PostTemplatePage {
     this.like.emit(this.mediaData);
     this.mediaProvider.likeMediaFile(this._mediaData.file_id).subscribe(res => {
       this.mediaProvider.getLikesForMediaFile(this._mediaData.file_id).subscribe(response => {
-        this.likes = response;
+        this.likes = response as any[];
         this.isLoadingLikes = false;
       });
     });
@@ -84,7 +84,7 @@ export class PostTemplatePage {
     this.unLike.emit(this.mediaData);
     this.mediaProvider.unlikeMediaFile(this._mediaData.file_id).subscribe(res => {
       this.mediaProvider.getLikesForMediaFile(this._mediaData.file_id).subscribe(res => {
-        this.likes = res;
+        this.likes = res as any[];
         this.isLoadingLikes = false;
       });
     });

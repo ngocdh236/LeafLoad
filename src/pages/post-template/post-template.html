@@ -1,43 +1,42 @@
 <div class="media-card">
   <h5 class="media-content">username</h5>
-  <div class="media"><img [src]="mediaData.thumbnail"></div>
   <div class="media"><img [src]="(mediaData.filename | thumbnail: 'large')"></div>
 
   <button *ngIf="!liked" class="interaction" ion-button color="dark" icon-left clear large (click)="emitLikeEvent()" [disabled]="isLoadingLikes">
-    <ion-icon name="ios-heart-outline"></ion-icon>
+    <ion-icon name="ios-leaf-outline"></ion-icon>
   </button>
 
-  <button *ngIf="liked" class="interaction" ion-button color="dark" icon-left clear large (click)="emitUnLikeEvent()" [disabled]="isLoadingLikes">
-    <ion-icon name="ios-heart-outline"></ion-icon>
+  <button *ngIf="liked" class="interaction" ion-button icon-left clear large (click)="emitUnLikeEvent()" [disabled]="isLoadingLikes">
+    <ion-icon name="ios-leaf"></ion-icon>
   </button>
 
   <button class="interaction" ion-button color="dark" icon-left clear large (click)="emitCommentEvent()" [disabled]="isLoadingComments">
     <ion-icon name="ios-text-outline"></ion-icon>
   </button>
 
-  <h6 class="media-content">{{(likes$ | async)?.length}} likes</h6>
+  <h6 class="media-content">{{likes.length}} likes</h6>
   <h6 class="media-content">{{mediaData.title}}</h6>
   <p class="media-content">{{mediaData.description}}</p>
   <ion-note>11h ago</ion-note>
 </div>
-<!--=======-->
-<!--<h5>username</h5>-->
-<!--<img [src]="(mediaData.filename | thumbnail: 'large')">-->
-<!--<h5>{{mediaData.title}}</h5>-->
-<!--<p>{{mediaData.description}}</p>-->
 
-<!--<button *ngIf="!liked" class="card-interaction" ion-button icon-left clear small (click)="emitLikeEvent()" [disabled]="isLoadingLikes">-->
-  <!--<ion-icon name="ios-heart-outline"></ion-icon>-->
-  <!--<div>{{(likes$ | async)?.length}}</div>-->
-<!--</button>-->
+<!--<h5>username</h5>
+<img [src]="(mediaData.filename | thumbnail: 'large')">
+<h5>{{mediaData.title}}</h5>
+<p>{{mediaData.description}}</p>
 
-<!--<button *ngIf="liked" class="card-interaction" ion-button icon-left clear small (click)="emitUnLikeEvent()" [disabled]="isLoadingLikes">-->
-  <!--<ion-icon name="ios-heart"></ion-icon>-->
-  <!--<div>{{(likes$ | async)?.length}}</div>-->
-<!--</button>-->
+<button *ngIf="!liked" class="card-interaction" ion-button icon-left clear small (click)="emitLikeEvent()" [disabled]="isLoadingLikes">
+  <ion-icon name="ios-heart-outline"></ion-icon>
+  <div>{{(likes$ | async)?.length}}</div>
+</button>
 
-<!--<button class="card-interaction" ion-button icon-left clear small (click)="emitCommentEvent()" [disabled]="isLoadingComments">-->
-  <!--<ion-icon name="ios-text-outline"></ion-icon>-->
-  <!--<div>{{(comments$ | async)?.length}}</div>-->
-<!--</button>-->
-<!--&gt;>>>>>> develop-->
+<button *ngIf="liked" class="card-interaction" ion-button icon-left clear small (click)="emitUnLikeEvent()" [disabled]="isLoadingLikes">
+  <ion-icon name="ios-heart"></ion-icon>
+  <div>{{(likes$ | async)?.length}}</div>
+</button>
+
+<button class="card-interaction" ion-button icon-left clear small (click)="emitCommentEvent()" [disabled]="isLoadingComments">
+  <ion-icon name="ios-text-outline"></ion-icon>
+  <div>{{(comments$ | async)?.length}}</div>
+</button>-->
+
