@@ -1,0 +1,33 @@
+<!--
+  Generated template for the CommentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title  align-title="center">Comments</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">Close</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list no-padding>
+    <ion-list-header *ngFor="let comment of comments; let i = index" no-lines no-padding>
+      {{comment.comment}}
+    </ion-list-header>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <label>
+       <input [(ngModel)]="comment" #commentInput="ngModel" placeholder="Type in your comment..." required>
+   </label>
+   <button (click)="submitComment()" [disabled]="!commentInput.valid">Comment</button>
+  </ion-toolbar>
+</ion-footer>

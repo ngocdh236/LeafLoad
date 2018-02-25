@@ -14,6 +14,8 @@ export class MediaDataProvider {
   apiUrl = ENV.API_BASE_URL;
   mediaURL = `${this.apiUrl}/uploads/`;
   searchURL = `${this.apiUrl}/media/search/`;
+  commentURL = `${this.apiUrl}/comments`;
+  favoriteURL= `${this.apiUrl}/favourites`;
 
   constructor(public http: HttpClient) {
   }
@@ -39,13 +41,28 @@ export class MediaDataProvider {
     return this.http.post(this.searchURL, dictValue);
   }
 
-  public likeMediaFile(file_id: number) {
-    const settings = {
-      headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token'))
-    }
-    const body = {
-      file_id: file_id
-    }
-    return this.http.post(this.apiUrl + '/favourites', body, settings);
+  public getCommentsForFile(fileId: number) {
+    const commentsForFileURL = `${this.commentURL}/file/${fileId}`;
+    return this.http.get(commentsForFileURL);
+  }
+
+  public createCommentToMediaFile(comment: string, mediaFile: any) {
+    const data = {comment: comment, file_id: mediaFile.file_id};
+    return this.http.post(this.commentURL, data);
+  }
+
+  public getLikesForMediaFile(fileId: number) {
+    const favoritesToFilesURL = `${this.favoriteURL}/file/${fileId}`;
+    return this.http.get(favoritesToFilesURL);
+  }
+
+  public likeMediaFile(fileId: number) {
+    const data = {file_id: fileId};
+    return this.http.post(this.favoriteURL, data);
+  }
+
+  public unlikeMediaFile(fileId: number) {
+    const favoritesToFilesURL = `${this.favoriteURL}/file/${fileId}`;
+    return this.http.delete(favoritesToFilesURL);
   }
 }

@@ -5,7 +5,11 @@
 </ion-header>
 
 <ion-content>
+<!--<<<<<<< HEAD-->
   <div no-lines *ngFor="let media of mediaArray">
+<!--=======-->
+  <!--<div class="media-card" no-lines *ngFor="let media of mediaArray">-->
+<!--&gt;>>>>>> develop-->
     <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
   </div>
 
