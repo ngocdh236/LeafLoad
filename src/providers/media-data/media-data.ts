@@ -14,6 +14,8 @@ export class MediaDataProvider {
   apiUrl = ENV.API_BASE_URL;
   mediaURL = `${this.apiUrl}/uploads/`;
   searchURL = `${this.apiUrl}/media/search/`;
+  commentURL = `${this.apiUrl}/comments`;
+  favoriteURL= `${this.apiUrl}/favourites`;
 
   constructor(public http: HttpClient) {
   }
@@ -37,6 +39,31 @@ export class MediaDataProvider {
     }
     const dictValue = {title: `${keyWord}`, description: `${keyWord}`};
     return this.http.post(this.searchURL, dictValue);
+  }
+
+  public getCommentsForFile(fileId: number) {
+    const commentsForFileURL = `${this.commentURL}/file/${fileId}`;
+    return this.http.get(commentsForFileURL);
+  }
+
+  public createCommentToMediaFile(comment: string, mediaFile: any) {
+    const data = {comment: comment, file_id: mediaFile.file_id};
+    return this.http.post(this.commentURL, data);
+  }
+
+  public getLikesForMediaFile(fileId: number) {
+    const favoritesToFilesURL = `${this.favoriteURL}/file/${fileId}`;
+    return this.http.get(favoritesToFilesURL);
+  }
+
+  public likeMediaFile(fileId: number) {
+    const data = {file_id: fileId};
+    return this.http.post(this.favoriteURL, data);
+  }
+
+  public unlikeMediaFile(fileId: number) {
+    const favoritesToFilesURL = `${this.favoriteURL}/file/${fileId}`;
+    return this.http.delete(favoritesToFilesURL);
   }
 
 }
