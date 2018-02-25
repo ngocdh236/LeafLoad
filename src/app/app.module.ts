@@ -6,10 +6,11 @@ import { MyApp } from './app.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from "./interceptors/token.interceptor";
 
-import {ProfilePage} from "../pages/profile/profile";
-import {UploadPage} from "../pages/upload/upload";
+import { ProfilePage } from "../pages/profile/profile";
+import { UploadPage } from "../pages/upload/upload";
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { CommentPage } from "../pages/comment/comment";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -23,6 +24,7 @@ import { LoginTemplatePage } from "../pages/login-template/login-template";
 import { PostTemplatePage } from "../pages/post-template/post-template";
 import { ThumbnailPipe } from "../pipes/thumbnail/thumbnail";
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -35,7 +37,8 @@ import { ThumbnailPipe } from "../pipes/thumbnail/thumbnail";
     SignupPage,
     SearchPage,
     LoginTemplatePage,
-    PostTemplatePage
+    PostTemplatePage,
+    CommentPage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import { ThumbnailPipe } from "../pipes/thumbnail/thumbnail";
     SignupPage,
     SearchPage,
     LoginTemplatePage,
-    PostTemplatePage
+    PostTemplatePage,
+    CommentPage
   ],
   providers: [
     StatusBar,

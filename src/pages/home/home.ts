@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import {MediaDataProvider} from "../../providers/media-data/media-data";
+import { NavController, ModalController, NavParams } from 'ionic-angular';
+import { MediaDataProvider } from "../../providers/media-data/media-data";
 import { PostTemplatePage } from "../post-template/post-template";
+import { CommentPage } from "../comment/comment";
 
 @Component({
   selector: 'page-home',
@@ -13,7 +14,7 @@ export class HomePage {
   numberOfFilesPerRequest = 10;
   infiniteScroll: any;
 
-  constructor(public navCtrl: NavController, public mediaData: MediaDataProvider) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public mediaData: MediaDataProvider) {
     this.currentPage = 0;
     this.mediaArray = [];
   }
@@ -51,11 +52,12 @@ export class HomePage {
   }
 
   like(event: any) {
-    console.log("like event");
+
   }
 
   comment(event: any) {
-    console.log("comment event");
+    let profileModel = this.modalCtrl.create(CommentPage, event);
+    profileModel.present();
   }
 
 }

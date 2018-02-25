@@ -3,14 +3,17 @@
 <h5>{{mediaData.title}}</h5>
 <p>{{mediaData.description}}</p>
 
-<button class="card-interaction" ion-button icon-left clear small (click)="emitLikeEvent()">
+<button *ngIf="!liked" class="card-interaction" ion-button icon-left clear small (click)="emitLikeEvent()" [disabled]="isLoadingLikes">
   <ion-icon name="ios-heart-outline"></ion-icon>
-  <div>12</div>
+  <div>{{(likes$ | async)?.length}}</div>
 </button>
 
-<button class="card-interaction" ion-button icon-left clear small (click)="emitCommentEvent()">
+<button *ngIf="liked" class="card-interaction" ion-button icon-left clear small (click)="emitUnLikeEvent()" [disabled]="isLoadingLikes">
+  <ion-icon name="ios-heart"></ion-icon>
+  <div>{{(likes$ | async)?.length}}</div>
+</button>
+
+<button class="card-interaction" ion-button icon-left clear small (click)="emitCommentEvent()" [disabled]="isLoadingComments">
   <ion-icon name="ios-text-outline"></ion-icon>
-  <div>4</div>
+  <div>{{(comments$ | async)?.length}}</div>
 </button>
-
-<p class="card-interaction">11h ago</p>
