@@ -17,7 +17,7 @@
       <ion-note>likes</ion-note>
     </div>
     <button id="modify-user-data-button" (click)="modifyUserData($event)">Edit Profile</button>
-    <button id="log-out-button" icon-only>
+    <button id="log-out-button" icon-only (click)="presentLogoutAlert()">
       <ion-icon name="ios-log-out"></ion-icon>
     </button>
   </div>

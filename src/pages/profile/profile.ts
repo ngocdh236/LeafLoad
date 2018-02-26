@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
-import {MediaDataProvider} from "../../providers/media-data/media-data";
-import {CommentPage} from "../comment/comment";
-import {ModifyUserDataPage} from "../modify-user-data/modify-user-data";
-
+import { Component, EventEmitter, Output } from '@angular/core';
+import { IonicPage, ModalController, NavController, NavParams, AlertController } from 'ionic-angular';
+import { MediaDataProvider } from "../../providers/media-data/media-data";
+import { CommentPage } from "../comment/comment";
+import { ModifyUserDataPage } from "../modify-user-data/modify-user-data";
+import { UserSession } from "../../app/UserSession";
 /**
  * Generated class for the ProfilePage page.
  *
@@ -22,7 +22,7 @@ export class ProfilePage {
   currentPage = 0;
   infiniteScroll: any;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public mediaData: MediaDataProvider) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public mediaData: MediaDataProvider, private alertCtrl: AlertController) {
     this.currentPage = 0;
     this.mediaArray = [];
   }
@@ -30,6 +30,9 @@ export class ProfilePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
     this.loadMediaFilesOfCurrentUser(this.currentPage);
+    console.log(`AccessToken: ${UserSession.accessToken}`);
+    console.log(`UserId: ${UserSession.userId}`);
+    console.log(`Username: ${UserSession.username}`);
   }
 
   loadMediaFilesOfCurrentUser(page: number) {
@@ -65,6 +68,33 @@ export class ProfilePage {
 
   comment(ev: any) {
 
+  }
+
+  presentLogoutAlert() {
+    let alert = this.alertCtrl.create({
+    title: 'Logout',
+    message: 'Are you sure to logout?',
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+        }
+      },
+      {
+        text: 'Logout',
+        handler: () => {
+          UserSession.logout();
+
+          console.log(`AccessToken: ${UserSession.accessToken}`);
+          console.log(`UserId: ${UserSession.userId}`);
+          console.log(`Username: ${UserSession.username}`);
+        }
+      }
+    ]
+  });
+
+  alert.present();
   }
 
 

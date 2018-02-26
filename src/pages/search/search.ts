@@ -6,6 +6,8 @@ import { LoginPage } from "../login/login";
 import { HttpErrorResponse } from "@angular/common/http";
 import { LoginTemplatePage } from "../login-template/login-template";
 import {CommentPage} from "../comment/comment";
+import { UserSession } from "../../app/UserSession";
+
 /**
  * Generated class for the SearchPage page.
  *
@@ -56,7 +58,7 @@ export class SearchPage {
 
   onLogin(ev: any) {
     this.userDataProvider.login(ev).subscribe(response => {
-      localStorage.setItem('token', response['token']);
+      UserSession.loginSuccessfullyWithDictionary(response);
       this.isUserLoggedIn = true;
     }, (error: HttpErrorResponse) => {
       this.loginTemplate.updateAlert(error.error.message);
