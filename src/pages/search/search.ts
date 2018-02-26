@@ -40,7 +40,7 @@ export class SearchPage {
   onInput(ev: any) {
     let keyword = ev.target.value;
     console.log(keyword);
-    /*if (keyword && keyword.trim() !== '') {
+    if (keyword && keyword.trim() !== '') {
       this.mediaArray = [];
       this.mediaData.searchMediaFiles(keyword).subscribe(res => {
         this.mediaArray = res;
@@ -51,7 +51,7 @@ export class SearchPage {
     } else {
       // Revert search result
       this.mediaArray = [];
-    }*/
+    }
   }
 
   onLogin(ev: any) {

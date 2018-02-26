@@ -12,6 +12,8 @@ import { ENV } from '@environment';
 @Injectable()
 export class UserDataProvider {
   apiUrl = ENV.API_BASE_URL;
+  loginUrl = `${this.apiUrl}/login`;
+  signUpUrl = `${this.apiUrl}/users`;
 
   constructor(public http: HttpClient) {
   }
@@ -22,7 +24,7 @@ export class UserDataProvider {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     };
 
-    return this.http.post(this.apiUrl + '/login', user, settings);
+    return this.http.post(this.loginUrl, user);
   }
 
   public signUp(user: User) {
@@ -31,11 +33,12 @@ export class UserDataProvider {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     };
 
-    return this.http.post(this.apiUrl + '/users', user, settings);
+    return this.http.post(this.signUpUrl, user);
   }
 
-  public getUsername() {
-
+  public requestUserInfo(userId: number) {
+    const requestUserInfoUrl = `${this.apiUrl}/users/:${userId}`;
+    return this.http.get(requestUserInfoUrl)
   }
 
   public isUserLoggedIn(): boolean {

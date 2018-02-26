@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
+import {UserDataProvider} from "../../providers/user-data/user-data";
 
 /**
  * Generated class for the PostTemplatePage page.
@@ -23,6 +24,7 @@ export class PostTemplatePage {
     return this._mediaData;
   }
 
+  @Input() thinh:  string;
   @Input()
   set mediaData(mediaData: any) {
     this._mediaData = mediaData;
@@ -51,6 +53,13 @@ export class PostTemplatePage {
   isLoadingLikes: boolean = true;
   isLoadingComments: boolean = true;
 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaDataProvider, public userProvider: UserDataProvider) {
+  }
+
+  ionViewDidLoad() {
+    console.log(`Thinh: ${this.thinh}`);
+  }
+
   public get liked() {
     if (this.likes != null && this.likes.length > 0) {
       let myLike: any[] = this.likes.filter(aLike => aLike.user_id == 27);
@@ -59,13 +68,6 @@ export class PostTemplatePage {
       }
     }
     return false;
-  }
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaDataProvider) {
-
-  }
-
-  ionViewDidLoad() {
   }
 
   emitLikeEvent() {

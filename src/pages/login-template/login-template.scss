@@ -1,7 +1,4 @@
 page-login-template {
-  input, input::-webkit-input-placeholder, button {
-    font-size: 18px;
-  }
 
   ion-content {
     display: flex;
@@ -19,6 +16,7 @@ page-login-template {
 
   button {
     @extend %default-button;
+    color: white;
     background-color: #50A050;
     width: 80%;
     height: 40px;
