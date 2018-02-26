@@ -5,7 +5,7 @@ import { UserDataProvider } from "../../providers/user-data/user-data";
 import { LoginPage } from "../login/login";
 import { HttpErrorResponse } from "@angular/common/http";
 import { LoginTemplatePage } from "../login-template/login-template";
-import {CommentPage} from "../comment/comment";
+import { CommentPage } from "../comment/comment";
 import { UserSession } from "../../app/UserSession";
 
 /**
@@ -24,25 +24,27 @@ export class SearchPage {
 
   @ViewChild(LoginTemplatePage) loginTemplate;
 
-  isUserLoggedIn: boolean = false;
   loginPage: any = LoginPage;
   mediaArray: any;
+
+  public get isUserLoggedIn(): boolean {
+    return UserSession.isLoggedIn;
+  }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private mediaData: MediaDataProvider, private userDataProvider: UserDataProvider, public modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
+    // TODO: Refactor this by using Input in the template itself
     this.loginTemplate.shouldShowSkipButton = false;
     this.loginTemplate.shouldShowSignUpButton = false;
-    this.isUserLoggedIn = false;
     //this.isUserLoggedIn = this.userDataProvider.isUserLoggedIn();
     //console.log(`Is user logged in: ${this.userDataProvider.isUserLoggedIn()}`);
   }
 
   onInput(ev: any) {
     let keyword = ev.target.value;
-    console.log(keyword);
-    /*if (keyword && keyword.trim() !== '') {
+    if (keyword && keyword.trim() !== '') {
       this.mediaArray = [];
       this.mediaData.searchMediaFiles(keyword).subscribe(res => {
         this.mediaArray = res;
@@ -53,16 +55,11 @@ export class SearchPage {
     } else {
       // Revert search result
       this.mediaArray = [];
-    }*/
+    }
   }
 
   onLogin(ev: any) {
-    this.userDataProvider.login(ev).subscribe(response => {
-      UserSession.loginSuccessfullyWithDictionary(response);
-      this.isUserLoggedIn = true;
-    }, (error: HttpErrorResponse) => {
-      this.loginTemplate.updateAlert(error.error.message);
-    });
+
   }
 
   onSignUp(event: any) {
