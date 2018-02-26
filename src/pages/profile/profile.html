@@ -7,17 +7,22 @@
 </ion-header>
 
 <ion-content>
-  <!--<div class="user-info">-->
-    <!--<ion-avatar id="avatar">-->
-      <!--<img src="assets/icon/favicon.ico">-->
-    <!--</ion-avatar>-->
-    <!--<div class="body">-->
-      <!--<p class="figures">12 posts</p>-->
-      <!--<p class="figures">12 likes</p>-->
-      <!--<button ion-button color="dark" clear click="modify-user-data()">Edit Profile</button>-->
-    <!--</div>-->
-  <!--</div>-->
-  <div class="media-card" no-lines *ngFor="let media of mediaArray">
+  <div class="user-info">
+    <div class="figures">
+      <p>12</p>
+      <ion-note>posts</ion-note>
+    </div>
+    <div class="figures">
+      <p>12</p>
+      <ion-note>likes</ion-note>
+    </div>
+    <button id="modify-user-data-button" (click)="modifyUserData($event)">Edit Profile</button>
+    <button id="log-out-button" icon-only>
+      <ion-icon name="ios-log-out"></ion-icon>
+    </button>
+  </div>
+
+  <div *ngFor="let media of mediaArray">
     <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
   </div>
 

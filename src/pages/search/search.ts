@@ -1,10 +1,11 @@
 import { Component, ViewChild  } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { LoginPage } from "../login/login";
 import { HttpErrorResponse } from "@angular/common/http";
 import { LoginTemplatePage } from "../login-template/login-template";
+import {CommentPage} from "../comment/comment";
 /**
  * Generated class for the SearchPage page.
  *
@@ -25,7 +26,7 @@ export class SearchPage {
   loginPage: any = LoginPage;
   mediaArray: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private mediaData: MediaDataProvider, private userDataProvider: UserDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private mediaData: MediaDataProvider, private userDataProvider: UserDataProvider, public modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
@@ -38,7 +39,8 @@ export class SearchPage {
 
   onInput(ev: any) {
     let keyword = ev.target.value;
-    if (keyword && keyword.trim() !== '') {
+    console.log(keyword);
+    /*if (keyword && keyword.trim() !== '') {
       this.mediaArray = [];
       this.mediaData.searchMediaFiles(keyword).subscribe(res => {
         this.mediaArray = res;
@@ -49,7 +51,7 @@ export class SearchPage {
     } else {
       // Revert search result
       this.mediaArray = [];
-    }
+    }*/
   }
 
   onLogin(ev: any) {
@@ -78,7 +80,8 @@ export class SearchPage {
   }
 
   comment(ev: any) {
-
+    let profileModel = this.modalCtrl.create(CommentPage, ev);
+    profileModel.present();
   }
 
 }

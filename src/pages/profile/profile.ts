@@ -1,6 +1,8 @@
-import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 import {MediaDataProvider} from "../../providers/media-data/media-data";
+import {CommentPage} from "../comment/comment";
+import {ModifyUserDataPage} from "../modify-user-data/modify-user-data";
 
 /**
  * Generated class for the ProfilePage page.
@@ -20,7 +22,7 @@ export class ProfilePage {
   currentPage = 0;
   infiniteScroll: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaData: MediaDataProvider) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public mediaData: MediaDataProvider) {
     this.currentPage = 0;
     this.mediaArray = [];
   }
@@ -54,6 +56,11 @@ export class ProfilePage {
 
   like(ev: any) {
 
+  }
+
+  modifyUserData () {
+    let modifyUserDataModel = this.modalCtrl.create(ModifyUserDataPage, event);
+    modifyUserDataModel.present();
   }
 
   comment(ev: any) {

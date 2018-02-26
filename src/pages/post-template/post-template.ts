@@ -66,7 +66,6 @@ export class PostTemplatePage {
   }
 
   ionViewDidLoad() {
-
   }
 
   emitLikeEvent() {

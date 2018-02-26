@@ -4,32 +4,21 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header [hidden]="!isUserLoggedIn">
-  <ion-navbar color='primary'>
-    <ion-title>
-      Search Media
-    </ion-title>
-  </ion-navbar>
-  <ion-toolbar color='primary'>
-    <ion-searchbar
-      placeholder="Search here"
-      showCancelButton color="danger"
-      (ionInput)="onInput($event)"
-      (ionCancel)="onCancel($event)">
-    </ion-searchbar>
+<ion-header no-border text-center [hidden]="!isUserLoggedIn">
+  <ion-toolbar>
+    <ion-searchbar text-center placeholder="Search" (ionInput)="onInput($event)" required></ion-searchbar>
+    <!--<input text-center placeholder="Search" (input)="onInput($event)" required>-->
   </ion-toolbar>
 </ion-header>
 
-<ion-content [hidden]="!isUserLoggedIn" padding>
-  <div class="media-card" no-lines *ngFor="let media of mediaArray">
-    <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($comment)"></page-post-template>
+<ion-content [hidden]="!isUserLoggedIn">
+  <div *ngFor="let media of mediaArray">
+    <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
   </div>
 </ion-content>
 
-<ion-content [hidden]="isUserLoggedIn" padding>
-    <ion-item>
-      <ion-label>Please login to continue searching:</ion-label>
-    </ion-item>
-
-  <page-login-template (login)="onLogin($event)" (signUp)="onSignUp($event)" (skip)="onSkip($event)"></page-login-template>
+<ion-content [hidden]="isUserLoggedIn">
+  <h4 text-center>Please login to continue</h4>
+  <page-login-template (login)="onLogin($event)" (signUp)="onSignUp($event)"
+                       (skip)="onSkip($event)"></page-login-template>
 </ion-content>

@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-import { LoadingController } from 'ionic-angular/index';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { MediaDataProvider } from "../../providers/media-data/media-data";
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {LoadingController} from 'ionic-angular/index';
+import {Observable} from 'rxjs/Observable';
+import {of} from 'rxjs/observable/of';
+import {MediaDataProvider} from "../../providers/media-data/media-data";
 
 /**
  * Generated class for the CommentPage page.
@@ -18,6 +18,7 @@ import { MediaDataProvider } from "../../providers/media-data/media-data";
   templateUrl: 'comment.html',
 })
 export class CommentPage {
+  isUploadingComment: boolean = false;
   comments: any;
 
   comments$: Observable<any[]>;
@@ -30,14 +31,7 @@ export class CommentPage {
   }
 
   ionViewDidLoad() {
-    this.comments$ = of(this.comments);
-    let loading = this.loadingController.create({content: 'Loading comments...', spinner: 'ios'});
-    loading.present();
-
-    this.mediaProvider.getCommentsForFile(this.mediaFile.file_id).subscribe(res => {
-      this.comments = res;
-      loading.dismiss();
-    });
+    this.loadComments();
   }
 
   dismiss() {
@@ -46,19 +40,29 @@ export class CommentPage {
 
   submitComment() {
     if (this.comment && this.comment.trim() !== '') {
-
-      // Show loading
-      let loading = this.loadingController.create({content: 'Posting comment...', spinner: 'ios'});
-      loading.present();
       // Scroll to bottom
       // TODO: Scroll to bottom if neccessary
 
-      // Send to service
-      this.mediaProvider.createCommentToMediaFile(this.comment, this.mediaFile).subscribe(res =>{
+      // Send comment to service
+      this.isUploadingComment = true;
+      this.mediaProvider.createCommentToMediaFile(this.comment, this.mediaFile).subscribe(res => {
         // TODO: Error-handler should be trigger in the service itself
-        loading.dismiss();
-        this.comments.push({comment: this.comment});
+        this.isUploadingComment = false;
+        this.loadComments();
       });
+
+      this.comment = '';
     }
+  }
+
+  loadComments() {
+    this.comments$ = of(this.comments);
+    let loading = this.loadingController.create({content: 'Loading comments...', spinner: 'ios'});
+    loading.present();
+
+    this.mediaProvider.getCommentsForFile(this.mediaFile.file_id).subscribe(res => {
+      this.comments = res;
+      loading.dismiss();
+    });
   }
 }

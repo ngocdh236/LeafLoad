@@ -57,8 +57,8 @@ export class HomePage {
   }
 
   comment(event: any) {
-    let profileModel = this.modalCtrl.create(CommentPage, event);
-    profileModel.present();
+    let commentModel = this.modalCtrl.create(CommentPage, event);
+    commentModel.present();
   }
 
 }

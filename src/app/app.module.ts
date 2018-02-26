@@ -23,6 +23,7 @@ import {SearchPage} from "../pages/search/search";
 import { LoginTemplatePage } from "../pages/login-template/login-template";
 import { PostTemplatePage } from "../pages/post-template/post-template";
 import { ThumbnailPipe } from "../pipes/thumbnail/thumbnail";
+import {ModifyUserDataPage} from "../pages/modify-user-data/modify-user-data";
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ThumbnailPipe } from "../pipes/thumbnail/thumbnail";
     SearchPage,
     LoginTemplatePage,
     PostTemplatePage,
-    CommentPage
+    CommentPage,
+    ModifyUserDataPage
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { ThumbnailPipe } from "../pipes/thumbnail/thumbnail";
     SearchPage,
     LoginTemplatePage,
     PostTemplatePage,
-    CommentPage
+    CommentPage,
+    ModifyUserDataPage
   ],
   providers: [
     StatusBar,
