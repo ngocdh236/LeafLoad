@@ -2,7 +2,7 @@ import { Component, Output } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { EventEmitter } from '@angular/core';
 import { UserDataProvider } from "../../providers/user-data/user-data";
-
+import { UserSession } from "../../app/UserSession";
 /**
  * Generated class for the LoginTemplatePage page.
  *
@@ -40,6 +40,11 @@ export class LoginTemplatePage {
 
   emitLoginEvent() {
     this.login.emit(this.user);
+    this.userDataProvider.login(this.user).subscribe(response => {
+      UserSession.loginSuccessfullyWithDictionary(response);
+    }, (error: HttpErrorResponse) => {
+      this.status = (error.error.message);
+    });
   }
 
   emitSignUpEvent() {
@@ -50,6 +55,7 @@ export class LoginTemplatePage {
     this.skip.emit(null);
   }
 
+  // Update status (error) message
   updateAlert(message: string) {
     this.status = message;
   }

@@ -1,4 +1,4 @@
-<ion-header no-border>
+<ion-header *ngIf="isUserLoggedIn" no-border>
 
   <ion-navbar>
     <ion-title text-center>Username</ion-title>
@@ -6,7 +6,7 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="isUserLoggedIn">
   <div class="user-info">
     <div class="figures">
       <p>12</p>
@@ -17,7 +17,7 @@
       <ion-note>likes</ion-note>
     </div>
     <button id="modify-user-data-button" (click)="modifyUserData($event)">Edit Profile</button>
-    <button id="log-out-button" icon-only>
+    <button id="log-out-button" icon-only (click)="presentLogoutAlert()">
       <ion-icon name="ios-log-out"></ion-icon>
     </button>
   </div>
@@ -29,4 +29,10 @@
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
+</ion-content>
+
+<ion-content *ngIf="!isUserLoggedIn">
+  <page-login-template (login)="onLogin($event)"
+                       (signUp)="onSignUp($event)"
+                       (skip)="onSkip($event)"></page-login-template>
 </ion-content>
