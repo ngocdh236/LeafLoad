@@ -10,8 +10,6 @@ export class UserSession {
   }
 
   public static get accessToken(): string {
-    let abcy = localStorage.getItem(TokenKey);
-    console.log(`LocalStorage's accessToken: ${abcy}`);
     return localStorage.getItem(TokenKey);
   }
 
@@ -36,12 +34,9 @@ export class UserSession {
 
   // isUserLoggedIn getter
   public static get isLoggedIn(): boolean {
-    let tokentokentokentoken = UserSession.accessToken;
-    console.log(`This is the fucking wrong token: ${tokentokentokentoken}`);
-    if (tokentokentokentoken) {
+    if (UserSession.accessToken) {
       return true;
     }
-
     return false;
   }
 

@@ -38,6 +38,7 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
+    this.loginTemplate.shouldShowSkipButton = false;
     console.log('ionViewDidLoad ProfilePage');
     this.loadMediaFilesOfCurrentUser(this.currentPage);
     console.log(`AccessToken: ${UserSession.accessToken}`);

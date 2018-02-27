@@ -1,9 +1,10 @@
 import { Component, Output } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { EventEmitter } from '@angular/core';
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { UserSession } from "../../app/UserSession";
 import { HttpErrorResponse } from "@angular/common/http";
+import { SignupPage } from "../signup/signup";
 /**
  * Generated class for the LoginTemplatePage page.
  *
@@ -32,7 +33,7 @@ export class LoginTemplatePage {
   shouldShowSkipButton: boolean = true;
   shouldShowSignUpButton: boolean = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider, private viewController: ViewController) {
   }
 
   ionViewDidLoad() {
@@ -50,10 +51,13 @@ export class LoginTemplatePage {
 
   emitSignUpEvent() {
     this.signUp.emit(null);
+    this.navCtrl.push(SignupPage);
   }
 
   emitSkipEvent() {
     this.skip.emit(null);
+    // Fragile here
+    this.viewController.dismiss();
   }
 
   // Update status (error) message

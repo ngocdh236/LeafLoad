@@ -37,7 +37,6 @@ export class SearchPage {
   ionViewDidLoad() {
     // TODO: Refactor this by using Input in the template itself
     this.loginTemplate.shouldShowSkipButton = false;
-    this.loginTemplate.shouldShowSignUpButton = false;
     //this.isUserLoggedIn = this.userDataProvider.isUserLoggedIn();
     //console.log(`Is user logged in: ${this.userDataProvider.isUserLoggedIn()}`);
   }
