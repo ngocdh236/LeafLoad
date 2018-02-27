@@ -1,8 +1,10 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
-import {MediaDataProvider} from "../../providers/media-data/media-data";
-import {CommentPage} from "../comment/comment";
-import {ModifyUserDataPage} from "../modify-user-data/modify-user-data";
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { IonicPage, ModalController, NavController, NavParams, AlertController } from 'ionic-angular';
+import { MediaDataProvider } from "../../providers/media-data/media-data";
+import { CommentPage } from "../comment/comment";
+import { ModifyUserDataPage } from "../modify-user-data/modify-user-data";
+import { UserSession } from "../../app/UserSession";
+import { LoginTemplatePage } from "../login-template/login-template";
 
 /**
  * Generated class for the ProfilePage page.
@@ -16,19 +18,26 @@ import {ModifyUserDataPage} from "../modify-user-data/modify-user-data";
   selector: 'page-profile',
   templateUrl: 'profile.html',
 })
+
 export class ProfilePage {
+
+  @ViewChild(LoginTemplatePage) loginTemplate;
+
   mediaArray: any[] = [];
   numberOfFilesPerRequest = 10;
   currentPage = 0;
   infiniteScroll: any;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public mediaData: MediaDataProvider) {
+  public get isUserLoggedIn(): boolean {
+    return UserSession.isLoggedIn;
+  }
+
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public mediaData: MediaDataProvider, private alertCtrl: AlertController) {
     this.currentPage = 0;
     this.mediaArray = [];
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
     this.loadMediaFilesOfCurrentUser(this.currentPage);
   }
 
@@ -64,6 +73,45 @@ export class ProfilePage {
   }
 
   comment(ev: any) {
+
+  }
+
+  presentLogoutAlert() {
+    let alert = this.alertCtrl.create({
+    title: 'Logout',
+    message: 'Are you sure to logout?',
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+        }
+      },
+      {
+        text: 'Logout',
+        handler: () => {
+          UserSession.logout();
+        }
+      }
+    ]
+  });
+
+  alert.present();
+  }
+
+  onLogin(ev: any) {
+
+  }
+
+  onSignUp(event: any) {
+
+  }
+
+  onCancel(ev: any) {
+
+  }
+
+  onSkip(ev: any) {
 
   }
 

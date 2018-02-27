@@ -1,8 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
-import {UserDataProvider} from "../../providers/user-data/user-data";
+import { UserDataProvider } from "../../providers/user-data/user-data";
+import { UserSession } from "../../app/UserSession";
+import { LoginPage } from "../login/login";
+import { CommentPage } from "../comment/comment";
 
 /**
  * Generated class for the PostTemplatePage page.
@@ -29,14 +32,25 @@ export class PostTemplatePage {
     this._mediaData = mediaData;
     this.comments$ = this.mediaProvider.getCommentsForFile(this._mediaData.file_id);
     this.likes$ = this.mediaProvider.getLikesForMediaFile(this._mediaData.file_id);
-    this.mediaProvider.getCommentsForFile(this._mediaData.file_id).subscribe(res => {
-      this.comments = res as any[];
-      this.isLoadingComments = false;
-    });
+
+    // Fetch likes
     this.mediaProvider.getLikesForMediaFile(this._mediaData.file_id).subscribe(res => {
       this.likes = res as any[];
       this.isLoadingLikes = false;
     });
+
+    // Fetch comments
+    this.mediaProvider.getCommentsForFile(this._mediaData.file_id).subscribe(res => {
+      this.comments = res as any[];
+      this.isLoadingComments = false;
+    });
+
+    if (UserSession.isLoggedIn) {
+      // Fetch username
+      this.userProvider.requestUserInfoByUserId(this._mediaData.user_id).subscribe(res => {
+        this.username = (res as any).username;
+      });
+    }
   };
 
   @Output() like: EventEmitter<any> = new EventEmitter();
@@ -52,15 +66,17 @@ export class PostTemplatePage {
   isLoadingLikes: boolean = true;
   isLoadingComments: boolean = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaDataProvider, public userProvider: UserDataProvider) {
+  username: string = null;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaDataProvider, public userProvider: UserDataProvider, public modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {
   }
 
   public get liked() {
-    if (this.likes != null && this.likes.length > 0) {
-      let myLike: any[] = this.likes.filter(aLike => aLike.user_id == 27);
+    if (this.likes != null && this.likes.length > 0 && UserSession.isLoggedIn) {
+      let myLike: any[] = this.likes.filter(aLike => aLike.user_id == UserSession.userId);
       if (myLike.length != 0) {
           return true;
       }
@@ -69,14 +85,18 @@ export class PostTemplatePage {
   }
 
   emitLikeEvent() {
-    this.isLoadingLikes = true;
-    this.like.emit(this.mediaData);
-    this.mediaProvider.likeMediaFile(this._mediaData.file_id).subscribe(res => {
-      this.mediaProvider.getLikesForMediaFile(this._mediaData.file_id).subscribe(response => {
-        this.likes = response as any[];
-        this.isLoadingLikes = false;
+    if (UserSession.isLoggedIn) {
+      this.isLoadingLikes = true;
+      this.mediaProvider.likeMediaFile(this._mediaData.file_id).subscribe(res => {
+        this.mediaProvider.getLikesForMediaFile(this._mediaData.file_id).subscribe(response => {
+          this.likes = response as any[];
+          this.isLoadingLikes = false;
+        });
       });
-    });
+    } else {
+      this.presentLoginView();
+    }
+    this.like.emit(this.mediaData);
   }
 
   emitUnLikeEvent() {
@@ -90,6 +110,14 @@ export class PostTemplatePage {
   }
 
   emitCommentEvent() {
+    let commentModel = this.modalCtrl.create(CommentPage, event);
+    commentModel.present();
     this.comment.emit(this.mediaData);
+  }
+
+  // Helper methods
+  private presentLoginView() {
+    let loginModel = this.modalCtrl.create(LoginPage, event);
+    loginModel.present();
   }
 }

@@ -36,14 +36,8 @@ export class UserDataProvider {
     return this.http.post(this.signUpUrl, user);
   }
 
-  public requestUserInfo(userId: number) {
-    const requestUserInfoUrl = `${this.apiUrl}/users/:${userId}`;
+  public requestUserInfoByUserId(userId: number) {
+    const requestUserInfoUrl = `${this.apiUrl}/users/${userId}`;
     return this.http.get(requestUserInfoUrl)
-  }
-
-  public isUserLoggedIn(): boolean {
-    const token = localStorage.getItem('token');
-
-    return token != null && token.trim() !== '';
   }
 }

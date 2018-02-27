@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, ModalController, NavParams } from 'ionic-angular';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
 import { PostTemplatePage } from "../post-template/post-template";
-import { CommentPage } from "../comment/comment";
 
 @Component({
   selector: 'page-home',
@@ -34,7 +33,7 @@ export class HomePage {
         media.thumbnail = this.mediaData.mediaURL + thumbName;
         this.mediaArray.push(media);
       });
-
+      
       // Increase the current page index
       this.currentPage += 1;
 
@@ -53,12 +52,9 @@ export class HomePage {
   }
 
   like(event: any) {
-
   }
 
   comment(event: any) {
-    let commentModel = this.modalCtrl.create(CommentPage, event);
-    commentModel.present();
   }
 
 }
