@@ -4,5 +4,13 @@
 
 
 <ion-content padding>
+  <form (submit)="startUpload($event)">
+    <input type="file" name="file" (change)="setFile($event)">
 
+    <input [(ngModel)]="media.title" name="title" placeholder="Title">
+
+    <textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>
+
+    <button type="submit">Upload</button>
+  </form>
 </ion-content>

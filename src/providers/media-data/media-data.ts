@@ -65,4 +65,8 @@ export class MediaDataProvider {
     const favoritesToFilesURL = `${this.favoriteURL}/file/${fileId}`;
     return this.http.delete(favoritesToFilesURL);
   }
+
+  public uploadMedia(formData: FormData) {
+    return this.http.post(this.apiUrl + '/media', formData);
+  }
 }

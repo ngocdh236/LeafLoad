@@ -6,7 +6,7 @@
 
 <ion-content>
   <div *ngFor="let media of mediaArray">
-    <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)" [thinh]="jaksfhgjkasghjkgh"></page-post-template>
+    <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
   </div>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

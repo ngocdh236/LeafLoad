@@ -24,6 +24,7 @@ import { LoginTemplatePage } from "../pages/login-template/login-template";
 import { PostTemplatePage } from "../pages/post-template/post-template";
 import { ThumbnailPipe } from "../pipes/thumbnail/thumbnail";
 import {ModifyUserDataPage} from "../pages/modify-user-data/modify-user-data";
+import {PhotoLibrary} from "@ionic-native/photo-library";
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import {ModifyUserDataPage} from "../pages/modify-user-data/modify-user-data";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     UserDataProvider,
-    MediaDataProvider
+    MediaDataProvider,
+    PhotoLibrary
   ]
 })
 export class AppModule {}

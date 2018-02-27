@@ -51,14 +51,14 @@ export class ProfilePage {
       if (this.infiniteScroll != null) {
         this.infiniteScroll.complete();
       }
-      });
+    });
   }
 
   like(ev: any) {
 
   }
 
-  modifyUserData () {
+  modifyUserData() {
     let modifyUserDataModel = this.modalCtrl.create(ModifyUserDataPage, event);
     modifyUserDataModel.present();
   }

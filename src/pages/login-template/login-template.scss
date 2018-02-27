@@ -5,7 +5,13 @@ page-login-template {
     align-items: center;
   }
 
+  #logo-image {
+    margin-top: 20px;
+    margin-left: -5px;
+  }
+
   input {
+    background-color: #fafafa;
     border-radius: 5px;
     border: $default-border;
     padding: 20px;

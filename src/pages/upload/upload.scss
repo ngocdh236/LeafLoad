@@ -1,3 +1,23 @@
 page-upload {
 
+  input, textarea {
+    border-radius: 5px;
+    border: $default-border;
+    padding: 20px;
+    width: 60%;
+    height: 30px;
+    margin-bottom: 10px;
+  }
+
+  textarea {
+
+  }
+
+  button {
+    @extend %default-button;
+    color: white;
+    background-color: #50A050;
+    width: 80%;
+    height: 40px;
+  }
 }

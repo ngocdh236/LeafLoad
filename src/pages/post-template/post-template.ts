@@ -24,7 +24,6 @@ export class PostTemplatePage {
     return this._mediaData;
   }
 
-  @Input() thinh:  string;
   @Input()
   set mediaData(mediaData: any) {
     this._mediaData = mediaData;
@@ -57,7 +56,6 @@ export class PostTemplatePage {
   }
 
   ionViewDidLoad() {
-    console.log(`Thinh: ${this.thinh}`);
   }
 
   public get liked() {
