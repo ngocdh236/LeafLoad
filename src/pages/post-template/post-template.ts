@@ -123,14 +123,14 @@ export class PostTemplatePage {
   }
 
   emitCommentEvent() {
-    let commentModel = this.modalCtrl.create(CommentPage, event);
+    let commentModel = this.modalCtrl.create(CommentPage, this.mediaData);
     commentModel.present();
     this.comment.emit(this.mediaData);
   }
 
   // Helper methods
   private presentLoginView() {
-    let loginModel = this.modalCtrl.create(LoginPage, event);
+    let loginModel = this.modalCtrl.create(LoginPage, {});
     loginModel.present();
   }
 }
