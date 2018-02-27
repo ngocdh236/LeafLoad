@@ -5,9 +5,14 @@ page-login-template {
     align-items: center;
   }
 
-  #logo-image {
+  .logo {
     margin-top: 20px;
-    margin-left: -5px;
+    margin-bottom: 20px;
+    width: 100%;
+    img {
+      width: 50%;
+      height: auto;
+    }
   }
 
   input {
@@ -15,7 +20,7 @@ page-login-template {
     border-radius: 5px;
     border: $default-border;
     padding: 20px;
-    width: 60%;
+    width: 80%;
     height: 30px;
     margin-bottom: 10px;
   }

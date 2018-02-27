@@ -1,5 +1,9 @@
 <ion-content>
-  <img id="logo-image" src="assets/imgs/logo.png">
+  <div text-center class="logo">
+    <img src="assets/imgs/logo.png">
+    <img src="assets/imgs/text-logo.png">
+  </div>
+
   <form text-center (submit) = "emitLoginEvent()">
 
       <input [(ngModel)]="user.username" name="username" type="text" placeholder="Username" #username="ngModel"

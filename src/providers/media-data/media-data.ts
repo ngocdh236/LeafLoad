@@ -27,10 +27,7 @@ export class MediaDataProvider {
 
   public getMediaFilesOfCurrentUser(page: number, numberOfFilesPerRequest: number) {
     const start = page * numberOfFilesPerRequest;
-    const settings = {
-      headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token'))
-    }
-    return this.http.get(this.apiUrl + '/media/user', settings);
+    return this.http.get(this.apiUrl + '/media/user');
   }
 
   public searchMediaFiles(keyWord: string) {

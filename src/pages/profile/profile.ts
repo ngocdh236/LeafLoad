@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams, AlertController } from 'ionic-angular';
+import {IonicPage, ModalController, NavController, NavParams, AlertController, Content } from 'ionic-angular';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
 import { CommentPage } from "../comment/comment";
 import { ModifyUserDataPage } from "../modify-user-data/modify-user-data";
 import { UserSession } from "../../app/UserSession";
 import { LoginTemplatePage } from "../login-template/login-template";
+import { UserDataProvider } from "../../providers/user-data/user-data";
 
 /**
  * Generated class for the ProfilePage page.
@@ -22,7 +23,9 @@ import { LoginTemplatePage } from "../login-template/login-template";
 export class ProfilePage {
 
   @ViewChild(LoginTemplatePage) loginTemplate;
+  @ViewChild(Content) content;
 
+  username: string;
   mediaArray: any[] = [];
   numberOfFilesPerRequest = 10;
   currentPage = 0;
@@ -32,7 +35,7 @@ export class ProfilePage {
     return UserSession.isLoggedIn;
   }
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public mediaData: MediaDataProvider, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public mediaData: MediaDataProvider, private alertCtrl: AlertController, public userDataProvider: UserDataProvider) {
     this.currentPage = 0;
     this.mediaArray = [];
   }
@@ -60,6 +63,11 @@ export class ProfilePage {
       if (this.infiniteScroll != null) {
         this.infiniteScroll.complete();
       }
+    });
+
+    // Fetch Username
+    this.userDataProvider.requestUserInfoByUserId(Number(UserSession.userId)).subscribe(res => {
+      this.username = (res as any).username;
     });
   }
 
@@ -90,6 +98,7 @@ export class ProfilePage {
       {
         text: 'Logout',
         handler: () => {
+          this.username = null;
           UserSession.logout();
         }
       }
@@ -113,6 +122,16 @@ export class ProfilePage {
 
   onSkip(ev: any) {
 
+  }
+
+  didSucceedToLogin(ev: any) {
+    // Remove user data
+    this.mediaArray = [];
+    this.username = null;
+
+    // Resize the content otherwise the navbar would overlap the content
+    this.content.resize();
+    this.loadMediaFilesOfCurrentUser(this.currentPage);
   }
 
 

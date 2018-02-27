@@ -44,13 +44,6 @@ export class PostTemplatePage {
       this.comments = res as any[];
       this.isLoadingComments = false;
     });
-
-    if (UserSession.isLoggedIn) {
-      // Fetch username
-      this.userProvider.requestUserInfoByUserId(this._mediaData.user_id).subscribe(res => {
-        this.username = (res as any).username;
-      });
-    }
   };
 
   @Output() like: EventEmitter<any> = new EventEmitter();
@@ -66,8 +59,8 @@ export class PostTemplatePage {
   isLoadingLikes: boolean = true;
   isLoadingComments: boolean = true;
 
-  username: string = null;
-
+  private _username: string = null;
+  private _loadingUsername = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaDataProvider, public userProvider: UserDataProvider, public modalCtrl: ModalController) {
   }
 
@@ -82,6 +75,26 @@ export class PostTemplatePage {
       }
     }
     return false;
+  }
+
+  public get username(): string {
+    if (!UserSession.isLoggedIn) {
+      return null;
+    } else {
+      if (this._username) {
+        return this._username;
+      } else {
+        if (!this._loadingUsername) {
+          this._loadingUsername = true;
+          this.userProvider.requestUserInfoByUserId(this._mediaData.user_id).subscribe(res => {
+            this._username = (res as any).username;
+            this._loadingUsername = false;
+          });
+        }
+
+      }
+    }
+    return null;
   }
 
   emitLikeEvent() {

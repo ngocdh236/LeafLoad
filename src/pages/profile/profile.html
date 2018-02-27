@@ -1,38 +1,35 @@
-<ion-header *ngIf="isUserLoggedIn" no-border>
+<ion-header *ngIf="isUserLoggedIn">
 
   <ion-navbar>
-    <ion-title text-center>Username</ion-title>
+    <ion-title text-center>{{username}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content *ngIf="isUserLoggedIn">
-  <div class="user-info">
-    <div class="figures">
-      <p>12</p>
-      <ion-note>posts</ion-note>
+<ion-content>
+  <div *ngIf="isUserLoggedIn">
+    <div class="user-info">
+      <div class="figures">
+        <p>{{mediaArray.length}}</p>
+        <ion-note>posts</ion-note>
+      </div>
+      <!--<div class="figures">-->
+      <!--<p>12</p>-->
+      <!--<ion-note>likes</ion-note>-->
+      <!--</div>-->
+      <button id="modify-user-data-button" (click)="modifyUserData($event)">Edit Profile</button>
+      <button id="log-out-button" icon-only (click)="presentLogoutAlert()">
+        <ion-icon name="ios-log-out"></ion-icon>
+      </button>
     </div>
-    <div class="figures">
-      <p>12</p>
-      <ion-note>likes</ion-note>
+
+    <div *ngFor="let media of mediaArray">
+      <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
     </div>
-    <button id="modify-user-data-button" (click)="modifyUserData($event)">Edit Profile</button>
-    <button id="log-out-button" icon-only (click)="presentLogoutAlert()">
-      <ion-icon name="ios-log-out"></ion-icon>
-    </button>
   </div>
 
-  <div *ngFor="let media of mediaArray">
-    <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
-  </div>
-
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-</ion-content>
-
-<ion-content *ngIf="!isUserLoggedIn">
-  <page-login-template (login)="onLogin($event)"
+  <page-login-template *ngIf="!isUserLoggedIn" (login)="onLogin($event)"
                        (signUp)="onSignUp($event)"
-                       (skip)="onSkip($event)" [showSkipButton]='false'></page-login-template>
+                       (skip)="onSkip($event)"
+                       (didSucceedToLogin)="didSucceedToLogin($event)" [showSkipButton]='false'></page-login-template>
 </ion-content>

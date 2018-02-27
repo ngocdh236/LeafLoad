@@ -21,7 +21,7 @@ export class UploadPage {
 
   mediaArray: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private photoLibrary: PhotoLibrary, public mediaProvider: MediaDataProvider, private imagePicker: ImagePicker) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private photoLibrary: PhotoLibrary, public mediaProvider: MediaDataProvider) {
   }
 
   ionViewDidLoad() {
