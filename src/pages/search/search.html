@@ -18,7 +18,6 @@
 </ion-content>
 
 <ion-content [hidden]="isUserLoggedIn">
-  <page-login-template (login)="onLogin($event)" (signUp)="onSignUp($event)"
   <page-login-template [showSkipButton]='false' (login)="onLogin($event)" (signUp)="onSignUp($event)"
                        (skip)="onSkip($event)"></page-login-template>
 </ion-content>

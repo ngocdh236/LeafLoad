@@ -25,8 +25,8 @@ export class LoginTemplatePage {
   };
   status: String;
 
-  @Input() showSkipButton: false;
-  @Input() showSignUpButton: false;
+  @Input() showSkipButton: boolean;
+  @Input() showSignUpButton: boolean;
 
   @Output() login: EventEmitter<any> = new EventEmitter();
   @Output() signUp: EventEmitter<any> = new EventEmitter();

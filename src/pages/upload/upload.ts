@@ -26,11 +26,11 @@ export class UploadPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UploadPage');
-    this.imagePicker.getPictures().then((results) => {
-      for (var i = 0; i < results.length; i++) {
-        console.log('Image URI: ' + results[i]);
-      }
-    }, (err) => { });
+    // this.imagePicker.getPictures().then((results) => {
+    //   for (var i = 0; i < results.length; i++) {
+    //     console.log('Image URI: ' + results[i]);
+    //   }
+    // }, (err) => { });
   }
 
   media: Media = {
