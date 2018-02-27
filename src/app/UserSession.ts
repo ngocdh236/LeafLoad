@@ -48,7 +48,7 @@ export class UserSession {
 
   public static loginSuccessfullyWithDictionary(dict: any) {
     UserSession.accessToken = dict['token'];
-    UserSession.userId = dict['user']['userId'];
+    UserSession.userId = dict['user']['user_id'];
     UserSession.username = dict['user']['username'];
   }
 

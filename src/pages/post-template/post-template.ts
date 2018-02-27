@@ -73,7 +73,6 @@ export class PostTemplatePage {
   }
 
   ionViewDidLoad() {
-    console.log(`Thinh: ${this.thinh}`);
   }
 
   public get liked() {
@@ -87,7 +86,7 @@ export class PostTemplatePage {
   }
 
   emitLikeEvent() {
-    if (UserSession.isUserLoggedIn) {
+    if (UserSession.isLoggedIn) {
       this.isLoadingLikes = true;
       this.mediaProvider.likeMediaFile(this._mediaData.file_id).subscribe(res => {
         this.mediaProvider.getLikesForMediaFile(this._mediaData.file_id).subscribe(response => {
