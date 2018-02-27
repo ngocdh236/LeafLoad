@@ -19,6 +19,6 @@
 
 <ion-content [hidden]="isUserLoggedIn">
   <h6 text-center>Please login to continue</h6>
-  <page-login-template (login)="onLogin($event)" (signUp)="onSignUp($event)"
+  <page-login-template [showSkipButton]='false' (login)="onLogin($event)" (signUp)="onSignUp($event)"
                        (skip)="onSkip($event)"></page-login-template>
 </ion-content>

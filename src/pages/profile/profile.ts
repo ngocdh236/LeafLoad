@@ -38,12 +38,7 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
-    this.loginTemplate.shouldShowSkipButton = false;
-    console.log('ionViewDidLoad ProfilePage');
     this.loadMediaFilesOfCurrentUser(this.currentPage);
-    console.log(`AccessToken: ${UserSession.accessToken}`);
-    console.log(`UserId: ${UserSession.userId}`);
-    console.log(`Username: ${UserSession.username}`);
   }
 
   loadMediaFilesOfCurrentUser(page: number) {
@@ -96,10 +91,6 @@ export class ProfilePage {
         text: 'Logout',
         handler: () => {
           UserSession.logout();
-
-          console.log(`AccessToken: ${UserSession.accessToken}`);
-          console.log(`UserId: ${UserSession.userId}`);
-          console.log(`Username: ${UserSession.username}`);
         }
       }
     ]

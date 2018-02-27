@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component, Output, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { EventEmitter } from '@angular/core';
 import { UserDataProvider } from "../../providers/user-data/user-data";
@@ -25,15 +25,20 @@ export class LoginTemplatePage {
   };
   status: String;
 
+  @Input() showSkipButton: false;
+  @Input() showSignUpButton: false;
+
   @Output() login: EventEmitter<any> = new EventEmitter();
   @Output() signUp: EventEmitter<any> = new EventEmitter();
   @Output() skip: EventEmitter<any> = new EventEmitter();
 
   // Update these properties to hide/show the view
-  shouldShowSkipButton: boolean = true;
-  shouldShowSignUpButton: boolean = true;
+  public shouldShowSkipButton: boolean = true;
+  public shouldShowSignUpButton: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider, private viewController: ViewController) {
+    this.showSkipButton = true;
+    this.showSignUpButton = true;
   }
 
   ionViewDidLoad() {

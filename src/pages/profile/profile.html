@@ -34,5 +34,5 @@
 <ion-content *ngIf="!isUserLoggedIn">
   <page-login-template (login)="onLogin($event)"
                        (signUp)="onSignUp($event)"
-                       (skip)="onSkip($event)"></page-login-template>
+                       (skip)="onSkip($event)" [showSkipButton]='false'></page-login-template>
 </ion-content>

@@ -13,10 +13,10 @@
   </form>
 
 
-    <button [hidden]="!shouldShowSignUpButton" ion-button block clear (click)="emitSignUpEvent()">Sign Up</button>
+    <button *ngIf="showSignUpButton" ion-button block clear (click)="emitSignUpEvent()">Sign Up</button>
 
 
-  <div [hidden]="!shouldShowSkipButton">
+  <div *ngIf="showSkipButton">
     <button ion-button block clear (click)="emitSkipEvent()">Skip</button>
   </div>
 
