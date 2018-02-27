@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
-import {UserDataProvider} from "../../providers/user-data/user-data";
+import { UserDataProvider } from "../../providers/user-data/user-data";
 
 /**
  * Generated class for the PostTemplatePage page.

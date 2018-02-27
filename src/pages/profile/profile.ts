@@ -5,7 +5,6 @@ import { CommentPage } from "../comment/comment";
 import { ModifyUserDataPage } from "../modify-user-data/modify-user-data";
 import { UserSession } from "../../app/UserSession";
 import { LoginTemplatePage } from "../login-template/login-template";
-import { MediaDataProvider } from "../../providers/media-data/media-data";
 
 /**
  * Generated class for the ProfilePage page.
@@ -109,7 +108,7 @@ export class ProfilePage {
   }
 
   onLogin(ev: any) {
-    
+
   }
 
   onSignUp(event: any) {

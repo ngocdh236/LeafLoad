@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { EventEmitter } from '@angular/core';
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { UserSession } from "../../app/UserSession";
+import { HttpErrorResponse } from "@angular/common/http";
 /**
  * Generated class for the LoginTemplatePage page.
  *
