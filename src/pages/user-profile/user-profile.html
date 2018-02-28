@@ -7,12 +7,15 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>user-profile</ion-title>
+    <ion-title *ngIf="user">{{user.username}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  
+
+  <div *ngFor="let media of mediaArray">
+    <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
+  </div>
 </ion-content>
