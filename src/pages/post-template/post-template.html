@@ -14,7 +14,7 @@
     <ion-icon name="ios-text-outline"></ion-icon>
   </button>
 
-  <h6 class="media-content" *ngIf="likes.length > 0">{{likes.length}} likes</h6>
+  <h6 class="media-content" *ngIf="likes.length > 0" (click)="likeCountingLabelClicked()">{{likes.length}} likes</h6>
   <h6 class="media-content" *ngIf="mediaData.title">{{mediaData.title}}</h6>
   <p class="media-content" *ngIf="mediaData.description">{{mediaData.description}}</p>
   <ion-note>11h ago</ion-note>

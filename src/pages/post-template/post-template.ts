@@ -6,6 +6,7 @@ import { UserDataProvider } from "../../providers/user-data/user-data";
 import { UserSession } from "../../app/UserSession";
 import { LoginPage } from "../login/login";
 import { CommentPage } from "../comment/comment";
+import { LikeListPage } from "../like-list/like-list";
 
 /**
  * Generated class for the PostTemplatePage page.
@@ -132,5 +133,9 @@ export class PostTemplatePage {
   private presentLoginView() {
     let loginModel = this.modalCtrl.create(LoginPage, {});
     loginModel.present();
+  }
+
+  likeCountingLabelClicked() {
+    this.navCtrl.push(LikeListPage, this.likes);
   }
 }
