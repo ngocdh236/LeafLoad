@@ -3,20 +3,13 @@ import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { ListTemplatePage } from "../list-template/list-template";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { Like } from "../../interfaces/Like";
-
+import { User } from "../../interfaces/User";
 /**
  * Generated class for the LikeListPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
-// TODO: Remove this by importing an in
-terface
- interface User {
-   user_id: number;
-   username: string;
- }
 
 @IonicPage()
 @Component({

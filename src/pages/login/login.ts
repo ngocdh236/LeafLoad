@@ -21,11 +21,7 @@ import { TabsPage } from "../tabs/tabs";
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  user: User = {
-    username: '',
-    password: '',
-    email: ''
-  };
+  user: User;
   status: String;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userData: UserDataProvider) {

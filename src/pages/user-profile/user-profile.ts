@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { User } from "../../interfaces/User" ;
 /**
  * Generated class for the UserProfilePage page.
  *
