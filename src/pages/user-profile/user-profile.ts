@@ -16,7 +16,7 @@ import { MediaDataProvider } from "../../providers/media-data/media-data";
   selector: 'page-user-profile',
   templateUrl: 'user-profile.html',
 })
-export class  {
+export class UserProfilePage {
 
   user: User;
   userId: number;
@@ -32,7 +32,6 @@ export class  {
     this.downloadUserProfile();
     this.downloadMediaFiles();
   }
-
 
   downloadUserProfile() {
     if (this.userId) {

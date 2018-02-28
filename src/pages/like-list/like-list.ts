@@ -51,15 +51,10 @@ export class LikeListPage {
       });
     }
   }
-
-<<<<<<< HEAD
-  usernameClicked() {
-    this.navCtrl.push(UserProfilePage, {});
-=======
+  
   usernameClicked(index: number) {
     let liker = this.likers[index];
     this.navCtrl.push(UserProfilePage, liker);
->>>>>>> 66b290a3e7ffa9e81638fb3d9fbd85aeb7210ef9
   }
 
   // private displayListOfLikers() {
