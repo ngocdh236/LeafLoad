@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from "./interceptors/token.interceptor";
+import { UnAuthorizedRequestInterceptor } from "./interceptors/unauthorized-request.interceptor";
 
 import { ProfilePage } from "../pages/profile/profile";
 import { UploadPage } from "../pages/upload/upload";
@@ -74,8 +75,9 @@ import { UserProfilePage } from "../pages/user-profile/user-profile";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: ErrorHandler, useClass: IonicErrorHandler}, UnAuthorizedRequestInterceptor
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: UnAuthorizedRequestInterceptor, multi: true},
     UserDataProvider,
     MediaDataProvider,
     PhotoLibrary
