@@ -16,6 +16,6 @@
 <ion-content padding>
 
   <div *ngFor="let media of mediaArray">
-    <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
+    <page-post-template [mediaData]="media"></page-post-template>
   </div>
 </ion-content>

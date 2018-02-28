@@ -19,7 +19,7 @@ import { MediaDataProvider } from "../../providers/media-data/media-data";
 export class  {
 
   user: User;
-  userId: number = 27;
+  userId: number;
   mediaArray: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider, private mediaDataProvider: MediaDataProvider) {
@@ -29,19 +29,24 @@ export class  {
   }
 
   ionViewDidLoad() {
-
+    this.downloadUserProfile();
+    this.downloadMediaFiles();
   }
 
+
   downloadUserProfile() {
-    this.userDataProvider.requestUserInfoByUserId(this.userId).subscribe(res => {
-      this.user = res as User;
-    });
+    if (this.userId) {
+      this.userDataProvider.requestUserInfoByUserId(this.userId).subscribe(res => {
+        this.user = res as User;
+      });
+    }
   }
 
   downloadMediaFiles() {
-    this.mediaDataProvider.getMediaFilesForUser(this.userId).subscribe(res => {
-      this.mediaArray = res as any[];
-    });
+    if (this.userId) {
+      this.mediaDataProvider.getMediaFilesForUser(this.userId).subscribe(res => {
+        this.mediaArray = res as any[];
+      });
+    }
   }
-
 }

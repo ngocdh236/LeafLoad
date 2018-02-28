@@ -32,8 +32,8 @@ export class MediaDataProvider {
   }
 
   public getMediaFilesForUser(userId: number) {
-    const url = `${this.mediaForUserURL}/${userId}`;
-    return this.http.get(url);
+    const userMediaUrl = `${this.mediaForUserURL}/${userId}`;
+    return this.http.get(userMediaUrl);
   }
 
   public searchMediaFiles(keyWord: string) {

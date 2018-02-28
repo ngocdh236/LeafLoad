@@ -1,7 +1,7 @@
 import { Component, ViewChild, ComponentFactoryResolver, ComponentFactory, ComponentRef, ViewContainerRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { ListTemplatePage } from "../list-template/list-template";
-import { UserProfilePage } from "../user-profile";
+import { UserProfilePage } from "../user-profile/user-profile";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { Like } from "../../interfaces/Like";
 import { User } from "../../interfaces/User";
@@ -52,8 +52,14 @@ export class LikeListPage {
     }
   }
 
+<<<<<<< HEAD
   usernameClicked() {
     this.navCtrl.push(UserProfilePage, {});
+=======
+  usernameClicked(index: number) {
+    let liker = this.likers[index];
+    this.navCtrl.push(UserProfilePage, liker);
+>>>>>>> 66b290a3e7ffa9e81638fb3d9fbd85aeb7210ef9
   }
 
   // private displayListOfLikers() {
