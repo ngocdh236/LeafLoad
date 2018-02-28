@@ -7,6 +7,7 @@ import { UserSession } from "../../app/UserSession";
 import { LoginPage } from "../login/login";
 import { CommentPage } from "../comment/comment";
 import { LikeListPage } from "../like-list/like-list";
+import { UserProfilePage } from "../user-profile/user-profile";
 
 /**
  * Generated class for the PostTemplatePage page.
@@ -137,5 +138,9 @@ export class PostTemplatePage {
 
   likeCountingLabelClicked() {
     this.navCtrl.push(LikeListPage, this.likes);
+  }
+
+  usernameClicked() {
+    this.navCtrl.push(UserProfilePage, this.mediaData);
   }
 }
