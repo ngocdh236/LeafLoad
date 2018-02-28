@@ -20,7 +20,14 @@ import { User } from "../../interfaces/User";
   templateUrl: 'login-template.html',
 })
 export class LoginTemplatePage {
-  user: User;
+  user: User = {
+    username: '',
+    user_id: '',
+    username: '',
+    email: '',
+    password: '',
+    full_name: ''
+  };
   status: String;
 
   @Input() showSkipButton: boolean;
