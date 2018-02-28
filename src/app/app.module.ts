@@ -14,18 +14,18 @@ import { CommentPage } from "../pages/comment/comment";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {LoginPage} from "../pages/login/login";
+import { LoginPage } from "../pages/login/login";
 import { UserDataProvider } from '../providers/user-data/user-data';
 import { MediaDataProvider } from '../providers/media-data/media-data';
-import {HttpClientModule} from "@angular/common/http";
-import {SignupPage} from "../pages/signup/signup";
-import {SearchPage} from "../pages/search/search";
+import { HttpClientModule} from "@angular/common/http";
+import { SignupPage } from "../pages/signup/signup";
+import { SearchPage } from "../pages/search/search";
 import { LoginTemplatePage } from "../pages/login-template/login-template";
 import { PostTemplatePage } from "../pages/post-template/post-template";
 import { ThumbnailPipe } from "../pipes/thumbnail/thumbnail";
-import {ModifyUserDataPage} from "../pages/modify-user-data/modify-user-data";
-import {PhotoLibrary} from "@ionic-native/photo-library";
-
+import { ModifyUserDataPage } from "../pages/modify-user-data/modify-user-data";
+import { PhotoLibrary } from "@ionic-native/photo-library";
+import { UserProfileTemplatePage } from "../pages/user-profile-template/user-profile-template";
 
 @NgModule({
   declarations: [
@@ -41,7 +41,8 @@ import {PhotoLibrary} from "@ionic-native/photo-library";
     LoginTemplatePage,
     PostTemplatePage,
     CommentPage,
-    ModifyUserDataPage
+    ModifyUserDataPage,
+    UserProfileTemplatePage
   ],
   imports: [
     BrowserModule,
@@ -61,7 +62,8 @@ import {PhotoLibrary} from "@ionic-native/photo-library";
     LoginTemplatePage,
     PostTemplatePage,
     CommentPage,
-    ModifyUserDataPage
+    ModifyUserDataPage,
+    UserProfileTemplatePage
   ],
   providers: [
     StatusBar,
