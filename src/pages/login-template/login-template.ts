@@ -5,6 +5,8 @@ import { UserDataProvider } from "../../providers/user-data/user-data";
 import { UserSession } from "../../app/UserSession";
 import { HttpErrorResponse } from "@angular/common/http";
 import { SignupPage } from "../signup/signup";
+import { User } from "../../interfaces/User";
+
 /**
  * Generated class for the LoginTemplatePage page.
  *
@@ -18,11 +20,7 @@ import { SignupPage } from "../signup/signup";
   templateUrl: 'login-template.html',
 })
 export class LoginTemplatePage {
-  user = {
-    username: '',
-    password: '',
-    email: ''
-  };
+  user: User;
   status: String;
 
   @Input() showSkipButton: boolean;

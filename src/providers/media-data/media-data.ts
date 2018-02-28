@@ -15,7 +15,8 @@ export class MediaDataProvider {
   mediaURL = `${this.apiUrl}/uploads/`;
   searchURL = `${this.apiUrl}/media/search/`;
   commentURL = `${this.apiUrl}/comments`;
-  favoriteURL= `${this.apiUrl}/favourites`;
+  favoriteURL = `${this.apiUrl}/favourites`;
+  mediaForUserURL = `${this.apiUrl}/media/user`;
 
   constructor(public http: HttpClient) {
   }
@@ -28,6 +29,11 @@ export class MediaDataProvider {
   public getMediaFilesOfCurrentUser(page: number, numberOfFilesPerRequest: number) {
     const start = page * numberOfFilesPerRequest;
     return this.http.get(this.apiUrl + '/media/user');
+  }
+
+  public getMediaFilesForUser(userId: number) {
+    const userMediaUrl = `${this.mediaForUserURL}/${userId}`;
+    return this.http.get(userMediaUrl);
   }
 
   public searchMediaFiles(keyWord: string) {

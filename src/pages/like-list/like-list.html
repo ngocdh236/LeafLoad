@@ -16,7 +16,7 @@
   <ion-spinner name="ios" *ngIf="isLoading"></ion-spinner>
   <div *ngIf="!isLoading" >
     <div *ngFor="let item of likers; let i = index">
-      <h6>{{item.username}}</h6>
+      <h6 (click)="usernameClicked(i)">{{item.username}}</h6>
     </div>
   </div>
 </ion-content>

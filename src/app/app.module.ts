@@ -25,9 +25,9 @@ import { PostTemplatePage } from "../pages/post-template/post-template";
 import { ThumbnailPipe } from "../pipes/thumbnail/thumbnail";
 import { ModifyUserDataPage } from "../pages/modify-user-data/modify-user-data";
 import { PhotoLibrary } from "@ionic-native/photo-library";
-import { UserProfileTemplatePage } from "../pages/user-profile-template/user-profile-template";
 import { ListTemplatePage } from "../pages/list-template/list-template";
 import { LikeListPage } from '../pages/like-list/like-list';
+import { UserProfilePage } from "../pages/user-profile/user-profile";
 
 @NgModule({
   declarations: [
@@ -44,9 +44,9 @@ import { LikeListPage } from '../pages/like-list/like-list';
     PostTemplatePage,
     CommentPage,
     ModifyUserDataPage,
-    UserProfileTemplatePage,
     ListTemplatePage,
-    LikeListPage
+    LikeListPage,
+    UserProfilePage
   ],
   imports: [
     BrowserModule,
@@ -67,9 +67,9 @@ import { LikeListPage } from '../pages/like-list/like-list';
     PostTemplatePage,
     CommentPage,
     ModifyUserDataPage,
-    UserProfileTemplatePage,
     ListTemplatePage,
-    LikeListPage
+    LikeListPage,
+    UserProfilePage
   ],
   providers: [
     StatusBar,

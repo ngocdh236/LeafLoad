@@ -20,12 +20,7 @@ import {LoginPage} from "../login/login";
   templateUrl: 'signup.html',
 })
 export class SignupPage {
-  user: User = {
-    username: '',
-    password: '',
-    email: '',
-    full_name: ''
-  };
+  user: User;
   status: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userData: UserDataProvider) {
