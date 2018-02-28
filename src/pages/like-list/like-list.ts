@@ -11,7 +11,8 @@ import { Like } from "../../interfaces/Like";
  * Ionic pages and navigation.
  */
 
-// TODO: Remove this by importing an interface
+// TODO: Remove this by importing an in
+terface
  interface User {
    user_id: number;
    username: string;

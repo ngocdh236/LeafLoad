@@ -28,6 +28,7 @@ import { PhotoLibrary } from "@ionic-native/photo-library";
 import { UserProfileTemplatePage } from "../pages/user-profile-template/user-profile-template";
 import { ListTemplatePage } from "../pages/list-template/list-template";
 import { LikeListPage } from '../pages/like-list/like-list';
+import { UserProfilePage } from "../pages/user-profile/user-profile";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { LikeListPage } from '../pages/like-list/like-list';
     ModifyUserDataPage,
     UserProfileTemplatePage,
     ListTemplatePage,
-    LikeListPage
+    LikeListPage,
+    UserProfilePage
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,8 @@ import { LikeListPage } from '../pages/like-list/like-list';
     ModifyUserDataPage,
     UserProfileTemplatePage,
     ListTemplatePage,
-    LikeListPage
+    LikeListPage,
+    UserProfilePage
   ],
   providers: [
     StatusBar,
