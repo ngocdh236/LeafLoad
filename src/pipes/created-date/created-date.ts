@@ -19,6 +19,8 @@ export class CreatedDatePipe implements PipeTransform {
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
+  millisecondDifference: any;
+
   transform(value: string) {
     let displayDate: string;
 
@@ -31,49 +33,44 @@ export class CreatedDatePipe implements PipeTransform {
     let createdYearString = createdDate.getFullYear().toString();
 
     let millisecondDifference = currentDate.getTime() - createdDate.getTime();
+    this.millisecondDifference = millisecondDifference;
+
+    if (millisecondDifference >= this.weekToMillisecond) {
+      if (currentYearString == createdYearString) {
+        displayDate = createdMonthString + ' ' + createdDayString;
+      } else {
+        displayDate = createdMonthString + ' ' + createdDayString + ', ' + createdYearString;
+      }
+    }
 
     if (millisecondDifference < this.secondToMillisecond) {
       displayDate = 'Just now';
     }
 
     if (millisecondDifference >= this.secondToMillisecond && millisecondDifference < this.minuteToMillisecond) {
-      if (Math.floor(millisecondDifference/1000) == 1) {
-        displayDate = Math.floor(millisecondDifference/1000).toString() + ' second ago';
-      } else {displayDate = Math.floor(millisecondDifference/1000).toString() + ' seconds ago';}
+      displayDate = this.getDisplayDate(1000, 'second', 'seconds');
     }
 
     if (millisecondDifference >= this.minuteToMillisecond && millisecondDifference < this.hourToMillisecond) {
-      if (Math.floor(millisecondDifference/60000) == 1) {
-        displayDate = Math.floor(millisecondDifference/60000).toString() + ' minute ago';
-      } else {
-        displayDate = Math.floor(millisecondDifference/60000).toString() + ' minutes ago';
-      }
+      displayDate = this.getDisplayDate(60000, 'minute', 'minutes');
     }
 
     if (millisecondDifference >= this.hourToMillisecond && millisecondDifference < this.dayToMillisecond) {
-      if (Math.floor(millisecondDifference/3600000) == 1) {
-        displayDate = Math.floor(millisecondDifference/3600000).toString() + ' hour ago';
-      } else {
-        displayDate = Math.floor(millisecondDifference/3600000).toString() + ' hours ago';
-      }
+      displayDate = this.getDisplayDate(3600000, 'hour', 'hours');
     }
 
     if (millisecondDifference >= this.dayToMillisecond && millisecondDifference < this.weekToMillisecond) {
-      if (Math.floor(millisecondDifference/86400000) == 1) {
-        displayDate = Math.floor(millisecondDifference/86400000).toString() + ' day ago';
-      } else {
-        displayDate = Math.floor(millisecondDifference/86400000).toString() + ' days ago';
-      }
-    }
-
-    if (millisecondDifference >= this.weekToMillisecond) {
-      if (currentYearString == createdYearString) {
-        displayDate = `${createdMonthString} ${createdDayString}`;
-      } else {
-        displayDate = `${createdMonthString} ${createdDayString}, ${createdYearString}`;
-      }
+      displayDate = this.getDisplayDate(86400000, 'day', 'days');
     }
 
     return displayDate.toUpperCase();
+  }
+
+  getDisplayDate(dividend: number, singular: string, plural: string) {
+    if (Math.floor(this.millisecondDifference/dividend) == 1) {
+      return (Math.floor(this.millisecondDifference/dividend) + ' ' + singular + ' ago')
+    } else {
+      return (Math.floor(this.millisecondDifference/dividend) + ' ' + plural + ' ago')
+    }
   }
 }
