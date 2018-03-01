@@ -46,13 +46,10 @@ import {CreatedDatePipe} from "../pipes/created-date/created-date";
     PostTemplatePage,
     CommentPage,
     ModifyUserDataPage,
-<<<<<<< HEAD
-    CreatedDatePipe
-=======
+    CreatedDatePipe,
     ListTemplatePage,
     LikeListPage,
     UserProfilePage
->>>>>>> develop
   ],
   imports: [
     BrowserModule,
@@ -80,7 +77,7 @@ import {CreatedDatePipe} from "../pipes/created-date/created-date";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}, UnAuthorizedRequestInterceptor
+    {provide: ErrorHandler, useClass: IonicErrorHandler}, UnAuthorizedRequestInterceptor,
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: UnAuthorizedRequestInterceptor, multi: true},
     UserDataProvider,

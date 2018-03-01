@@ -22,12 +22,12 @@ import { User } from "../../interfaces/User";
 export class LoginTemplatePage {
   user: User = {
     username: '',
-    user_id: '',
-    username: '',
-    email: '',
     password: '',
-    full_name: ''
-  };
+    email: '',
+    full_name: '',
+    user_id: null,
+  }
+
   status: String;
 
   @Input() showSkipButton: boolean;
