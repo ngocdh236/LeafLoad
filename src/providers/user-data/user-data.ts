@@ -38,6 +38,16 @@ export class UserDataProvider {
 
   public requestUserInfoByUserId(userId: number) {
     const requestUserInfoUrl = `${this.apiUrl}/users/${userId}`;
-    return this.http.get(requestUserInfoUrl)
+    return this.http.get(requestUserInfoUrl);
+  }
+
+  public updateUserInfo(newInfo: any) {
+    const requestURL= `${this.apiUrl}/users`;
+    return this.http.put(requestURL, newInfo);
+  }
+
+  public requestCurrentUserInfo() {
+    const requestURL= `${this.apiUrl}/users/user`;
+    return this.http.get(requestURL);
   }
 }
