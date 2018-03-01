@@ -1,5 +1,5 @@
 <div class="media-card">
-  <h5 class="media-content" *ngIf="username">{{username}}</h5>
+  <h5 class="media-content" *ngIf="username" (click)="usernameClicked()">{{username}}</h5>
   <div class="media"><img [src]="(mediaData.filename | thumbnail: 'large')"></div>
 
   <button *ngIf="!liked" class="interaction" ion-button color="dark" icon-left clear large (click)="emitLikeEvent()" [disabled]="isLoadingLikes">
@@ -14,7 +14,7 @@
     <ion-icon name="ios-text-outline"></ion-icon>
   </button>
 
-  <h6 class="media-content" *ngIf="likes.length > 0">{{likes.length}} likes</h6>
+  <h6 class="media-content" *ngIf="likes.length > 0" (click)="likeCountingLabelClicked()">{{likes.length}} likes</h6>
   <h6 class="media-content" *ngIf="mediaData.title">{{mediaData.title}}</h6>
   <p class="media-content" *ngIf="mediaData.description">{{mediaData.description}}</p>
   <ion-note>{{mediaData.time_added | createdDate}}</ion-note>

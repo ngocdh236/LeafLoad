@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from "./interceptors/token.interceptor";
+import { UnAuthorizedRequestInterceptor } from "./interceptors/unauthorized-request.interceptor";
 
 import { ProfilePage } from "../pages/profile/profile";
 import { UploadPage } from "../pages/upload/upload";
@@ -14,20 +15,21 @@ import { CommentPage } from "../pages/comment/comment";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {LoginPage} from "../pages/login/login";
+import { LoginPage } from "../pages/login/login";
 import { UserDataProvider } from '../providers/user-data/user-data';
 import { MediaDataProvider } from '../providers/media-data/media-data';
-import {HttpClientModule} from "@angular/common/http";
-import {SignupPage} from "../pages/signup/signup";
-import {SearchPage} from "../pages/search/search";
+import { HttpClientModule} from "@angular/common/http";
+import { SignupPage } from "../pages/signup/signup";
+import { SearchPage } from "../pages/search/search";
 import { LoginTemplatePage } from "../pages/login-template/login-template";
 import { PostTemplatePage } from "../pages/post-template/post-template";
 import { ThumbnailPipe } from "../pipes/thumbnail/thumbnail";
-import {ModifyUserDataPage} from "../pages/modify-user-data/modify-user-data";
-import {PhotoLibrary} from "@ionic-native/photo-library";
+import { ModifyUserDataPage } from "../pages/modify-user-data/modify-user-data";
+import { PhotoLibrary } from "@ionic-native/photo-library";
+import { ListTemplatePage } from "../pages/list-template/list-template";
+import { LikeListPage } from '../pages/like-list/like-list';
+import { UserProfilePage } from "../pages/user-profile/user-profile";
 import {CreatedDatePipe} from "../pipes/created-date/created-date";
-import {FileTransfer, FileTransferObject} from "@ionic-native/file-transfer";
-
 
 @NgModule({
   declarations: [
@@ -44,7 +46,13 @@ import {FileTransfer, FileTransferObject} from "@ionic-native/file-transfer";
     PostTemplatePage,
     CommentPage,
     ModifyUserDataPage,
+<<<<<<< HEAD
     CreatedDatePipe
+=======
+    ListTemplatePage,
+    LikeListPage,
+    UserProfilePage
+>>>>>>> develop
   ],
   imports: [
     BrowserModule,
@@ -65,12 +73,16 @@ import {FileTransfer, FileTransferObject} from "@ionic-native/file-transfer";
     PostTemplatePage,
     CommentPage,
     ModifyUserDataPage,
+    ListTemplatePage,
+    LikeListPage,
+    UserProfilePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: ErrorHandler, useClass: IonicErrorHandler}, UnAuthorizedRequestInterceptor
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: UnAuthorizedRequestInterceptor, multi: true},
     UserDataProvider,
     MediaDataProvider,
     PhotoLibrary,

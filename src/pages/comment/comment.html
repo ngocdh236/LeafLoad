@@ -24,8 +24,10 @@
     <!--</ion-list-header>-->
   <!--</ion-list>-->
   <div class="comment-content" *ngFor="let comment of comments; let i = index">
-    <h6>username</h6>
-    <p>{{comment.comment}}</p>
+    <div *ngIf="comment.user">
+      <h6 >{{comment.user.username}}</h6>
+      <p>{{comment.comment}}</p>
+    </div>
   </div>
 </ion-content>
 
