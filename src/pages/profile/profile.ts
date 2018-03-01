@@ -86,8 +86,8 @@ export class ProfilePage {
 
   presentLogoutAlert() {
     let alert = this.alertCtrl.create({
-    title: 'Logout',
-    message: 'Are you sure to logout?',
+    title: 'Log Out',
+    message: 'Are you sure to log out?',
     buttons: [
       {
         text: 'Cancel',
@@ -96,7 +96,7 @@ export class ProfilePage {
         }
       },
       {
-        text: 'Logout',
+        text: 'Log Out',
         handler: () => {
           this.username = null;
           UserSession.logout();

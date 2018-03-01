@@ -26,6 +26,7 @@ import { ThumbnailPipe } from "../pipes/thumbnail/thumbnail";
 import {ModifyUserDataPage} from "../pages/modify-user-data/modify-user-data";
 import {PhotoLibrary} from "@ionic-native/photo-library";
 import {CreatedDatePipe} from "../pipes/created-date/created-date";
+import {FileTransfer, FileTransferObject} from "@ionic-native/file-transfer";
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import {CreatedDatePipe} from "../pipes/created-date/created-date";
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     UserDataProvider,
     MediaDataProvider,
-    PhotoLibrary
+    PhotoLibrary,
+
   ]
 })
 export class AppModule {}

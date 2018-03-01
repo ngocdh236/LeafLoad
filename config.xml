@@ -3,7 +3,7 @@
     <name>LeafLoad</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://10.112.214.135:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -77,6 +77,10 @@
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
     <allow-navigation href="http://10.112.212.6:8100" />
+    <allow-navigation href="http://10.0.1.20:8101" />
+    <allow-navigation href="http://10.0.1.20:8100" />
+    <allow-navigation href="http://10.112.214.135:8101" />
+    <allow-navigation href="http://10.112.214.135:8100" />
     <engine name="ios" spec="4.5.4" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-device" spec="^2.0.1" />
@@ -86,9 +90,9 @@
     <plugin name="cordova-plugin-photo-library" spec="^2.1.0">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="To choose photos" />
     </plugin>
-    <allow-navigation href="http://10.0.1.20:8101" />
     <plugin name="com.synconset.imagepicker" spec="~2.1.8">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="your usage message" />
     </plugin>
-    <allow-navigation href="http://10.0.1.20:8100" />
+    <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
+    <plugin name="cordova-plugin-advanced-http" spec="^1.10.2" />
 </widget>

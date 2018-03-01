@@ -29,7 +29,7 @@ export class CreatedDatePipe implements PipeTransform {
 
     let createdDate = new Date(value);
     let createdDayString = createdDate.getDate().toString();
-    let createdMonthString = this.monthNames[createdDate.getMonth()].toString(); // convert short month names to full month names
+    let createdMonthString = this.monthNames[createdDate.getMonth()].toString(); // convert short month name to full month name
     let createdYearString = createdDate.getFullYear().toString();
 
     let millisecondDifference = currentDate.getTime() - createdDate.getTime();
@@ -67,10 +67,11 @@ export class CreatedDatePipe implements PipeTransform {
   }
 
   getDisplayDate(dividend: number, singular: string, plural: string) {
-    if (Math.floor(this.millisecondDifference/dividend) == 1) {
-      return (Math.floor(this.millisecondDifference/dividend) + ' ' + singular + ' ago')
+    var convertedAndRoundedResult = Math.floor(this.millisecondDifference/dividend);
+    if (convertedAndRoundedResult == 1) {
+      return convertedAndRoundedResult + ' ' + singular + ' ago';
     } else {
-      return (Math.floor(this.millisecondDifference/dividend) + ' ' + plural + ' ago')
+      return convertedAndRoundedResult + ' ' + plural + ' ago';
     }
   }
 }

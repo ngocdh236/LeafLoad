@@ -4,6 +4,7 @@ import {PhotoLibrary} from '@ionic-native/photo-library';
 import {MediaDataProvider} from "../../providers/media-data/media-data";
 import {Media} from "../../interfaces/Media";
 import { ImagePicker } from '@ionic-native/image-picker';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer'
 
 /**
  * Generated class for the UploadPage page.
@@ -43,6 +44,37 @@ export class UploadPage {
     console.log(evt.target.files);
     this.media.file = evt.target.files[0];
   }
+
+  // upload(fileEntry) {
+  //   // !! Assumes variable fileURL contains a valid URL to a text file on the device,
+  //   var fileURL = fileEntry.toURL();
+  //
+  //   var success = function (r) {
+  //     console.log("Successful upload...");
+  //     console.log("Code = " + r.responseCode);
+  //     // displayFileData(fileEntry.fullPath + " (content uploaded to server)");
+  //   }
+  //
+  //   var fail = function (error) {
+  //     alert("An error has occurred: Code = " + error.code);
+  //   }
+  //
+  //   var options = new FileUploadOptions();
+  //   options.fileKey = "file";
+  //   options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+  //   options.mimeType = "text/plain";
+  //
+  //   var params = {};
+  //   params.value1 = "test";
+  //   params.value2 = "param";
+  //
+  //   options.params = params;
+  //
+  //   var ft = new FileTransfer();
+  //   // SERVER must be a URL that can handle the request, like
+  //   // http://some.server.com/upload.php
+  //   ft.upload(fileURL, encodeURI(SERVER), success, fail, options);
+  // };
 
   uploadMedia(e) {
     e.preventDefault();
