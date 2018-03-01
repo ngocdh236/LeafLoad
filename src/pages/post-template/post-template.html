@@ -1,6 +1,6 @@
 <div class="media-card">
   <h5 class="media-content" *ngIf="username" (click)="usernameClicked()">{{username}}</h5>
-  <div class="media"><img [src]="(mediaData.filename | thumbnail: 'large')"></div>
+  <div class="media"><img [src]="(mediaData.filename | thumbnail: 'large')" (click)="displayPhotoViewer()"></div>
 
   <button *ngIf="!liked" class="interaction" ion-button color="dark" icon-left clear large (click)="emitLikeEvent()" [disabled]="isLoadingLikes">
     <ion-icon name="ios-leaf-outline"></ion-icon>

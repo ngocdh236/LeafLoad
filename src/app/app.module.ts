@@ -29,6 +29,7 @@ import { PhotoLibrary } from "@ionic-native/photo-library";
 import { ListTemplatePage } from "../pages/list-template/list-template";
 import { LikeListPage } from '../pages/like-list/like-list';
 import { UserProfilePage } from "../pages/user-profile/user-profile";
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,9 @@ import { UserProfilePage } from "../pages/user-profile/user-profile";
     {provide: HTTP_INTERCEPTORS, useClass: UnAuthorizedRequestInterceptor, multi: true},
     UserDataProvider,
     MediaDataProvider,
-    PhotoLibrary
+    PhotoLibrary,
+    PhotoViewer,
+    ThumbnailPipe
   ]
 })
 export class AppModule {}
