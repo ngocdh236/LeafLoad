@@ -1,23 +1,35 @@
 page-upload {
+  form {
+    display: flex;
+    flex-direction: column;
 
-  input, textarea {
-    border-radius: 5px;
-    border: $default-border;
-    padding: 20px;
-    width: 60%;
-    height: 30px;
-    margin-bottom: 10px;
-  }
+    #button-choose-file {
+      background-color: white;
+      border: 1px black solid;
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
+    }
 
-  textarea {
+    input, textarea {
+      border-radius: 5px;
+      border: $default-border;
+      padding: 20px;
+      width: 80%;
+      height: 30px;
+      margin-bottom: 10px;
+    }
 
-  }
+    textarea {
+      height: 100px;
+    }
 
-  button {
-    @extend %default-button;
-    color: white;
-    background-color: #50A050;
-    width: 80%;
-    height: 40px;
+    button {
+      @extend %default-button;
+      color: white;
+      background-color: #50A050;
+      width: 80%;
+      height: 40px;
+    }
   }
 }

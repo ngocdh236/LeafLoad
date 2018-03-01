@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { ThumbnailPipe } from './thumbnail/thumbnail';
+import { CreatedDatePipe } from './created-date/created-date';
 @NgModule({
-	declarations: [ThumbnailPipe],
+	declarations: [ThumbnailPipe,
+    CreatedDatePipe],
 	imports: [],
-	exports: [ThumbnailPipe]
+	exports: [ThumbnailPipe,
+    CreatedDatePipe]
 })
 export class PipesModule {}

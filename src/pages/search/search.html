@@ -4,10 +4,9 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header no-border text-center>
+<ion-header no-border [hidden]="!isUserLoggedIn">
   <ion-toolbar>
-    <ion-searchbar [hidden]="!isUserLoggedIn" text-center placeholder="Search" (ionInput)="onInput($event)" required></ion-searchbar>
-    <!--<input text-center placeholder="Search" (input)="onInput($event)" required>-->
+    <ion-searchbar placeholder="Search" (ionInput)="onInput($event)" required></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 

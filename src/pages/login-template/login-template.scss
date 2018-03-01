@@ -1,16 +1,13 @@
 page-login-template {
-
   ion-content {
-    display: flex;
-    align-items: center;
+    width: 100%;
   }
 
   .logo {
-    margin-top: 20px;
+    margin-top: 30%;
     margin-bottom: 20px;
-    width: 100%;
     img {
-      width: 50%;
+      width: 40%;
       height: auto;
     }
   }
@@ -20,7 +17,7 @@ page-login-template {
     border-radius: 5px;
     border: $default-border;
     padding: 20px;
-    width: 80%;
+    width: 65%;
     height: 30px;
     margin-bottom: 10px;
   }
@@ -29,7 +26,7 @@ page-login-template {
     @extend %default-button;
     color: white;
     background-color: #50A050;
-    width: 80%;
+    width: 65%;
     height: 40px;
   }
 }

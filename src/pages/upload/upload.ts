@@ -40,7 +40,7 @@ export class UploadPage {
   };
 
   setFile(evt) {
-    console.log(evt.target.files[0]);
+    console.log(evt.target.files);
     this.media.file = evt.target.files[0];
   }
 

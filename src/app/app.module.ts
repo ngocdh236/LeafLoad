@@ -25,6 +25,7 @@ import { PostTemplatePage } from "../pages/post-template/post-template";
 import { ThumbnailPipe } from "../pipes/thumbnail/thumbnail";
 import {ModifyUserDataPage} from "../pages/modify-user-data/modify-user-data";
 import {PhotoLibrary} from "@ionic-native/photo-library";
+import {CreatedDatePipe} from "../pipes/created-date/created-date";
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {PhotoLibrary} from "@ionic-native/photo-library";
     LoginTemplatePage,
     PostTemplatePage,
     CommentPage,
-    ModifyUserDataPage
+    ModifyUserDataPage,
+    CreatedDatePipe
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,7 @@ import {PhotoLibrary} from "@ionic-native/photo-library";
     LoginTemplatePage,
     PostTemplatePage,
     CommentPage,
-    ModifyUserDataPage
+    ModifyUserDataPage,
   ],
   providers: [
     StatusBar,

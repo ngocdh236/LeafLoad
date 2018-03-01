@@ -17,7 +17,7 @@
   <h6 class="media-content" *ngIf="likes.length > 0">{{likes.length}} likes</h6>
   <h6 class="media-content" *ngIf="mediaData.title">{{mediaData.title}}</h6>
   <p class="media-content" *ngIf="mediaData.description">{{mediaData.description}}</p>
-  <ion-note>11h ago</ion-note>
+  <ion-note>{{mediaData.time_added | createdDate}}</ion-note>
 </div>
 
 <!--<h5>username</h5>
