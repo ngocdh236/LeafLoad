@@ -32,6 +32,7 @@ import { UserProfilePage } from "../pages/user-profile/user-profile";
 import {CreatedDatePipe} from "../pipes/created-date/created-date";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import {FileTransfer} from "@ionic-native/file-transfer";
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,9 @@ import {FileTransfer} from "@ionic-native/file-transfer";
     UserDataProvider,
     MediaDataProvider,
     PhotoLibrary,
-    Camera
+    Camera,
+    PhotoViewer,
+    ThumbnailPipe
   ]
 })
 export class AppModule {}

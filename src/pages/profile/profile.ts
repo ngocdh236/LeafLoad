@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import {IonicPage, ModalController, NavController, NavParams, AlertController, Content } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams, AlertController, Content, Events } from 'ionic-angular';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
 import { CommentPage } from "../comment/comment";
 import { ModifyUserDataPage } from "../modify-user-data/modify-user-data";
@@ -7,12 +7,8 @@ import { UserSession } from "../../app/UserSession";
 import { LoginTemplatePage } from "../login-template/login-template";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+const UserLoggedInEvent = "UserLoggedInEvent";
+const UserUpdatedInfoEvent = "UserUpdatedInfoEvent";
 
 @IonicPage()
 @Component({
@@ -25,8 +21,6 @@ export class ProfilePage {
   @ViewChild(LoginTemplatePage) loginTemplate;
   @ViewChild(Content) content;
 
-  username: string;
-  fullName: string;
   mediaArray: any[] = [];
   numberOfFilesPerRequest = 10;
   currentPage = 0;
@@ -36,13 +30,31 @@ export class ProfilePage {
     return UserSession.isLoggedIn;
   }
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public mediaData: MediaDataProvider, private alertCtrl: AlertController, public userDataProvider: UserDataProvider) {
+  public get username(): string {
+    return UserSession.username;
+  };
+
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public mediaData: MediaDataProvider, private alertCtrl: AlertController, public userDataProvider: UserDataProvider, private events: Events) {
     this.currentPage = 0;
     this.mediaArray = [];
+
+    events.subscribe(UserLoggedInEvent, () => {
+      this.reloadPostData();
+    });
+
+    events.subscribe(UserUpdatedInfoEvent, () => {
+      this.reloadPostData();
+    });
   }
 
   ionViewDidLoad() {
     this.loadMediaFilesOfCurrentUser(this.currentPage);
+
+    // Silently update user info whenever user launches the app
+    this.userDataProvider.requestCurrentUserInfo().subscribe(res => {
+      // TODO: Move this line below to the service itself
+      UserSession.updateWithNewInfo(res);
+    });
   }
 
   loadMediaFilesOfCurrentUser(page: number) {
@@ -64,12 +76,6 @@ export class ProfilePage {
       if (this.infiniteScroll != null) {
         this.infiniteScroll.complete();
       }
-    });
-
-    // Fetch Username
-    this.userDataProvider.requestUserInfoByUserId(Number(UserSession.userId)).subscribe(res => {
-      this.username = (res as any).username;
-      this.fullName = (res as any).full_name;
     });
   }
 
@@ -100,7 +106,6 @@ export class ProfilePage {
       {
         text: 'Log Out',
         handler: () => {
-          this.username = null;
           UserSession.logout();
         }
       }
@@ -126,15 +131,17 @@ export class ProfilePage {
 
   }
 
+  // TODO: Deprecated. Use the Events instead.
   didSucceedToLogin(ev: any) {
+    this.reloadPostData();
+  }
+
+  private reloadPostData() {
     // Remove user data
     this.mediaArray = [];
-    this.username = null;
 
     // Resize the content otherwise the navbar would overlap the content
     this.content.resize();
     this.loadMediaFilesOfCurrentUser(this.currentPage);
   }
-
-
 }

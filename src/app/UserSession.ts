@@ -1,6 +1,7 @@
 const TokenKey: string = "TokenKey";
 const UserIdKey: string = "UserIdKey";
 const UsernameKey: string = "UserNameKey"
+const EmailKey: string = "EmailKey"
 
 export class UserSession {
 
@@ -31,6 +32,15 @@ export class UserSession {
     return localStorage.getItem(UserIdKey);
   }
 
+  // userId
+  public static set email(value: string) {
+    localStorage.setItem(EmailKey, value);
+  }
+
+  public static get email(): string {
+    return localStorage.getItem(EmailKey);
+  }
+
 
   // isUserLoggedIn getter
   public static get isLoggedIn(): boolean {
@@ -48,8 +58,22 @@ export class UserSession {
 
   public static loginSuccessfullyWithDictionary(dict: any) {
     UserSession.accessToken = dict['token'];
-    UserSession.userId = dict['user']['user_id'];
-    UserSession.username = dict['user']['username'];
+
+    let userInfo = dict['user'];
+    UserSession.updateWithNewInfo(userInfo);
+  }
+
+  public static updateWithNewInfo(newInfo: any) {
+    if (newInfo) {
+      let userId = newInfo['user_id'];
+      if (userId) { UserSession.userId = userId; }
+
+      let email = newInfo['email'];
+      if (email) { UserSession.email = email; }
+
+      let username = newInfo['username'];
+      if (username) { UserSession.username = username; }
+    }
   }
 
 }

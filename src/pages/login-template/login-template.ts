@@ -1,5 +1,5 @@
 import { Component, Output, Input } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, Events } from 'ionic-angular';
 import { EventEmitter } from '@angular/core';
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { UserSession } from "../../app/UserSession";
@@ -13,6 +13,8 @@ import { User } from "../../interfaces/User";
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+
+const UserLoggedInEvent = "UserLoggedInEvent";
 
 @IonicPage()
 @Component({
@@ -49,7 +51,7 @@ export class LoginTemplatePage {
   // Present modally
   presentedModally: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider, private viewController: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider, private viewController: ViewController, private events: Events) {
     this.showSkipButton = true;
     this.showSignUpButton = true;
 
@@ -63,8 +65,11 @@ export class LoginTemplatePage {
   emitLoginEvent() {
     this.login.emit(this.user);
     this.userDataProvider.login(this.user).subscribe(response => {
+
       UserSession.loginSuccessfullyWithDictionary(response);
       this.didSucceedToLogin.emit(response);
+
+      this.events.publish(UserLoggedInEvent);
 
       if (this.presentedModally) {
         this.viewController.dismiss();

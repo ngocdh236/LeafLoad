@@ -8,7 +8,8 @@ import { LoginPage } from "../login/login";
 import { CommentPage } from "../comment/comment";
 import { LikeListPage } from "../like-list/like-list";
 import { UserProfilePage } from "../user-profile/user-profile";
-
+import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { ThumbnailPipe } from "../../pipes/thumbnail/thumbnail";
 /**
  * Generated class for the PostTemplatePage page.
  *
@@ -63,7 +64,7 @@ export class PostTemplatePage {
 
   private _username: string = null;
   private _loadingUsername = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaDataProvider, public userProvider: UserDataProvider, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaDataProvider, public userProvider: UserDataProvider, public modalCtrl: ModalController, private photoViewer: PhotoViewer, private thumbnailPipe: ThumbnailPipe) {
   }
 
   ionViewDidLoad() {
@@ -142,5 +143,10 @@ export class PostTemplatePage {
 
   usernameClicked() {
     this.navCtrl.push(UserProfilePage, this.mediaData);
+  }
+
+  displayPhotoViewer() {
+    let imageURL = this.thumbnailPipe.transform(this.mediaData.filename, 'large');
+    this.photoViewer.show(imageURL);
   }
 }
