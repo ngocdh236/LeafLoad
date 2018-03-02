@@ -25,8 +25,8 @@ export class LoginTemplatePage {
     password: '',
     email: '',
     full_name: '',
-    user_id: null,
-  }
+    user_id: 0
+  };
 
   status: String;
 

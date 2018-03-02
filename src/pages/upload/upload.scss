@@ -1,14 +1,11 @@
 page-upload {
   form {
-    display: flex;
-    flex-direction: column;
+    ion-icon {
+      font-size: 200px;
+    }
 
-    #button-choose-file {
-      background-color: white;
-      border: 1px black solid;
-      width: 100px;
-      height: 100px;
-      margin-bottom: 20px;
+    #file-input {
+      display: none;
     }
 
     input, textarea {

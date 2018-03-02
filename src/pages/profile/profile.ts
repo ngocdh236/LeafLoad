@@ -26,6 +26,7 @@ export class ProfilePage {
   @ViewChild(Content) content;
 
   username: string;
+  fullName: string;
   mediaArray: any[] = [];
   numberOfFilesPerRequest = 10;
   currentPage = 0;
@@ -68,6 +69,7 @@ export class ProfilePage {
     // Fetch Username
     this.userDataProvider.requestUserInfoByUserId(Number(UserSession.userId)).subscribe(res => {
       this.username = (res as any).username;
+      this.fullName = (res as any).full_name;
     });
   }
 

@@ -5,16 +5,22 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content text-center>
   <form (submit)="startUpload($event)">
-    <button id="button-choose-file" icon-only>
+    <label for="file-input">
       <ion-icon name="add"></ion-icon>
-    </button>
-    <input type="file" name="file" (change)="setFile($event)">
+    </label>
+    <br>
+    <input id="file-input" type="file" name="file" (change)="setFile($event)">
 
     <input [(ngModel)]="media.title" name="title" placeholder="Title">
 
     <textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>
+
+
+    <button ion-button full (click)="openCamera()">Open Cam</button>
+    <button ion-button full (click)="openGallery()">Open Gal</button>
+    <img [src]="base64Image" *ngIf="base64Image"/>
 
     <button type="submit">Upload</button>
   </form>

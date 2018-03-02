@@ -12,7 +12,7 @@
       <input [(ngModel)]="user.password" name="password" type="password" placeholder="Password" #password="ngModel"
                  required>
 
-      <button type="submit" block [disabled]="!username.valid || !password.valid">Login</button>
+      <button type="submit"  [disabled]="!username.valid || !password.valid">Login</button>
 
     <h6 text-center>{{status}}</h6>
   </form>

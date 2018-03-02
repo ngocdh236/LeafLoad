@@ -6,8 +6,8 @@
 
 </ion-header>
 
-<ion-content>
-  <div *ngIf="isUserLoggedIn">
+<ion-content *ngIf="isUserLoggedIn">
+  <div>
     <div class="user-info">
       <div class="figures">
         <p>{{mediaArray.length}}</p>
@@ -21,14 +21,18 @@
       <button id="log-out-button" icon-only (click)="presentLogoutAlert()">
         <ion-icon name="ios-log-out"></ion-icon>
       </button>
+      <h6 *ngIf="fullName">{{fullName}}</h6>
     </div>
+    <ion-item-divider></ion-item-divider>
 
-    <div *ngFor="let media of mediaArray">
+    <div class="media" *ngFor="let media of mediaArray">
       <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
     </div>
   </div>
+</ion-content>
 
-  <page-login-template *ngIf="!isUserLoggedIn" (login)="onLogin($event)"
+<ion-content *ngIf="!isUserLoggedIn">
+  <page-login-template (login)="onLogin($event)"
                        (signUp)="onSignUp($event)"
                        (skip)="onSkip($event)"
                        (didSucceedToLogin)="didSucceedToLogin($event)" [showSkipButton]='false'></page-login-template>

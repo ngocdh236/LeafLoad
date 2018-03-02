@@ -30,6 +30,8 @@ import { ListTemplatePage } from "../pages/list-template/list-template";
 import { LikeListPage } from '../pages/like-list/like-list';
 import { UserProfilePage } from "../pages/user-profile/user-profile";
 import {CreatedDatePipe} from "../pipes/created-date/created-date";
+import {Camera, CameraOptions} from "@ionic-native/camera";
+import {FileTransfer} from "@ionic-native/file-transfer";
 
 @NgModule({
   declarations: [
@@ -77,13 +79,13 @@ import {CreatedDatePipe} from "../pipes/created-date/created-date";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}, UnAuthorizedRequestInterceptor,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: UnAuthorizedRequestInterceptor, multi: true},
     UserDataProvider,
     MediaDataProvider,
     PhotoLibrary,
-
+    Camera
   ]
 })
 export class AppModule {}
