@@ -59,23 +59,10 @@ export class ProfilePage {
 
   loadMediaFilesOfCurrentUser(page: number) {
     this.mediaData.getMediaFilesOfCurrentUser(this.currentPage, this.numberOfFilesPerRequest).subscribe(res => {
-      console.log(res);
-      const newFiles: any = res;
-      newFiles.map(media => {
-        const temp = media.filename.split('.');
-        const thumbName = temp[0] + '-tn320.png';
-        media.thumbnail = this.mediaData.mediaURL + thumbName;
-        this.mediaArray.push(media);
+      this.mediaArray = res as any[];
 
-      });
-
-      // Increase the current page index
-      this.currentPage += 1;
-
-      // Complete the the scrolling indicator
-      if (this.infiniteScroll != null) {
-        this.infiniteScroll.complete();
-      }
+      // WORKAROUND: Resize the content otherwise the navbar would overlap the content
+      this.content.resize();
     });
   }
 
@@ -131,17 +118,13 @@ export class ProfilePage {
 
   }
 
-  // TODO: Deprecated. Use the Events instead.
   didSucceedToLogin(ev: any) {
-    this.reloadPostData();
+    
   }
 
   private reloadPostData() {
     // Remove user data
     this.mediaArray = [];
-
-    // Resize the content otherwise the navbar would overlap the content
-    this.content.resize();
     this.loadMediaFilesOfCurrentUser(this.currentPage);
   }
 }
