@@ -34,6 +34,7 @@ import {Camera, CameraOptions} from "@ionic-native/camera";
 import {FileTransfer} from "@ionic-native/file-transfer";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { GridTemplatePage } from "../pages/grid-template/grid-template";
+import { SinglePostTemplatePage } "../pages/single-post-template";
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { GridTemplatePage } from "../pages/grid-template/grid-template";
     ListTemplatePage,
     LikeListPage,
     UserProfilePage,
-    GridTemplatePage
+    GridTemplatePage,
+    SinglePostTemplatePage
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,8 @@ import { GridTemplatePage } from "../pages/grid-template/grid-template";
     ListTemplatePage,
     LikeListPage,
     UserProfilePage,
-    GridTemplatePage
+    GridTemplatePage,
+    SinglePostTemplatePage
   ],
   providers: [
     StatusBar,
