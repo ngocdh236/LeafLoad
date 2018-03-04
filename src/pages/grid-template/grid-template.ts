@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
@@ -15,11 +15,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class GridTemplatePage {
 
+  @Input() mediaArray: any[] = [];
+  @Output() didSelectItem: EventEmitter<any> = new EventEmitter();
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad GridTemplatePage');
+  }
+
+  selectItemAtIndex(index: number) {
+    let item = this.mediaArray[index];
+    this.didSelectItem.emit(item);
   }
 
 }

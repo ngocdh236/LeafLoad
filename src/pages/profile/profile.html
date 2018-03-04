@@ -25,9 +25,19 @@
     </div>
     <ion-item-divider></ion-item-divider>
 
-    <div class="media" *ngFor="let media of mediaArray">
-      <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
+    <button [ngClass]="{'hightlighted': shouldDisplayVerticalFlowLayout}" (click)="switchLayoutToVerticalFlowLayout()">Vertical Flow Layout</button>
+    <button [ngClass]="{'hightlighted': shouldDisplayGridLayout}" (click)="switchLayoutGridLayout()">Grid Layout</button>
+
+    <div *ngIf="shouldDisplayVerticalFlowLayout">
+      <div class="media" *ngFor="let media of mediaArray">
+        <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
+      </div>
     </div>
+
+    <div *ngIf="shouldDisplayGridLayout">
+      <page-grid-template [mediaArray]="mediaArray" (didSelectItem)="didSelectItem($event)"></page-grid-template>
+    </div>
+
   </div>
 </ion-content>
 

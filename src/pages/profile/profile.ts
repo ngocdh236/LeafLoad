@@ -6,9 +6,16 @@ import { ModifyUserDataPage } from "../modify-user-data/modify-user-data";
 import { UserSession } from "../../app/UserSession";
 import { LoginTemplatePage } from "../login-template/login-template";
 import { UserDataProvider } from "../../providers/user-data/user-data";
+import { GridTemplatePage } from "../grid-template/grid-template";
+import { SinglePostTemplatePage } from "../single-post-template/single-post-template";
 
 const UserLoggedInEvent = "UserLoggedInEvent";
 const UserUpdatedInfoEvent = "UserUpdatedInfoEvent";
+
+export enum LayoutType {
+    VerticalFlow,
+    Grid
+  }
 
 @IonicPage()
 @Component({
@@ -20,6 +27,8 @@ export class ProfilePage {
 
   @ViewChild(LoginTemplatePage) loginTemplate;
   @ViewChild(Content) content;
+
+  layoutType: LayoutType = LayoutType.VerticalFlow;
 
   mediaArray: any[] = [];
   numberOfFilesPerRequest = 10;
@@ -48,6 +57,9 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
+    // Intialize layout type
+    this.layoutType = LayoutType.VerticalFlow;
+
     this.loadMediaFilesOfCurrentUser(this.currentPage);
 
     // Silently update user info whenever user launches the app
@@ -119,12 +131,35 @@ export class ProfilePage {
   }
 
   didSucceedToLogin(ev: any) {
-    
+
   }
 
   private reloadPostData() {
     // Remove user data
     this.mediaArray = [];
     this.loadMediaFilesOfCurrentUser(this.currentPage);
+  }
+
+  // Grid view events
+  didSelectItem(ev: any) {
+    this.navCtrl.push(SinglePostTemplatePage, ev);
+  }
+
+  public get shouldDisplayVerticalFlowLayout() {
+    return this.layoutType === LayoutType.VerticalFlow;
+  }
+
+  public get shouldDisplayGridLayout() {
+    return this.layoutType === LayoutType.Grid;
+  }
+
+  // NOTE: A function call from html file can not know LayoutType type. So we are unable to pass a LayoutType argument to switchLayout function which is called from html file.
+  // TODO: Refactor this by using string enum. Since we are able pass a string as an argument to switchLayout function which can be called from html.
+  public switchLayoutToVerticalFlowLayout() {
+    this.layoutType = LayoutType.VerticalFlow
+  }
+
+  public switchLayoutGridLayout() {
+    this.layoutType = LayoutType.Grid;
   }
 }

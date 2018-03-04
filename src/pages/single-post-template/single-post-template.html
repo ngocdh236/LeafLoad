@@ -7,12 +7,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>single-post-template</ion-title>
+    <ion-title>{{mediaData.title}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <page-post-template [mediaData]="mediaData" (like)="like($event)" (comment)="comment($event)"></page-post-template>
 </ion-content>

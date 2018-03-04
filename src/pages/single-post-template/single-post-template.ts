@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
@@ -14,12 +14,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'single-post-template.html',
 })
 export class SinglePostTemplatePage {
+  mediaData: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    let data = navParams.data;
+    console.log(navParams.data);
+    if (data) {
+      this.mediaData = data;
+    }
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SinglePostTemplatePage');
-  }
-
 }
