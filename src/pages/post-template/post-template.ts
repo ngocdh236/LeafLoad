@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController, Events } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
 import { UserDataProvider } from "../../providers/user-data/user-data";
@@ -10,12 +10,15 @@ import { LikeListPage } from "../like-list/like-list";
 import { UserProfilePage } from "../user-profile/user-profile";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { ThumbnailPipe } from "../../pipes/thumbnail/thumbnail";
+
 /**
  * Generated class for the PostTemplatePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+
+ const DidDeletePostEvent = "DidDeletePostEvent";
 
 @IonicPage()
 @Component({
@@ -64,7 +67,15 @@ export class PostTemplatePage {
 
   private _username: string = null;
   private _loadingUsername = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaDataProvider, public userProvider: UserDataProvider, public modalCtrl: ModalController, private photoViewer: PhotoViewer, private thumbnailPipe: ThumbnailPipe) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public mediaProvider: MediaDataProvider,
+              public userProvider: UserDataProvider,
+              public modalCtrl: ModalController,
+              private photoViewer: PhotoViewer,
+              private thumbnailPipe: ThumbnailPipe,
+              public loadingCtrl: LoadingController,
+              private events: Events) {
   }
 
   ionViewDidLoad() {
@@ -131,6 +142,10 @@ export class PostTemplatePage {
     this.comment.emit(this.mediaData);
   }
 
+  emitDidDeleteMediaEvent() {
+    this.events.publish(DidDeletePostEvent, this.mediaData);
+  }
+
   // Helper methods
   private presentLoginView() {
     let loginModel = this.modalCtrl.create(LoginPage, {});
@@ -148,5 +163,49 @@ export class PostTemplatePage {
   displayPhotoViewer() {
     let imageURL = this.thumbnailPipe.transform(this.mediaData.filename, 'large');
     this.photoViewer.show(imageURL);
+  }
+
+  viewPhoto() {
+    this.displayPhotoViewer();
+  }
+
+  deletePost() {
+    if (this.isMyPost) {
+      let deletingLoading = this.displayLoadingActivityIndicator("Deleting post...");
+      deletingLoading.present();
+      this.mediaProvider.deleteMediaFile(this.mediaData).subscribe(res => {
+        deletingLoading.dismiss();
+        this.emitDidDeleteMediaEvent();
+        let successMessage = this.displayLoadingActivityIndicator("Deleted post successfully", 1000);
+        successMessage.present();
+      }, err => {
+        deletingLoading.dismiss();
+        let errorMessage = this.displayLoadingActivityIndicator("An error occur while deleting a post. Please try again", 1500);
+        errorMessage.present();
+      });
+    }
+  }
+
+  public get isMyPost(): boolean {
+    if (UserSession.isLoggedIn) {
+      return this.mediaData.user_id == UserSession.userId;
+    }
+
+    return false;
+  }
+
+  // Activity Indicator
+  // TODO: Refactor this so we can use everywhere
+  private displayLoadingActivityIndicator(message: string, duration: number = 0) {
+    let config: any = {content: message};
+
+    if (duration != 0) {
+      config.duration = duration;
+      config.spinner = 'hide';
+    }
+
+    let loading = this.loadingCtrl.create(config);
+
+    return loading;
   }
 }

@@ -1,4 +1,4 @@
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ENV } from '@environment';
 import { of } from 'rxjs/observable/of';
@@ -71,5 +71,16 @@ export class MediaDataProvider {
 
   public uploadMedia(formData: FormData) {
     return this.http.post(this.apiUrl + '/media', formData);
+  }
+
+  public deleteMediaFile(file: any) {
+    if (file.file_id) {
+      return this.deleteMediaFileById(file.file_id);
+    }
+  }
+
+  public deleteMediaFileById(fileId: number) {
+    let url = `${this.apiUrl}/media/${fileId}`;
+    return this.http.delete(url);
   }
 }

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, NavParams } from 'ionic-angular';
+import { NavController, ModalController, NavParams, Events } from 'ionic-angular';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
 import { PostTemplatePage } from "../post-template/post-template";
+
+const DidDeletePostEvent = "DidDeletePostEvent";
 
 @Component({
   selector: 'page-home',
@@ -14,9 +16,13 @@ export class HomePage {
   infiniteScroll: any;
   currentFile_id: number;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public mediaData: MediaDataProvider) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public mediaData: MediaDataProvider, private events: Events) {
     this.currentPage = 0;
     this.mediaArray = [];
+
+    events.subscribe(DidDeletePostEvent, (mediaFile) => {
+      this.didDeleteMediaFile(mediaFile);
+    });
   }
 
   ionViewDidLoad() {
@@ -33,7 +39,7 @@ export class HomePage {
         media.thumbnail = this.mediaData.mediaURL + thumbName;
         this.mediaArray.push(media);
       });
-      
+
       // Increase the current page index
       this.currentPage += 1;
 
@@ -55,6 +61,16 @@ export class HomePage {
   }
 
   comment(event: any) {
+  }
+
+  private didDeleteMediaFile(ev: any) {
+    for (let i = 0; i < this.mediaArray.length ; i++) {
+      if (this.mediaArray[i].file_id == ev.file_id) {
+
+        this.mediaArray.splice(i, 1);
+      }
+    }
+    this.mediaArray = this.mediaArray;
   }
 
 }

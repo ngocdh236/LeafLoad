@@ -11,6 +11,7 @@ import { SinglePostTemplatePage } from "../single-post-template/single-post-temp
 
 const UserLoggedInEvent = "UserLoggedInEvent";
 const UserUpdatedInfoEvent = "UserUpdatedInfoEvent";
+const DidDeletePostEvent = "DidDeletePostEvent";
 
 export enum LayoutType {
     VerticalFlow,
@@ -53,6 +54,10 @@ export class ProfilePage {
 
     events.subscribe(UserUpdatedInfoEvent, () => {
       this.reloadPostData();
+    });
+
+    events.subscribe(DidDeletePostEvent, (mediaFile) => {
+      this.didDeleteMediaFile(mediaFile);
     });
   }
 
@@ -132,6 +137,15 @@ export class ProfilePage {
 
   didSucceedToLogin(ev: any) {
 
+  }
+
+  private didDeleteMediaFile(ev: any) {
+    for (let i = 0; i < this.mediaArray.length ; i++) {
+      if (this.mediaArray[i].file_id == ev.file_id) {
+
+        this.mediaArray.splice(i, 1);
+      }
+    }
   }
 
   private reloadPostData() {
