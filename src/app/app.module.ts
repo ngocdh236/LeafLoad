@@ -33,6 +33,7 @@ import {CreatedDatePipe} from "../pipes/created-date/created-date";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import {FileTransfer} from "@ionic-native/file-transfer";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { GridTemplatePage } from "../pages/grid-template/grid-template";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
     CreatedDatePipe,
     ListTemplatePage,
     LikeListPage,
-    UserProfilePage
+    UserProfilePage,
+    GridTemplatePage
   ],
   imports: [
     BrowserModule,
@@ -75,7 +77,8 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
     ModifyUserDataPage,
     ListTemplatePage,
     LikeListPage,
-    UserProfilePage
+    UserProfilePage,
+    GridTemplatePage
   ],
   providers: [
     StatusBar,
