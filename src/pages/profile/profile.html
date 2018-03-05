@@ -7,6 +7,10 @@
 </ion-header>
 
 <ion-content *ngIf="isUserLoggedIn">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <div>
     <div class="user-info">
       <div class="figures">

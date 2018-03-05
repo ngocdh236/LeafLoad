@@ -65,7 +65,7 @@ export class ProfilePage {
     // Intialize layout type
     this.layoutType = LayoutType.VerticalFlow;
 
-    this.loadMediaFilesOfCurrentUser(this.currentPage);
+    this.loadMediaFilesOfCurrentUser(this.currentPage, null);
 
     // Silently update user info whenever user launches the app
     this.userDataProvider.requestCurrentUserInfo().subscribe(res => {
@@ -74,10 +74,14 @@ export class ProfilePage {
     });
   }
 
-  loadMediaFilesOfCurrentUser(page: number) {
+  loadMediaFilesOfCurrentUser(page: number, completionHandler: (succeeded: boolean) => void) {
     this.mediaData.getMediaFilesOfCurrentUser(this.currentPage, this.numberOfFilesPerRequest).subscribe(res => {
-      this.mediaArray = res as any[];
 
+      if (completionHandler) {
+        completionHandler(true);
+      }
+
+      this.mediaArray = res as any[];
       // WORKAROUND: Resize the content otherwise the navbar would overlap the content
       this.content.resize();
     });
@@ -148,10 +152,10 @@ export class ProfilePage {
     }
   }
 
-  private reloadPostData() {
+  private reloadPostData(completionHandler: (succeeded: boolean) => void) {
     // Remove user data
     this.mediaArray = [];
-    this.loadMediaFilesOfCurrentUser(this.currentPage);
+    this.loadMediaFilesOfCurrentUser(this.currentPage, completionHandler);
   }
 
   // Grid view events
@@ -175,5 +179,11 @@ export class ProfilePage {
 
   public switchLayoutGridLayout() {
     this.layoutType = LayoutType.Grid;
+  }
+
+  doRefresh(refresher) {
+    this.reloadPostData((succeeded) => {
+      refresher.complete();
+    });
   }
 }
