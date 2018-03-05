@@ -26,6 +26,7 @@ export class SearchPage {
 
   loginPage: any = LoginPage;
   mediaArray: any;
+  isLoading: boolean = false;
 
   public get isUserLoggedIn(): boolean {
     return UserSession.isLoggedIn;
@@ -43,9 +44,10 @@ export class SearchPage {
     let keyword = ev.target.value;
     if (keyword && keyword.trim() !== '') {
       this.mediaArray = [];
+      this.isLoading = true;
       this.mediaData.searchMediaFiles(keyword).subscribe(res => {
+        this.isLoading = false;
         this.mediaArray = res;
-        console.log(res);
       }, (error) => {
 
       });
