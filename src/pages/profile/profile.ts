@@ -49,11 +49,11 @@ export class ProfilePage {
     this.mediaArray = [];
 
     events.subscribe(UserLoggedInEvent, () => {
-      this.reloadPostData();
+      this.reloadPostData(null);
     });
 
     events.subscribe(UserUpdatedInfoEvent, () => {
-      this.reloadPostData();
+      this.reloadPostData(null);
     });
 
     events.subscribe(DidDeletePostEvent, (mediaFile) => {
