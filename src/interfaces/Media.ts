@@ -1,5 +1,5 @@
 export interface Media {
-  file: File;
-  title: string;
-  description: string;
+  file_id: number,
+  title: string,
+  description: string
 }

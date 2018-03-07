@@ -7,37 +7,43 @@
 </ion-header>
 
 <ion-content *ngIf="isUserLoggedIn">
-  <div>
-    <div class="user-info">
-      <div class="figures">
-        <p>{{mediaArray.length}}</p>
-        <ion-note>posts</ion-note>
-      </div>
-      <!--<div class="figures">-->
-      <!--<p>12</p>-->
-      <!--<ion-note>likes</ion-note>-->
-      <!--</div>-->
-      <button id="modify-user-data-button" (click)="modifyUserData($event)">Edit Profile</button>
-      <button id="log-out-button" icon-only (click)="presentLogoutAlert()">
-        <ion-icon name="ios-log-out"></ion-icon>
-      </button>
-      <h6 *ngIf="fullName">{{fullName}}</h6>
-    </div>
-    <ion-item-divider></ion-item-divider>
-
-    <button [ngClass]="{'hightlighted': shouldDisplayVerticalFlowLayout}" (click)="switchLayoutToVerticalFlowLayout()">Vertical Flow Layout</button>
-    <button [ngClass]="{'hightlighted': shouldDisplayGridLayout}" (click)="switchLayoutGridLayout()">Grid Layout</button>
-
-    <div *ngIf="shouldDisplayVerticalFlowLayout">
-      <div class="media" *ngFor="let media of mediaArray">
-        <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
-      </div>
+  <div class="user-info">
+    <div class="figures">
+      <p>{{mediaArray.length}}</p>
+      <ion-note>posts</ion-note>
     </div>
 
-    <div *ngIf="shouldDisplayGridLayout">
-      <page-grid-template [mediaArray]="mediaArray" (didSelectItem)="didSelectItem($event)"></page-grid-template>
-    </div>
+    <button id="modify-user-data-button" (click)="modifyUserData($event)">Edit Profile</button>
+    <button id="log-out-button" icon-only (click)="presentLogoutAlert()">
+      <ion-icon name="ios-log-out"></ion-icon>
+    </button>
+    <h6 *ngIf="fullName">{{fullName}}</h6>
+  </div>
 
+  <ion-item no-padding></ion-item>
+
+  <ion-item class="layout-options" no-padding>
+
+    <button ion-button color="dark" clear (click)="switchLayoutGridLayout()">
+      <ion-icon *ngIf="shouldDisplayGridLayout" name="ios-grid"></ion-icon>
+      <ion-icon *ngIf="shouldDisplayVerticalFlowLayout" name="ios-grid-outline"></ion-icon>
+    </button>
+
+    <button ion-button color="dark" clear (click)="switchLayoutToVerticalFlowLayout()">
+      <ion-icon *ngIf="shouldDisplayVerticalFlowLayout" name="ios-list-box"></ion-icon>
+      <ion-icon *ngIf="shouldDisplayGridLayout" name="ios-list-box-outline"></ion-icon>
+    </button>
+
+  </ion-item>
+
+  <div *ngIf="shouldDisplayGridLayout">
+    <page-grid-template [mediaArray]="mediaArray" (didSelectItem)="didSelectItem($event)"></page-grid-template>
+  </div>
+
+  <div *ngIf="shouldDisplayVerticalFlowLayout">
+    <div *ngFor="let media of mediaArray">
+      <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
+    </div>
   </div>
 </ion-content>
 

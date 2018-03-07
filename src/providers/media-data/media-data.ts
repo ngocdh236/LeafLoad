@@ -17,6 +17,7 @@ export class MediaDataProvider {
   commentURL = `${this.apiUrl}/comments`;
   favoriteURL = `${this.apiUrl}/favourites`;
   mediaForUserURL = `${this.apiUrl}/media/user`;
+  uploadURL = `${this.apiUrl}/media`;
 
   constructor(public http: HttpClient) {
   }
@@ -26,8 +27,8 @@ export class MediaDataProvider {
     return this.http.get(this.apiUrl + `/media?start=${start}&limit=${numberOfFilesPerRequest}`);
   }
 
-  public getMediaFilesOfCurrentUser(page: number, numberOfFilesPerRequest: number) {
-    const start = page * numberOfFilesPerRequest;
+  public getMediaFilesOfCurrentUser() {
+    // const start = page * numberOfFilesPerRequest;
     return this.http.get(this.apiUrl + '/media/user');
   }
 
@@ -37,9 +38,6 @@ export class MediaDataProvider {
   }
 
   public searchMediaFiles(keyWord: string) {
-    const settings = {
-      headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token')).set('Conten-Type', 'application/x-www-form-urlencoded')
-    }
     const dictValue = {title: `${keyWord}`, description: `${keyWord}`};
     return this.http.post(this.searchURL, dictValue);
   }
@@ -82,5 +80,10 @@ export class MediaDataProvider {
   public deleteMediaFileById(fileId: number) {
     let url = `${this.apiUrl}/media/${fileId}`;
     return this.http.delete(url);
+  }
+
+  public updateFileInfo(fileId: number, media: any) {
+    let url = `${this.apiUrl}/media/${fileId}`;
+    return this.http.put(url, media);
   }
 }

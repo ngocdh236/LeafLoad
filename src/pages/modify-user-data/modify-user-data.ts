@@ -18,35 +18,6 @@ import { UserDataProvider } from "../../providers/user-data/user-data";
   templateUrl: 'modify-user-data.html',
 })
 export class ModifyUserDataPage {
-  // private _username: string = null;
-  // private _password: string = null;
-  // private _email : string = null;
-  //
-  // public get username(): string {
-  //   if (this._username) { return this._username; }
-  //   return UserSession.username;
-  // }
-  //
-  // public set username(value: string) {
-  //   if (UserSession.username)
-  // }
-  //
-  // public get password(): string {
-  //
-  // }
-  //
-  // public set password(value: string) {
-  //
-  // }
-  //
-  // public get email(): string {
-  //
-  // }
-  //
-  // public set email(value: string) {
-  //
-  // }
-
   user: User = {
     username: UserSession.username,
     user_id: 0,
@@ -91,19 +62,19 @@ export class ModifyUserDataPage {
     return true;
   }
 
-  constructor(public navCtrl: NavController, public viewController: ViewController, public navParams: NavParams, private userDataProvider: UserDataProvider, public loadingCtrl: LoadingController, private events: Events) {
+  constructor(public navCtrl: NavController,
+              public viewController: ViewController,
+              public navParams: NavParams,
+              private userDataProvider: UserDataProvider,
+              public loadingCtrl: LoadingController,
+              private events: Events) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ModifyUserDataPage');
   }
 
   dismiss() {
     this.viewController.dismiss();
-  }
-
-  deleteAccount() {
-
   }
 
   updateUserProfileInfo() {

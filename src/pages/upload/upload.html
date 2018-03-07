@@ -6,22 +6,28 @@
 </ion-header>
 
 <ion-content text-center>
-  <form (submit)="startUpload($event)">
-    <label for="file-input">
-      <ion-icon name="add"></ion-icon>
-    </label>
-    <br>
-    <input id="file-input" type="file" name="file" (change)="setFile($event)">
+  <!--<form (submit)="startUpload($event)">-->
+    <!--<label for="file-input">-->
+      <!--<ion-icon name="add"></ion-icon>-->
+    <!--</label>-->
+    <!--<br>-->
+    <!--<input id="file-input" type="file" name="file" (change)="setFile($event)">-->
 
-    <input [(ngModel)]="media.title" name="title" placeholder="Title">
+    <!--<input [(ngModel)]="media.title" name="title" placeholder="Title">-->
 
-    <textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>
+    <!--<textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>-->
 
 
-    <button ion-button full (click)="openCamera()">Open Cam</button>
-    <button ion-button full (click)="openGallery()">Open Gal</button>
-    <img [src]="base64Image" *ngIf="base64Image"/>
+    <!--<button ion-button full (click)="openCamera()">Open Cam</button>-->
+    <!--<button ion-button full (click)="openGallery()">Open Gal</button>-->
+    <!--<img *ngIf="imageSrc" [src]="imageSrc" />-->
 
-    <button type="submit">Upload</button>
-  </form>
+    <!--<button type="submit">Upload</button>-->
+  <!--</form>-->
+
+  <div class="gallery-button" text-center>
+    <img [src]="imageSrc" />
+    <ion-icon name="images" on-tap="openGallery()"></ion-icon>
+    <p>Choose a Photo</p>
+  </div>
 </ion-content>

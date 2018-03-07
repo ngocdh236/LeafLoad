@@ -1,52 +1,34 @@
-<div class="media-card">
+<div class="header">
   <h5 class="media-content" *ngIf="username" (click)="usernameClicked()">{{username}}</h5>
-  <div class="media">
-    <img [src]="(mediaData.filename | thumbnail: 'large')" (click)="displayPhotoViewer()">
-    <div class="more-options">
-      <div class="dropdown" style="float:right;">
-        <button class="dropbtn"><img src="assets/imgs/more-options.png"></button>
-        <div class="dropdown-content">
-          <button (click)="viewPhoto()"> View photo </button>
-          <button *ngIf="isMyPost" (click)="deletePost()">Delete post</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <button *ngIf="!liked" class="interaction" ion-button color="dark" icon-left clear large (click)="emitLikeEvent()" [disabled]="isLoadingLikes">
-    <ion-icon name="ios-leaf-outline"></ion-icon>
+  <button icon-only (click)="showMediaOptions()">
+    <ion-icon name="more"></ion-icon>
   </button>
-
-  <button *ngIf="liked" class="interaction" ion-button icon-left clear large (click)="emitUnLikeEvent()" [disabled]="isLoadingLikes">
-    <ion-icon name="ios-leaf"></ion-icon>
-  </button>
-
-  <button class="interaction" ion-button color="dark" icon-left clear large (click)="emitCommentEvent()" [disabled]="isLoadingComments">
-    <ion-icon name="ios-text-outline"></ion-icon>
-  </button>
-
-  <h6 class="media-content" *ngIf="likes.length > 0" (click)="likeCountingLabelClicked()">{{likes.length}} likes</h6>
-  <h6 class="media-content" *ngIf="mediaData.title">{{mediaData.title}}</h6>
-  <p class="media-content" *ngIf="mediaData.description">{{mediaData.description}}</p>
-  <ion-note>{{mediaData.time_added | createdDate}}</ion-note>
 </div>
 
-<!--<h5>username</h5>
-<img [src]="(mediaData.filename | thumbnail: 'large')">
-<h5>{{mediaData.title}}</h5>
-<p>{{mediaData.description}}</p>
+<div class="media">
+  <img [src]="(mediaData.filename | thumbnail: 'large')" (click)="displayPhotoViewer()">
+</div>
 
-<button *ngIf="!liked" class="card-interaction" ion-button icon-left clear small (click)="emitLikeEvent()" [disabled]="isLoadingLikes">
-  <ion-icon name="ios-heart-outline"></ion-icon>
-  <div>{{(likes$ | async)?.length}}</div>
+
+<button *ngIf="!liked" ion-button color="dark" clear (click)="emitLikeEvent()"
+        [disabled]="isLoadingLikes">
+  <ion-icon name="ios-leaf-outline"></ion-icon>
 </button>
 
-<button *ngIf="liked" class="card-interaction" ion-button icon-left clear small (click)="emitUnLikeEvent()" [disabled]="isLoadingLikes">
-  <ion-icon name="ios-heart"></ion-icon>
-  <div>{{(likes$ | async)?.length}}</div>
+<button *ngIf="liked" ion-button clear (click)="emitUnLikeEvent()"
+        [disabled]="isLoadingLikes">
+  <ion-icon name="ios-leaf"></ion-icon>
 </button>
 
-<button class="card-interaction" ion-button icon-left clear small (click)="emitCommentEvent()" [disabled]="isLoadingComments">
+<button ion-button color="dark" clear (click)="emitCommentEvent()"
+        [disabled]="isLoadingComments">
   <ion-icon name="ios-text-outline"></ion-icon>
-  <div>{{(comments$ | async)?.length}}</div>
-</button>-->
+</button>
+
+<h6 class="media-content" *ngIf="likes.length > 0" (click)="likeCountingLabelClicked()">{{likes.length}} likes</h6>
+<h6 class="media-content" *ngIf="mediaData.title">{{mediaData.title}}</h6>
+<p class="media-content" *ngIf="mediaData.description">{{mediaData.description}}</p>
+<ion-note class="media-content">{{mediaData.time_added | createdDate}}</ion-note>
+
+

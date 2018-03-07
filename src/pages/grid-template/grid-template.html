@@ -4,17 +4,12 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<!-- <ion-header>
-
-  <ion-navbar>
-    <ion-title>grid-template</ion-title>
-  </ion-navbar>
-
-</ion-header> -->
-
 
 <div class="grid-container">
   <div class="grid-item" *ngFor="let item of mediaArray; let i = index">
-    <div class="media"><img [src]="(item.filename | thumbnail: 'large')" (click)="selectItemAtIndex(i)"></div>
+    <img [src]="(item.filename | thumbnail: 'large')" (click)="selectItemAtIndex(i)">
   </div>
+
+
+
 </div>

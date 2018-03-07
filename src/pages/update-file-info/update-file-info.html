@@ -1,0 +1,30 @@
+<ion-header no-border>
+
+  <ion-navbar>
+    <ion-buttons left>
+      <!--<button ion-button icon-only (click)="dismiss()">-->
+        <!--<ion-icon name="close"></ion-icon>-->
+      <!--</button>-->
+    </ion-buttons>
+    <ion-title>Edit Info</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary" stacked>Title</ion-label>
+      <ion-input [(ngModel)]="media.title" #title="ngModel"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Description</ion-label>
+      <ion-input [(ngModel)]="media.description" #description="ngModel"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <button ion-button color="primary" [disabled]="shouldDisableUpdateButton" (click)="updateFileInfo()">Update</button>
+</ion-content>
