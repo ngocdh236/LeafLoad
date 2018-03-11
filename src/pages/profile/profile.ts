@@ -10,6 +10,7 @@ import { GridTemplatePage } from "../grid-template/grid-template";
 import { SinglePostTemplatePage } from "../single-post-template/single-post-template";
 
 const UserLoggedInEvent = "UserLoggedInEvent";
+const UserLoggedOutEvent = "UserLoggedOutEvent";
 const UserUpdatedInfoEvent = "UserUpdatedInfoEvent";
 const DidDeletePostEvent = "DidDeletePostEvent";
 
@@ -115,6 +116,7 @@ export class ProfilePage {
         text: 'Log Out',
         handler: () => {
           UserSession.logout();
+          this.events.publish(UserLoggedOutEvent);
         }
       }
     ]

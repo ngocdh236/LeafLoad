@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content padding>
-  <form (submit)="signup()">
+  <form (submit)="signUp()">
     <ion-item>
       <ion-input [(ngModel)]="user.username" name="username" type="text" placeholder="Username" #username="ngModel"
                  required></ion-input>
@@ -38,12 +38,4 @@
     <br>
     <h6 padding-left ion-text color="danger">{{status}}</h6>
   </form>
-
-  <div>
-    <button ion-button block clear (click)="login()">Log In</button>
-  </div>
-
-  <div>
-    <button ion-button block clear (click)="skip()">Skip</button>
-  </div>
 </ion-content>

@@ -15,6 +15,7 @@ import { User } from "../../interfaces/User";
  */
 
 const UserLoggedInEvent = "UserLoggedInEvent";
+const LoginTemplatePageSkipTappedEvent = "LoginTemplatePageSkipTappedEvent";
 
 @IonicPage()
 @Component({
@@ -82,14 +83,19 @@ export class LoginTemplatePage {
   }
 
   emitSignUpEvent() {
-    this.signUp.emit(null);
+    //this.signUp.emit(null);
     this.navCtrl.push(SignupPage);
   }
 
   emitSkipEvent() {
     this.skip.emit(null);
-    // Fragile here
-    this.viewController.dismiss();
+
+    // Publish a skip event
+    this.events.publish(LoginTemplatePageSkipTappedEvent);
+
+    if (this.presentedModally) {
+      this.viewController.dismiss();
+    }
   }
 
   // Update status (error) message
