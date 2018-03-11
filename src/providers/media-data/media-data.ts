@@ -1,14 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ENV } from '@environment';
-import { of } from 'rxjs/observable/of';
 
-/*
-  Generated class for the MediaDataProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class MediaDataProvider {
   apiUrl = ENV.API_BASE_URL;
@@ -68,7 +61,7 @@ export class MediaDataProvider {
   }
 
   public uploadMedia(formData: FormData) {
-    return this.http.post(this.apiUrl + '/media', formData);
+    return this.http.post(this.uploadURL, formData);
   }
 
   public deleteMediaFile(file: any) {

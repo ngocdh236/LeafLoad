@@ -1,10 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ENV } from '@environment';
-/**
- * Generated class for the ThumnailPipe pipe.
- *
- * See https://angular.io/api/core/Pipe for more info on Angular Pipes.
- */
+
 @Pipe({
   name: 'thumbnail',
 })
@@ -18,7 +14,7 @@ export class ThumbnailPipe implements PipeTransform {
     }
 
     let filename = value.split(".")[0];
-    
+
     switch(size) {
       case 'screenshot': {
         filename = `${filename}.png`;

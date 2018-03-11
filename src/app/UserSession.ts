@@ -1,7 +1,7 @@
 const TokenKey: string = "TokenKey";
 const UserIdKey: string = "UserIdKey";
-const UsernameKey: string = "UserNameKey"
-const EmailKey: string = "EmailKey"
+const UsernameKey: string = "UserNameKey";
+const EmailKey: string = "EmailKey";
 
 export class UserSession {
 
@@ -32,7 +32,7 @@ export class UserSession {
     return localStorage.getItem(UserIdKey);
   }
 
-  // userId
+  // email
   public static set email(value: string) {
     localStorage.setItem(EmailKey, value);
   }
@@ -40,7 +40,6 @@ export class UserSession {
   public static get email(): string {
     return localStorage.getItem(EmailKey);
   }
-
 
   // isUserLoggedIn getter
   public static get isLoggedIn(): boolean {

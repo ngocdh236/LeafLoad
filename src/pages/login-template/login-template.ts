@@ -6,6 +6,7 @@ import { UserSession } from "../../app/UserSession";
 import { HttpErrorResponse } from "@angular/common/http";
 import { SignupPage } from "../signup/signup";
 import { User } from "../../interfaces/User";
+import {TabsPage} from "../tabs/tabs";
 
 /**
  * Generated class for the LoginTemplatePage page.
@@ -51,7 +52,11 @@ export class LoginTemplatePage {
   // Present modally
   presentedModally: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider, private viewController: ViewController, private events: Events) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private userDataProvider: UserDataProvider,
+              private viewController: ViewController,
+              private events: Events) {
     this.showSkipButton = true;
     this.showSignUpButton = true;
 
@@ -89,7 +94,9 @@ export class LoginTemplatePage {
   emitSkipEvent() {
     this.skip.emit(null);
     // Fragile here
-    this.viewController.dismiss();
+    this.navCtrl.setRoot(TabsPage);
+    this.navCtrl.popToRoot();
+    // this.viewController.dismiss();
   }
 
   // Update status (error) message

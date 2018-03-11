@@ -1,15 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Media} from "../../interfaces/Media";
-import {UserSession} from "../../app/UserSession";
 import {MediaDataProvider} from "../../providers/media-data/media-data";
-
-/**
- * Generated class for the UpdateFileInfoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({

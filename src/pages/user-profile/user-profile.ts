@@ -4,16 +4,8 @@ import { User } from "../../interfaces/User" ;
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { MediaDataProvider } from "../../providers/media-data/media-data";
 import { UserSession } from "../../app/UserSession";
-import { ModifyUserDataPage } from "../modify-user-data/modify-user-data";
 import { SinglePostTemplatePage } from "../single-post-template/single-post-template";
 import { LoginTemplatePage } from "../login-template/login-template";
-
-/**
- * Generated class for the UserProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 const UserLoggedInEvent = "UserLoggedInEvent";
 const UserUpdatedInfoEvent = "UserUpdatedInfoEvent";
@@ -39,16 +31,9 @@ export class UserProfilePage {
   user: User;
   userId: number;
   mediaArray: any[] = [];
-  numberOfFilesPerRequest = 10;
-  currentPage = 0;
 
   public get isUserLoggedIn(): boolean {
     return UserSession.isLoggedIn;
-  }
-
-  public get isCurrentUser(): boolean {
-    if (this.userId.toString() == UserSession.userId)
-      return true;
   }
 
   constructor(public navCtrl: NavController,
@@ -68,17 +53,16 @@ export class UserProfilePage {
       this.reloadPostData();
     });
 
-    events.subscribe(DidDeletePostEvent, (mediaFile) => {
-      this.didDeleteMediaFile(mediaFile);
-    });
+
   }
 
   ionViewDidLoad() {
     // Intialize layout type
     this.layoutType = LayoutType.Grid;
 
+    this.downloadUserProfile();
 
-    // this.downloadMediaFiles();
+    this.downloadMediaFiles();
     // UserSession.updateWithNewInfo(res);
 
   }
@@ -102,14 +86,7 @@ export class UserProfilePage {
     }
   }
 
-  private didDeleteMediaFile(ev: any) {
-    for (let i = 0; i < this.mediaArray.length ; i++) {
-      if (this.mediaArray[i].file_id == ev.file_id) {
 
-        this.mediaArray.splice(i, 1);
-      }
-    }
-  }
 
   private reloadPostData() {
     // Remove user data

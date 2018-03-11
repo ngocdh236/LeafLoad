@@ -1,33 +1,34 @@
-<ion-header no-border>
+<ion-header no-border *ngIf="isUserLoggedIn">
   <ion-navbar>
     <ion-title>Upload</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content text-center>
-  <!--<form (submit)="startUpload($event)">-->
-    <!--<label for="file-input">-->
-      <!--<ion-icon name="add"></ion-icon>-->
-    <!--</label>-->
-    <!--<br>-->
-    <!--<input id="file-input" type="file" name="file" (change)="setFile($event)">-->
+<ion-content text-center *ngIf="isUserLoggedIn">
+  <form (submit)="uploadMedia()">
+    <label for="file-input">
+      <ion-icon name="add"></ion-icon>
+    </label>
+    <br>
+    <input id="file-input" type="file" name="file" (change)="setFile($event)">
 
-    <!--<input [(ngModel)]="media.title" name="title" placeholder="Title">-->
+    <input [(ngModel)]="media.title" name="title" placeholder="Title">
 
-    <!--<textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>-->
+    <textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>
 
 
-    <!--<button ion-button full (click)="openCamera()">Open Cam</button>-->
-    <!--<button ion-button full (click)="openGallery()">Open Gal</button>-->
-    <!--<img *ngIf="imageSrc" [src]="imageSrc" />-->
+    <button ion-button (click)="openCamera()">Open Cam</button>
+    <button ion-button (click)="openGallery()">Open Gal</button>
+    <img *ngIf="imageSrc" [src]="imageSrc" />
 
-    <!--<button type="submit">Upload</button>-->
-  <!--</form>-->
+    <button type="submit">Upload</button>
+  </form>
+</ion-content>
 
-  <div class="gallery-button" text-center>
-    <img [src]="imageSrc" />
-    <ion-icon name="images" on-tap="openGallery()"></ion-icon>
-    <p>Choose a Photo</p>
-  </div>
+<ion-content *ngIf="!isUserLoggedIn">
+  <page-login-template (login)="onLogin($event)"
+                       (signUp)="onSignUp($event)"
+                       (skip)="onSkip($event)"
+                       (didSucceedToLogin)="didSucceedToLogin($event)" [showSkipButton]='false'></page-login-template>
 </ion-content>

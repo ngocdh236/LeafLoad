@@ -7,17 +7,21 @@
 </ion-header>
 
 <ion-content *ngIf="isUserLoggedIn">
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="user-info">
     <div class="figures">
       <p>{{mediaArray.length}}</p>
       <ion-note>posts</ion-note>
+
     </div>
 
     <button id="modify-user-data-button" (click)="modifyUserData($event)">Edit Profile</button>
     <button id="log-out-button" icon-only (click)="presentLogoutAlert()">
       <ion-icon name="ios-log-out"></ion-icon>
     </button>
-    <h6 *ngIf="fullName">{{fullName}}</h6>
   </div>
 
   <ion-item no-padding></ion-item>

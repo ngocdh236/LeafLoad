@@ -1,9 +1,3 @@
-<!--
-  Generated template for the SearchPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header no-border *ngIf="isUserLoggedIn">
   <ion-toolbar>
     <ion-searchbar placeholder="Search" (ionInput)="onInput($event)" required></ion-searchbar>
@@ -11,6 +5,7 @@
 </ion-header>
 
 <ion-content *ngIf="isUserLoggedIn">
+  <ion-spinner *ngIf="isLoading" class="loader" item-start name="ios"></ion-spinner>
   <div *ngFor="let media of mediaArray">
     <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
   </div>

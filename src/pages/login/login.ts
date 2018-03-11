@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { User } from "../../interfaces/user";
-import { NgForm } from "@angular/forms";
-import { HomePage} from "../home/home";
 import { HttpErrorResponse } from "@angular/common/http";
 import { SignupPage } from "../signup/signup";
 import { TabsPage } from "../tabs/tabs";
+import {UserSession} from "../../app/UserSession";
 
 /**
  * Generated class for the LoginPage page.
@@ -33,8 +32,9 @@ export class LoginPage {
 
   login() {
     this.userData.login(this.user).subscribe(response => {
-      localStorage.setItem('token', response['token']);
-      this.navCtrl.push(TabsPage);
+      // localStorage.setItem('token', response['token']);
+      this.navCtrl.setRoot(TabsPage);
+      this.navCtrl.popToRoot();
     }, (error: HttpErrorResponse) => {
       this.status = error.error.message;
     });
@@ -45,7 +45,7 @@ export class LoginPage {
   }
 
   skip() {
-    this.navCtrl.push(TabsPage);
+    this.navCtrl.setRoot(TabsPage);
+    this.navCtrl.popToRoot();
   }
-
 }

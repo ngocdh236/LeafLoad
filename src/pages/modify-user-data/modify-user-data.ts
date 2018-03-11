@@ -93,25 +93,27 @@ export class ModifyUserDataPage {
       updateLoading.dismiss();
 
       // Display new info downloading indicator
-      let newInfoLoading = this.displayLoadingActivityIndicator("Loading new information...");
-      newInfoLoading.present();
+      // let newInfoLoading = this.displayLoadingActivityIndicator("Loading new information...");
+      // newInfoLoading.present();
 
       // Download the newly updated user's info
       this.userDataProvider.requestCurrentUserInfo().subscribe(res => {
         UserSession.updateWithNewInfo(res);
-        newInfoLoading.dismiss();
+        // newInfoLoading.dismiss();
 
         // Broadcast a message that user updated info
         // TODO: Move this line below to the service
         this.events.publish(UserUpdatedInfoEvent);
 
         // Display the success indicator
-        let successIndicator = this.displayLoadingActivityIndicator("Successfully updated user info", 1000);
-        successIndicator.present();
+        // let successIndicator = this.displayLoadingActivityIndicator("Successfully updated user info", 1000);
+        // successIndicator.present();
+        this.dismiss();
+
       });
     }, error => {
       // Stop uplploading indicator in case of failure
-      updateLoading.dismiss();
+      // updateLoading.dismiss();
       // Display error message
       let errorLoading = this.displayLoadingActivityIndicator("Unable to update user information", 3000);
       errorLoading.present();

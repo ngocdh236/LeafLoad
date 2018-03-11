@@ -1,13 +1,12 @@
-import {Component, EventEmitter, Output, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {IonicPage, ModalController, NavController, NavParams, AlertController, Content, Events} from 'ionic-angular';
 import {MediaDataProvider} from "../../providers/media-data/media-data";
-import {CommentPage} from "../comment/comment";
 import {ModifyUserDataPage} from "../modify-user-data/modify-user-data";
 import {UserSession} from "../../app/UserSession";
 import {LoginTemplatePage} from "../login-template/login-template";
 import {UserDataProvider} from "../../providers/user-data/user-data";
-import {GridTemplatePage} from "../grid-template/grid-template";
 import {SinglePostTemplatePage} from "../single-post-template/single-post-template";
+import {LoginPage} from "../login/login";
 
 const UserLoggedInEvent = "UserLoggedInEvent";
 const UserUpdatedInfoEvent = "UserUpdatedInfoEvent";
@@ -32,7 +31,6 @@ export class ProfilePage {
   layoutType: LayoutType = LayoutType.Grid;
 
   mediaArray: any[] = [];
-  numberOfFilesPerRequest = 10;
   currentPage = 0;
 
   public get isUserLoggedIn(): boolean {
@@ -55,11 +53,11 @@ export class ProfilePage {
     this.mediaArray = [];
 
     events.subscribe(UserLoggedInEvent, () => {
-      this.reloadPostData();
+      this.reloadPostData(null);
     });
 
     events.subscribe(UserUpdatedInfoEvent, () => {
-      this.reloadPostData();
+      this.reloadPostData(null);
     });
 
     events.subscribe(DidDeletePostEvent, (mediaFile) => {
@@ -72,7 +70,8 @@ export class ProfilePage {
     this.layoutType = LayoutType.Grid;
 
     // this.loadMediaFilesOfCurrentUser(this.currentPage);
-    this.loadMediaFilesOfCurrentUser();
+    this.loadMediaFilesOfCurrentUser(null);
+
 
     // Silently update user info whenever user launches the app
     this.userDataProvider.requestCurrentUserInfo().subscribe(res => {
@@ -81,10 +80,15 @@ export class ProfilePage {
     });
   }
 
-  loadMediaFilesOfCurrentUser() {
+  loadMediaFilesOfCurrentUser(completionHandler: (succeed: boolean) => void) {
     this.mediaData.getMediaFilesOfCurrentUser().subscribe(res => {
       this.mediaArray = res as any[];
 
+      if (completionHandler) {
+        completionHandler(true);
+      }
+
+      this.mediaArray = res as any[];
       // WORKAROUND: Resize the content otherwise the navbar would overlap the content
       this.content.resize();
     });
@@ -111,7 +115,9 @@ export class ProfilePage {
         {
           text: 'Log Out',
           handler: () => {
+            // this.navCtrl.setRoot(LoginPage);
             UserSession.logout();
+            // this.navCtrl.popToRoot();
           }
         }
       ]
@@ -157,10 +163,10 @@ export class ProfilePage {
     }
   }
 
-  private reloadPostData() {
+  private reloadPostData(completionHandler: (succeeded: boolean) => void) {
     // Remove user data
     this.mediaArray = [];
-    this.loadMediaFilesOfCurrentUser();
+    this.loadMediaFilesOfCurrentUser(completionHandler);
   }
 
   // Grid view events
@@ -184,5 +190,11 @@ export class ProfilePage {
 
   public switchLayoutGridLayout() {
     this.layoutType = LayoutType.Grid;
+  }
+
+  doRefresh(refresher) {
+    this.reloadPostData((succeeded) => {
+      refresher.complete();
+    });
   }
 }

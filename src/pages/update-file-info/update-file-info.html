@@ -14,13 +14,13 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
-      <ion-label color="primary" stacked>Title</ion-label>
-      <ion-input [(ngModel)]="media.title" #title="ngModel"></ion-input>
+    <ion-item no-lines>
+      <ion-label color="dark">Title</ion-label>
+      <ion-item><ion-input [(ngModel)]="media.title" #title="ngModel"></ion-input></ion-item>
     </ion-item>
 
     <ion-item>
-      <ion-label color="primary" stacked>Description</ion-label>
+      <ion-label color="dark">Description</ion-label>
       <ion-input [(ngModel)]="media.description" #description="ngModel"></ion-input>
     </ion-item>
 

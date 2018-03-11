@@ -3,7 +3,6 @@ import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angula
 import { MediaDataProvider } from "../../providers/media-data/media-data";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { LoginPage } from "../login/login";
-import { HttpErrorResponse } from "@angular/common/http";
 import { LoginTemplatePage } from "../login-template/login-template";
 import { CommentPage } from "../comment/comment";
 import { UserSession } from "../../app/UserSession";
@@ -26,6 +25,7 @@ export class SearchPage {
 
   loginPage: any = LoginPage;
   mediaArray: any;
+  isLoading: boolean = false;
 
   public get isUserLoggedIn(): boolean {
     return UserSession.isLoggedIn;
@@ -43,9 +43,10 @@ export class SearchPage {
     let keyword = ev.target.value;
     if (keyword && keyword.trim() !== '') {
       this.mediaArray = [];
+      this.isLoading = true;
       this.mediaData.searchMediaFiles(keyword).subscribe(res => {
+        this.isLoading = false;
         this.mediaArray = res;
-        console.log(res);
       }, (error) => {
 
       });
