@@ -1,32 +1,32 @@
 page-upload {
-  form {
-    ion-icon {
-      font-size: 200px;
-    }
 
-    #file-input {
-      display: none;
-    }
-
-    input, textarea {
-      border-radius: 5px;
-      border: $default-border;
-      padding: 20px;
-      width: 80%;
-      height: 30px;
-      margin-bottom: 10px;
-    }
-
-    textarea {
-      height: 100px;
-    }
-
-    button {
-      @extend %default-button;
-      color: white;
-      background-color: #50A050;
-      width: 80%;
-      height: 40px;
-    }
+  ion-icon {
+    font-size: 200px;
   }
+
+  #file-input {
+    display: none;
+  }
+
+  input, textarea {
+    border-radius: 5px;
+    border: $default-border;
+    padding: 20px;
+    width: 80%;
+    height: 30px;
+    margin-bottom: 10px;
+  }
+
+  textarea {
+    height: 100px;
+  }
+
+  button {
+    @extend %default-button;
+    color: white;
+    background-color: #50A050;
+    width: 80%;
+    height: 40px;
+  }
+
 }

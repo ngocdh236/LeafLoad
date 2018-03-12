@@ -1,15 +1,19 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, LoadingController, Events } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
-import { MediaDataProvider } from "../../providers/media-data/media-data";
-import { UserDataProvider } from "../../providers/user-data/user-data";
-import { UserSession } from "../../app/UserSession";
-import { LoginPage } from "../login/login";
-import { CommentPage } from "../comment/comment";
-import { LikeListPage } from "../like-list/like-list";
-import { UserProfilePage } from "../user-profile/user-profile";
-import { PhotoViewer } from '@ionic-native/photo-viewer';
-import { ThumbnailPipe } from "../../pipes/thumbnail/thumbnail";
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {
+  IonicPage, NavController, NavParams, ModalController, LoadingController, Events,
+  ActionSheetController, AlertController
+} from 'ionic-angular';
+import {Observable} from 'rxjs/Observable';
+import {MediaDataProvider} from "../../providers/media-data/media-data";
+import {UserDataProvider} from "../../providers/user-data/user-data";
+import {UserSession} from "../../app/UserSession";
+import {CommentPage} from "../comment/comment";
+import {LikeListPage} from "../like-list/like-list";
+import {UserProfilePage} from "../user-profile/user-profile";
+import {PhotoViewer} from '@ionic-native/photo-viewer';
+import {ThumbnailPipe} from "../../pipes/thumbnail/thumbnail";
+import {LoginTemplatePage} from "../login-template/login-template";
+import {UpdateFileInfoPage} from "../update-file-info/update-file-info";
 
 /**
  * Generated class for the PostTemplatePage page.
@@ -18,7 +22,7 @@ import { ThumbnailPipe } from "../../pipes/thumbnail/thumbnail";
  * Ionic pages and navigation.
  */
 
- const DidDeletePostEvent = "DidDeletePostEvent";
+const DidDeletePostEvent = "DidDeletePostEvent";
 
 @IonicPage()
 @Component({
@@ -29,6 +33,7 @@ export class PostTemplatePage {
 
   private _mediaData: any;
   private _liked: boolean = false;
+
   get mediaData(): any {
     return this._mediaData;
   }
@@ -67,6 +72,7 @@ export class PostTemplatePage {
 
   private _username: string = null;
   private _loadingUsername = false;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public mediaProvider: MediaDataProvider,
@@ -75,7 +81,9 @@ export class PostTemplatePage {
               private photoViewer: PhotoViewer,
               private thumbnailPipe: ThumbnailPipe,
               public loadingCtrl: LoadingController,
-              private events: Events) {
+              private events: Events,
+              public actionSheetCtrl: ActionSheetController,
+              public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -85,7 +93,7 @@ export class PostTemplatePage {
     if (this.likes != null && this.likes.length > 0 && UserSession.isLoggedIn) {
       let myLike: any[] = this.likes.filter(aLike => aLike.user_id == UserSession.userId);
       if (myLike.length != 0) {
-          return true;
+        return true;
       }
     }
     return false;
@@ -148,7 +156,7 @@ export class PostTemplatePage {
 
   // Helper methods
   private presentLoginView() {
-    let loginModel = this.modalCtrl.create(LoginPage, {});
+    let loginModel = this.modalCtrl.create(LoginTemplatePage, {});
     loginModel.present();
   }
 
@@ -169,21 +177,84 @@ export class PostTemplatePage {
     this.displayPhotoViewer();
   }
 
-  deletePost() {
+  showMediaOptions() {
     if (this.isMyPost) {
-      let deletingLoading = this.displayLoadingActivityIndicator("Deleting post...");
-      deletingLoading.present();
-      this.mediaProvider.deleteMediaFile(this.mediaData).subscribe(res => {
-        deletingLoading.dismiss();
-        this.emitDidDeleteMediaEvent();
-        let successMessage = this.displayLoadingActivityIndicator("Deleted post successfully", 1000);
-        successMessage.present();
-      }, err => {
-        deletingLoading.dismiss();
-        let errorMessage = this.displayLoadingActivityIndicator("An error occur while deleting a post. Please try again", 1500);
-        errorMessage.present();
+      let mediaOptions = this.actionSheetCtrl.create({
+        buttons: [
+          {
+            text: 'View',
+            handler: () => {
+              this.viewPhoto();
+            }
+          },
+          {
+            text: 'Edit',
+            handler: () => {
+              this.navCtrl.push(UpdateFileInfoPage, this._mediaData);
+            }
+          },
+          {
+            text: 'Delete',
+            handler: () => {
+              this.presentConfirmDeleteAlert();
+            }
+          }, {
+            text: 'Cancel',
+            role: 'cancel',
+          }
+        ]
       });
+      mediaOptions.present();
+    } else {
+      let mediaOptions = this.actionSheetCtrl.create({
+        buttons: [
+          {
+            text: 'View',
+            handler: () => {
+              this.viewPhoto();
+            }
+          },
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          }
+        ]
+      });
+      mediaOptions.present();
     }
+  }
+
+  presentConfirmDeleteAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Delete Post?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.deletePost();
+          }
+        }
+      ]
+    });
+
+    alert.present();
+  }
+
+  deletePost() {
+    let deletingLoading = this.displayLoadingActivityIndicator("Deleting post...");
+    deletingLoading.present();
+    this.mediaProvider.deleteMediaFile(this.mediaData).subscribe(res => {
+      deletingLoading.dismiss();
+      this.emitDidDeleteMediaEvent();
+    }, err => {
+      deletingLoading.dismiss();
+      let errorMessage = this.displayLoadingActivityIndicator("An error occur while deleting a post. Please try again", 1500);
+      errorMessage.present();
+    });
   }
 
   public get isMyPost(): boolean {

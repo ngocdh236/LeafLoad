@@ -31,10 +31,10 @@ import { LikeListPage } from '../pages/like-list/like-list';
 import { UserProfilePage } from "../pages/user-profile/user-profile";
 import {CreatedDatePipe} from "../pipes/created-date/created-date";
 import {Camera, CameraOptions} from "@ionic-native/camera";
-import {FileTransfer} from "@ionic-native/file-transfer";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { GridTemplatePage } from "../pages/grid-template/grid-template";
 import { SinglePostTemplatePage } from "../pages/single-post-template/single-post-template";
+import {UpdateFileInfoPage} from "../pages/update-file-info/update-file-info";
 
 @NgModule({
   declarations: [
@@ -56,7 +56,8 @@ import { SinglePostTemplatePage } from "../pages/single-post-template/single-pos
     LikeListPage,
     UserProfilePage,
     GridTemplatePage,
-    SinglePostTemplatePage
+    SinglePostTemplatePage,
+    UpdateFileInfoPage
   ],
   imports: [
     BrowserModule,
@@ -81,7 +82,8 @@ import { SinglePostTemplatePage } from "../pages/single-post-template/single-pos
     LikeListPage,
     UserProfilePage,
     GridTemplatePage,
-    SinglePostTemplatePage
+    SinglePostTemplatePage,
+    UpdateFileInfoPage
   ],
   providers: [
     StatusBar,

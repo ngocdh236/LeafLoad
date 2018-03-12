@@ -1,17 +1,8 @@
-import { Component, ViewChild, ComponentFactoryResolver, ComponentFactory, ComponentRef, ViewContainerRef } from '@angular/core';
+import { Component, ViewChild, ComponentFactoryResolver } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
-import { ListTemplatePage } from "../list-template/list-template";
 import { UserProfilePage } from "../user-profile/user-profile";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { Like } from "../../interfaces/Like";
-import { User } from "../../interfaces/User";
-
-/**
- * Generated class for the LikeListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -25,7 +16,6 @@ export class LikeListPage {
   likers: any[] = [];
   public isLoading: boolean;
 
-  // @ViewChild(Content, { read: ViewContainerRef }) container;
   @ViewChild(Content) content;
 
 
@@ -35,7 +25,6 @@ export class LikeListPage {
 
   ionViewDidLoad() {
     this.downloadListOfLikers();
-    // this.displayListOfLikers();
   }
 
   private downloadListOfLikers() {
@@ -51,7 +40,7 @@ export class LikeListPage {
       });
     }
   }
-  
+
   usernameClicked(index: number) {
     let liker = this.likers[index];
     this.navCtrl.push(UserProfilePage, liker);

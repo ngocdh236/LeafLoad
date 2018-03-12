@@ -18,35 +18,6 @@ import { UserDataProvider } from "../../providers/user-data/user-data";
   templateUrl: 'modify-user-data.html',
 })
 export class ModifyUserDataPage {
-  // private _username: string = null;
-  // private _password: string = null;
-  // private _email : string = null;
-  //
-  // public get username(): string {
-  //   if (this._username) { return this._username; }
-  //   return UserSession.username;
-  // }
-  //
-  // public set username(value: string) {
-  //   if (UserSession.username)
-  // }
-  //
-  // public get password(): string {
-  //
-  // }
-  //
-  // public set password(value: string) {
-  //
-  // }
-  //
-  // public get email(): string {
-  //
-  // }
-  //
-  // public set email(value: string) {
-  //
-  // }
-
   user: User = {
     username: UserSession.username,
     user_id: 0,
@@ -91,19 +62,19 @@ export class ModifyUserDataPage {
     return true;
   }
 
-  constructor(public navCtrl: NavController, public viewController: ViewController, public navParams: NavParams, private userDataProvider: UserDataProvider, public loadingCtrl: LoadingController, private events: Events) {
+  constructor(public navCtrl: NavController,
+              public viewController: ViewController,
+              public navParams: NavParams,
+              private userDataProvider: UserDataProvider,
+              public loadingCtrl: LoadingController,
+              private events: Events) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ModifyUserDataPage');
   }
 
   dismiss() {
     this.viewController.dismiss();
-  }
-
-  deleteAccount() {
-
   }
 
   updateUserProfileInfo() {
@@ -122,25 +93,27 @@ export class ModifyUserDataPage {
       updateLoading.dismiss();
 
       // Display new info downloading indicator
-      let newInfoLoading = this.displayLoadingActivityIndicator("Loading new information...");
-      newInfoLoading.present();
+      // let newInfoLoading = this.displayLoadingActivityIndicator("Loading new information...");
+      // newInfoLoading.present();
 
       // Download the newly updated user's info
       this.userDataProvider.requestCurrentUserInfo().subscribe(res => {
         UserSession.updateWithNewInfo(res);
-        newInfoLoading.dismiss();
+        // newInfoLoading.dismiss();
 
         // Broadcast a message that user updated info
         // TODO: Move this line below to the service
         this.events.publish(UserUpdatedInfoEvent);
 
         // Display the success indicator
-        let successIndicator = this.displayLoadingActivityIndicator("Successfully updated user info", 1000);
-        successIndicator.present();
+        // let successIndicator = this.displayLoadingActivityIndicator("Successfully updated user info", 1000);
+        // successIndicator.present();
+        this.dismiss();
+
       });
     }, error => {
       // Stop uplploading indicator in case of failure
-      updateLoading.dismiss();
+      // updateLoading.dismiss();
       // Display error message
       let errorLoading = this.displayLoadingActivityIndicator("Unable to update user information", 3000);
       errorLoading.present();

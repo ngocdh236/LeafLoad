@@ -1,9 +1,10 @@
 page-profile {
+
+
   .user-info {
     display: flex;
     flex-wrap: wrap;
     margin-top: 20px;
-    margin-bottom: 50px;
     .figures {
       p {
         margin-bottom: 5px;
@@ -25,11 +26,10 @@ page-profile {
       width: 15%;
     }
   }
-  .media {
-    margin-top: 20px;
-  }
-
-  .hightlighted {
-    background-color: #4CAF50;
+  .layout-options {
+    width: 100%;
+    button {
+      width: 50%;
+    }
   }
 }

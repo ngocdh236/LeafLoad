@@ -1,10 +1,4 @@
-<!--
-  Generated template for the UserProfilePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+<ion-header no-border *ngIf="isUserLoggedIn">
 
   <ion-navbar>
     <ion-title *ngIf="user">{{user.username}}</ion-title>
@@ -13,10 +7,48 @@
 </ion-header>
 
 
-<ion-content>
-  <h6 *ngIf="user">{{user.fullName}}</h6>
-  <div *ngFor="let media of mediaArray">
-    <page-post-template [mediaData]="media"></page-post-template>
+<ion-content *ngIf="isUserLoggedIn">
+
+  <div class="user-info">
+    <div class="figures">
+      <p>{{mediaArray.length}}</p>
+      <ion-note>posts</ion-note>
+    </div>
+
   </div>
 
+  <ion-item no-padding></ion-item>
+
+  <ion-item class="layout-options" no-padding>
+
+    <button ion-button color="dark" clear (click)="switchLayoutGridLayout()">
+      <ion-icon *ngIf="shouldDisplayGridLayout" name="ios-grid"></ion-icon>
+      <ion-icon *ngIf="shouldDisplayVerticalFlowLayout" name="ios-grid-outline"></ion-icon>
+    </button>
+
+    <button ion-button color="dark" clear (click)="switchLayoutToVerticalFlowLayout()">
+      <ion-icon *ngIf="shouldDisplayVerticalFlowLayout" name="ios-list-box"></ion-icon>
+      <ion-icon *ngIf="shouldDisplayGridLayout" name="ios-list-box-outline"></ion-icon>
+    </button>
+
+  </ion-item>
+
+  <div *ngIf="shouldDisplayGridLayout">
+    <page-grid-template [mediaArray]="mediaArray" (didSelectItem)="didSelectItem($event)"></page-grid-template>
+  </div>
+
+  <div *ngIf="shouldDisplayVerticalFlowLayout">
+    <div *ngFor="let media of mediaArray">
+      <page-post-template [mediaData]="media"></page-post-template>
+    </div>
+
+  </div>
+
+</ion-content>
+
+<ion-content *ngIf="!isUserLoggedIn">
+  <page-login-template (login)="onLogin($event)"
+                       (signUp)="onSignUp($event)"
+                       (skip)="onSkip($event)"
+                       (didSucceedToLogin)="didSucceedToLogin($event)" [showSkipButton]='false'></page-login-template>
 </ion-content>

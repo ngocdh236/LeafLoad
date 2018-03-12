@@ -1,13 +1,12 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams, AlertController, Content, Events } from 'ionic-angular';
-import { MediaDataProvider } from "../../providers/media-data/media-data";
-import { CommentPage } from "../comment/comment";
-import { ModifyUserDataPage } from "../modify-user-data/modify-user-data";
-import { UserSession } from "../../app/UserSession";
-import { LoginTemplatePage } from "../login-template/login-template";
-import { UserDataProvider } from "../../providers/user-data/user-data";
-import { GridTemplatePage } from "../grid-template/grid-template";
-import { SinglePostTemplatePage } from "../single-post-template/single-post-template";
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, ModalController, NavController, NavParams, AlertController, Content, Events} from 'ionic-angular';
+import {MediaDataProvider} from "../../providers/media-data/media-data";
+import {ModifyUserDataPage} from "../modify-user-data/modify-user-data";
+import {UserSession} from "../../app/UserSession";
+import {LoginTemplatePage} from "../login-template/login-template";
+import {UserDataProvider} from "../../providers/user-data/user-data";
+import {SinglePostTemplatePage} from "../single-post-template/single-post-template";
+import {LoginPage} from "../login/login";
 
 const UserLoggedInEvent = "UserLoggedInEvent";
 const UserLoggedOutEvent = "UserLoggedOutEvent";
@@ -15,9 +14,9 @@ const UserUpdatedInfoEvent = "UserUpdatedInfoEvent";
 const DidDeletePostEvent = "DidDeletePostEvent";
 
 export enum LayoutType {
-    VerticalFlow,
-    Grid
-  }
+  VerticalFlow,
+  Grid
+}
 
 @IonicPage()
 @Component({
@@ -30,12 +29,10 @@ export class ProfilePage {
   @ViewChild(LoginTemplatePage) loginTemplate;
   @ViewChild(Content) content;
 
-  layoutType: LayoutType = LayoutType.VerticalFlow;
+  layoutType: LayoutType = LayoutType.Grid;
 
   mediaArray: any[] = [];
-  numberOfFilesPerRequest = 10;
   currentPage = 0;
-  infiniteScroll: any;
 
   public get isUserLoggedIn(): boolean {
     return UserSession.isLoggedIn;
@@ -45,7 +42,14 @@ export class ProfilePage {
     return UserSession.username;
   };
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public navParams: NavParams, public mediaData: MediaDataProvider, private alertCtrl: AlertController, public userDataProvider: UserDataProvider, private events: Events) {
+  constructor(public navCtrl: NavController,
+              public modalCtrl: ModalController,
+              public navParams: NavParams,
+              public mediaData: MediaDataProvider,
+              private alertCtrl: AlertController,
+              public userDataProvider: UserDataProvider,
+              private events: Events) {
+
     this.currentPage = 0;
     this.mediaArray = [];
 
@@ -64,9 +68,11 @@ export class ProfilePage {
 
   ionViewDidLoad() {
     // Intialize layout type
-    this.layoutType = LayoutType.VerticalFlow;
+    this.layoutType = LayoutType.Grid;
 
-    this.loadMediaFilesOfCurrentUser(this.currentPage, null);
+    // this.loadMediaFilesOfCurrentUser(this.currentPage);
+    this.loadMediaFilesOfCurrentUser(null);
+
 
     // Silently update user info whenever user launches the app
     this.userDataProvider.requestCurrentUserInfo().subscribe(res => {
@@ -75,8 +81,9 @@ export class ProfilePage {
     });
   }
 
-  loadMediaFilesOfCurrentUser(page: number, completionHandler: (succeeded: boolean) => void) {
-    this.mediaData.getMediaFilesOfCurrentUser(this.currentPage, this.numberOfFilesPerRequest).subscribe(res => {
+  loadMediaFilesOfCurrentUser(completionHandler: (succeed: boolean) => void) {
+    this.mediaData.getMediaFilesOfCurrentUser().subscribe(res => {
+      this.mediaArray = res as any[];
 
       if (completionHandler) {
         completionHandler(true);
@@ -88,41 +95,51 @@ export class ProfilePage {
     });
   }
 
-  like(ev: any) {
-
-  }
 
   modifyUserData() {
     let modifyUserDataModel = this.modalCtrl.create(ModifyUserDataPage, event);
     modifyUserDataModel.present();
   }
 
-  comment(ev: any) {
-
-  }
 
   presentLogoutAlert() {
     let alert = this.alertCtrl.create({
-    title: 'Log Out',
-    message: 'Are you sure to log out?',
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        handler: () => {
-        }
-      },
-      {
-        text: 'Log Out',
-        handler: () => {
-          UserSession.logout();
-          this.events.publish(UserLoggedOutEvent);
-        }
-      }
-    ]
-  });
+      title: 'Log Out',
+      message: 'Are you sure to log out?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Log Out',
+          handler: () => {
+            // this.navCtrl.setRoot(LoginPage);
+            UserSession.logout();
+            // this.navCtrl.popToRoot();
+          }
+        },
+        {
+          text: 'Log Out',
+          handler: () => {
+            UserSession.logout();
+            this.events.publish(UserLoggedOutEvent);
+          }
+        }]
+      });
 
-  alert.present();
+    alert.present();
+  }
+
+
+  like(ev: any) {
+
+  }
+
+  comment(ev: any) {
+
   }
 
   onLogin(ev: any) {
@@ -146,7 +163,7 @@ export class ProfilePage {
   }
 
   private didDeleteMediaFile(ev: any) {
-    for (let i = 0; i < this.mediaArray.length ; i++) {
+    for (let i = 0; i < this.mediaArray.length; i++) {
       if (this.mediaArray[i].file_id == ev.file_id) {
 
         this.mediaArray.splice(i, 1);
@@ -157,7 +174,7 @@ export class ProfilePage {
   private reloadPostData(completionHandler: (succeeded: boolean) => void) {
     // Remove user data
     this.mediaArray = [];
-    this.loadMediaFilesOfCurrentUser(this.currentPage, completionHandler);
+    this.loadMediaFilesOfCurrentUser(completionHandler);
   }
 
   // Grid view events
@@ -176,7 +193,7 @@ export class ProfilePage {
   // NOTE: A function call from html file can not know LayoutType type. So we are unable to pass a LayoutType argument to switchLayout function which is called from html file.
   // TODO: Refactor this by using string enum. Since we are able pass a string as an argument to switchLayout function which can be called from html.
   public switchLayoutToVerticalFlowLayout() {
-    this.layoutType = LayoutType.VerticalFlow
+    this.layoutType = LayoutType.VerticalFlow;
   }
 
   public switchLayoutGridLayout() {

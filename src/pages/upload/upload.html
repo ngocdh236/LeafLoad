@@ -1,12 +1,12 @@
-<ion-header no-border>
+<ion-header no-border *ngIf="isUserLoggedIn">
   <ion-navbar>
     <ion-title>Upload</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-<ion-content text-center>
-  <form (submit)="startUpload($event)">
+<ion-content text-center *ngIf="isUserLoggedIn">
+  <form (submit)="uploadMedia()">
     <label for="file-input">
       <ion-icon name="add"></ion-icon>
     </label>
@@ -18,10 +18,17 @@
     <textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>
 
 
-    <button ion-button full (click)="openCamera()">Open Cam</button>
-    <button ion-button full (click)="openGallery()">Open Gal</button>
-    <img [src]="base64Image" *ngIf="base64Image"/>
+    <button ion-button (click)="openCamera()">Open Cam</button>
+    <button ion-button (click)="openGallery()">Open Gal</button>
+    <img *ngIf="imageSrc" [src]="imageSrc" />
 
     <button type="submit">Upload</button>
   </form>
+</ion-content>
+
+<ion-content *ngIf="!isUserLoggedIn">
+  <page-login-template (login)="onLogin($event)"
+                       (signUp)="onSignUp($event)"
+                       (skip)="onSkip($event)"
+                       (didSucceedToLogin)="didSucceedToLogin($event)" [showSkipButton]='false'></page-login-template>
 </ion-content>

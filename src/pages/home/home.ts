@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, NavParams, Events } from 'ionic-angular';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
-import { PostTemplatePage } from "../post-template/post-template";
 
 const DidDeletePostEvent = "DidDeletePostEvent";
 

@@ -8,35 +8,32 @@
 
   <ion-navbar>
     <ion-buttons left>
-      <button ion-button icon-only (click)="dismiss()">
-        <ion-icon name="close"></ion-icon>
-      </button>
+      <button ion-button (click)="dismiss()">Cancel</button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button ion-button [disabled]="shouldDisableUpdateButton" (click)="updateUserProfileInfo()">Done</button>
     </ion-buttons>
     <ion-title>Edit Profile</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
   <ion-list>
     <ion-item>
-      <ion-label color="primary" stacked>Username</ion-label>
+      <ion-label>Username</ion-label>
       <ion-input [(ngModel)]="user.username" #username="ngModel"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label color="primary" stacked>Email</ion-label>
+      <ion-label>Email</ion-label>
       <ion-input type="email" [(ngModel)]="user.email" #email="ngModel"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label color="primary" stacked>New password</ion-label>
+      <ion-label>New password</ion-label>
       <ion-input type="password" [(ngModel)]="user.password" #email="ngModel"></ion-input>
     </ion-item>
     <label color="danger" *ngIf="!isPasswordEligible">Password must contain at least 6 characters</label>
   </ion-list>
-
-  <button ion-button color="primary" [disabled]="shouldDisableUpdateButton" (click)="updateUserProfileInfo()">Update</button>
-  <button ion-button color="danger" (click)="deleteAccount()">Delete your account</button>
 </ion-content>

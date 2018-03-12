@@ -4,22 +4,20 @@
     <img src="assets/imgs/text-logo.png">
   </div>
 
-  <form text-center (submit) = "emitLoginEvent()">
+  <form text-center (submit)="emitLoginEvent()">
 
-      <input [(ngModel)]="user.username" name="username" type="text" placeholder="Username" #username="ngModel"
-                 required>
+    <input [(ngModel)]="user.username" name="username" type="text" placeholder="Username" #username="ngModel"
+           required>
 
-      <input [(ngModel)]="user.password" name="password" type="password" placeholder="Password" #password="ngModel"
-                 required>
+    <input [(ngModel)]="user.password" name="password" type="password" placeholder="Password" #password="ngModel"
+           required>
 
-      <button type="submit"  [disabled]="!username.valid || !password.valid">Login</button>
+    <button type="submit" [disabled]="!username.valid || !password.valid">Login</button>
 
     <h6 text-center>{{status}}</h6>
   </form>
 
-
-    <button *ngIf="showSignUpButton" ion-button block clear (click)="emitSignUpEvent()">Sign Up</button>
-
+  <button *ngIf="showSignUpButton" ion-button block clear (click)="emitSignUpEvent()">Sign Up</button>
 
   <div *ngIf="showSkipButton">
     <button ion-button block clear (click)="emitSkipEvent()">Skip</button>
