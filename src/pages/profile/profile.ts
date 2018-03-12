@@ -118,12 +118,6 @@ export class ProfilePage {
           handler: () => {
             // this.navCtrl.setRoot(LoginPage);
             UserSession.logout();
-            // this.navCtrl.popToRoot();
-          }
-        },
-        {
-          text: 'Log Out',
-          handler: () => {
             UserSession.logout();
             this.events.publish(UserLoggedOutEvent);
           }
