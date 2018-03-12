@@ -6,24 +6,17 @@
 </ion-header>
 
 <ion-content text-center *ngIf="isUserLoggedIn">
-  <form (submit)="uploadMedia()">
-    <label for="file-input">
-      <ion-icon name="add"></ion-icon>
-    </label>
-    <br>
+  <img *ngIf="base64Image" [src]="base64Image" />
+  <button ion-button (click)="selectCamera()">Select Camera</button>
+  <button ion-button (click)="selectGallery()">Select Gallery</button>
+  <form>
     <input id="file-input" type="file" name="file" (change)="setFile($event)">
-
     <input [(ngModel)]="media.title" name="title" placeholder="Title">
-
     <textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>
-
-
-    <button ion-button (click)="openCamera()">Open Cam</button>
-    <button ion-button (click)="openGallery()">Open Gal</button>
-    <img *ngIf="imageSrc" [src]="imageSrc" />
-
-    <button type="submit">Upload</button>
   </form>
+
+  <button (click)="uploadMedia()">Upload</button>
+
 </ion-content>
 
 <ion-content *ngIf="!isUserLoggedIn">

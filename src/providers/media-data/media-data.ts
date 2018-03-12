@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ENV } from '@environment';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { UserSession } from '../../app/UserSession';
 
 @Injectable()
 export class MediaDataProvider {
@@ -12,7 +14,7 @@ export class MediaDataProvider {
   mediaForUserURL = `${this.apiUrl}/media/user`;
   uploadURL = `${this.apiUrl}/media`;
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private transfer: FileTransfer) {
   }
 
   public getMediaFiles(page: number, numberOfFilesPerRequest: number) {
@@ -78,5 +80,18 @@ export class MediaDataProvider {
   public updateFileInfo(fileId: number, media: any) {
     let url = `${this.apiUrl}/media/${fileId}`;
     return this.http.put(url, media);
+  }
+
+  public uploadMediaFile(data: any) {
+    let fileTransfer: FileTransferObject = this.transfer.create();
+    let accessToken = UserSession.accessToken;
+    let options: FileUploadOptions = {
+      fileKey: 'file',
+      fileName: 'fle.jpg',
+      headers: {'x-access-token': accessToken},
+      params: {'title': data.title, 'description': data.description}
+    }
+
+    return fileTransfer.upload(data.file, this.uploadURL, options);
   }
 }

@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {IonicApp, IonicModule, IonicErrorHandler, NavController} from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler, NavController } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -35,6 +35,7 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { GridTemplatePage } from "../pages/grid-template/grid-template";
 import { SinglePostTemplatePage } from "../pages/single-post-template/single-post-template";
 import {UpdateFileInfoPage} from "../pages/update-file-info/update-file-info";
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,8 @@ import {UpdateFileInfoPage} from "../pages/update-file-info/update-file-info";
     PhotoLibrary,
     Camera,
     PhotoViewer,
-    ThumbnailPipe
+    ThumbnailPipe,
+    FileTransfer
   ]
 })
 export class AppModule {}

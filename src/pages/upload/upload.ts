@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
-import {Camera, CameraOptions} from "@ionic-native/camera";
-import {HttpErrorResponse} from "@angular/common/http";
-import {UserSession} from "../../app/UserSession";
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { HttpErrorResponse } from "@angular/common/http";
+import { UserSession } from "../../app/UserSession";
+import { normalizeURL } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -21,7 +22,8 @@ export class UploadPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               private camera: Camera,
-              public mediaProvider: MediaDataProvider) {
+              public mediaProvider: MediaDataProvider,
+              public platform: Platform) {
   }
 
   ionViewDidLoad() {
@@ -30,94 +32,73 @@ export class UploadPage {
 
   media: any = {
     title: '',
-    description: ''
+    description: '',
+    file: null
   };
 
-  setFile(evt) {
-    console.log(evt.target.files);
-    this.media.file = evt.target.files[0];
-    this.readUrlInput(evt.target);
+  uploadMedia() {
+    this.mediaProvider.uploadMediaFile(this.media).then((data) => {
+      // Show success message
+
+      // Clean up the form
+
+    }, (err) => {
+      // SHow error message
+    });
   }
 
-  readUrlInput(input){
-    if (input.files && input.files[0]) {
-      let reader = new FileReader();
-      reader.onload = (e) => {
-        this.imageSrc = e.target['result'];
-      }
-      reader.readAsDataURL(input.files[0]);
-      console.log(this.imageSrc);
-    }
-    let fileList: FileList = event.target['files'];
-    let file: File = fileList[0];
-    console.log(file);
-  }
+  selectCamera() {
 
-  openCamera() {
     const options: CameraOptions = {
-      // targetWidth: 1000,
-      // targetHeight: 1000,
+      //this.platform.is('ios') ? this.camera.DestinationType.FILE_URI : this.camera.DestinationType.DATA_URL,
+      quality: 75,
+      targetWidth:720,
+      correctOrientation: true,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      this.base64Image = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      console.log(err);
+
+      this.media.file = imageData;
+
+      //get photo from the camera based on platform type
+      if (this.platform.is('ios'))
+        this.base64Image = normalizeURL(imageData);
+      else
+        this.base64Image = "data:image/jpeg;base64," + imageData;
+
+    }, (error) => {
+      console.debug("Unable to obtain picture: " + error, "app");
+      console.log(error);
     });
   }
 
-  openGallery() {
-    const options: CameraOptions = {
+  selectGallery() {
+    let cameraOptions = {
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: this.camera.DestinationType.FILE_URI,
+      quality: 70,
+      targetWidth: 1000,
+      targetHeight: 1000,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+      correctOrientation: true
     }
 
-    this.camera.getPicture(options).then((imageData) => {
-      this.base64Image = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      console.log(err);
+    this.camera.getPicture(cameraOptions).then((file_uri) => {
+
+      this.media.file = file_uri;
+
+      //get photo from the camera based on platform type
+      if (this.platform.is('ios'))
+        this.base64Image = normalizeURL(file_uri);
+      else
+        this.base64Image = "data:image/jpeg;base64," + file_uri;
+
+    }, (error) => {
+      console.debug("Unable to obtain picture: " + error, "app");
+      console.log(error);
     });
-  }
-
-
-  private imageSrc;
-  // private openGallery (): void {
-  //   let cameraOptions = {
-  //     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-  //     destinationType: this.camera.DestinationType.FILE_URI,
-  //     quality: 100,
-  //     targetWidth: 1000,
-  //     targetHeight: 1000,
-  //     encodingType: this.camera.EncodingType.JPEG,
-  //     correctOrientation: false
-  //   }
-  //
-  //   this.camera.getPicture(cameraOptions)
-  //     .then(file_uri => this.imageSrc = file_uri,
-  //       err => console.log(err));
-  // }
-
-  uploadMedia() {
-    const formData = new FormData();
-
-    formData.append('title', this.media.title);
-    formData.append('description', this.media.description);
-    formData.append('file', this.media.file);
-
-    console.log(formData);
-
-
-    this.mediaProvider.uploadMedia(formData).subscribe(response => {
-      console.log(response);
-    }, (error: HttpErrorResponse)=> {
-      console.log(error.error.message);
-    });
-
-    this.navCtrl.popToRoot();
   }
 }
