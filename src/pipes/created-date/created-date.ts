@@ -30,14 +30,6 @@ export class CreatedDatePipe implements PipeTransform {
     let millisecondDifference = currentDate.getTime() - createdDate.getTime();
     this.millisecondDifference = millisecondDifference;
 
-    if (millisecondDifference >= this.weekToMillisecond) {
-      if (currentYearString == createdYearString) {
-        displayDate = createdMonthString + ' ' + createdDayString;
-      } else {
-        displayDate = createdMonthString + ' ' + createdDayString + ', ' + createdYearString;
-      }
-    }
-
     if (millisecondDifference < this.secondToMillisecond) {
       displayDate = 'Just now';
     }
@@ -56,6 +48,14 @@ export class CreatedDatePipe implements PipeTransform {
 
     if (millisecondDifference >= this.dayToMillisecond && millisecondDifference < this.weekToMillisecond) {
       displayDate = this.getDisplayDate(86400000, 'day', 'days');
+    }
+
+    if (millisecondDifference >= this.weekToMillisecond) {
+      if (currentYearString == createdYearString) {
+        displayDate = createdMonthString + ' ' + createdDayString;
+      } else {
+        displayDate = createdMonthString + ' ' + createdDayString + ', ' + createdYearString;
+      }
     }
 
     return displayDate.toUpperCase();
