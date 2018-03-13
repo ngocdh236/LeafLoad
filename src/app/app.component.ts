@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginTemplatePage } from "../pages/login-template/login-template";
-import {HomePage} from "../pages/home/home";
 
 const FirstLaunchKey: string = 'LeafLoafFirstLaunch';
 const UserLoggedInEvent = "UserLoggedInEvent";
@@ -15,9 +14,9 @@ const LoginTemplatePageSkipTappedEvent = "LoginTemplatePageSkipTappedEvent";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any;
+  rootPage:any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private events: Events, ) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private events: Events) {
     platform.ready().then(() => {
       let firstLaunch = localStorage.getItem(FirstLaunchKey);
 
@@ -25,7 +24,6 @@ export class MyApp {
         this.rootPage = LoginTemplatePage;
       } else {
         this.rootPage = TabsPage;
-
       }
 
       statusBar.styleDefault();
@@ -46,4 +44,6 @@ export class MyApp {
       });
     });
   }
+
+
 }

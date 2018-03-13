@@ -11,6 +11,7 @@ const UserLoggedInEvent = "UserLoggedInEvent";
 const UserLoggedOutEvent = "UserLoggedOutEvent";
 const UserUpdatedInfoEvent = "UserUpdatedInfoEvent";
 const DidDeletePostEvent = "DidDeletePostEvent";
+const UserDidUploadMediaEvent = "UserDidUploadMediaEvent";
 
 export enum LayoutType {
   VerticalFlow,
@@ -62,6 +63,10 @@ export class ProfilePage {
 
     events.subscribe(DidDeletePostEvent, (mediaFile) => {
       this.didDeleteMediaFile(mediaFile);
+    });
+
+    events.subscribe(UserDidUploadMediaEvent, () => {
+      this.doRefresh(null);
     });
   }
 
@@ -192,7 +197,9 @@ export class ProfilePage {
 
   doRefresh(refresher) {
     this.reloadPostData((succeeded) => {
-      refresher.complete();
+      if(refresher) {
+        refresher.complete();
+      }
     });
   }
 }

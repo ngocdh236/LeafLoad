@@ -3,6 +3,7 @@ import { NavController, Events, Content } from 'ionic-angular';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
 
 const DidDeletePostEvent = "DidDeletePostEvent";
+const UserDidUploadMediaEvent = "UserDidUploadMediaEvent";
 
 @Component({
   selector: 'page-home',
@@ -22,6 +23,10 @@ export class HomePage {
 
     events.subscribe(DidDeletePostEvent, (mediaFile) => {
       this.didDeleteMediaFile(mediaFile);
+    });
+
+    events.subscribe(UserDidUploadMediaEvent, () => {
+      this.doRefresh(null);
     });
   }
 
@@ -72,7 +77,9 @@ export class HomePage {
         this.mediaArray = [];
       }
 
-      refresher.complete();
+      if (refresher) {
+        refresher.complete();
+      }
     });
   }
 

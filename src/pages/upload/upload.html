@@ -6,8 +6,13 @@
 </ion-header>
 
 <ion-content #uploadLayout text-center [hidden]="!isUserLoggedIn">
-  <div class="page-content" [hidden]="!shouldLayoutUploadView">
+  <div class="page-content" [hidden]="!isUserLoggedIn">
     <img *ngIf="base64Image" [src]="base64Image" />
+
+    <form *ngIf="base64Image">
+      <input [(ngModel)]="media.title" name="title" placeholder="Title">
+      <textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>
+    </form>
 
     <button class="option-buttons" icon-only (click)="selectCamera()">
       <ion-icon name="ios-camera-outline"></ion-icon>
@@ -16,11 +21,6 @@
     <button class="option-buttons" icon-only (click)="selectGallery()">
       <ion-icon name ="ios-image-outline"></ion-icon>
     </button>
-
-    <form>
-      <input [(ngModel)]="media.title" name="title" placeholder="Title">
-      <textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>
-    </form>
 
     <button [disabled]="!base64Image" id="upload-button" (click)="uploadMedia()">Upload</button>
   </div>

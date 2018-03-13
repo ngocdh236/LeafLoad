@@ -193,7 +193,8 @@ export class PostTemplatePage {
           {
             text: 'Edit',
             handler: () => {
-              this.navCtrl.push(UpdateFileInfoPage, this._mediaData);
+              let updateFileInfoModel = this.modalCtrl.create(UpdateFileInfoPage, this._mediaData);
+              updateFileInfoModel.present();
             }
           },
           {
@@ -250,6 +251,7 @@ export class PostTemplatePage {
   deletePost() {
     let deletingLoading = this.displayLoadingActivityIndicator("Deleting post...");
     deletingLoading.present();
+
     this.mediaProvider.deleteMediaFile(this.mediaData).subscribe(res => {
       deletingLoading.dismiss();
       this.emitDidDeleteMediaEvent();
