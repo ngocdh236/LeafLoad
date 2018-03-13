@@ -1,11 +1,8 @@
-import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, Events} from 'ionic-angular';
-import {User} from "../../interfaces/user";
-import {UserDataProvider} from "../../providers/user-data/user-data";
-import {HttpErrorResponse} from "@angular/common/http";
-import {HomePage} from "../home/home";
-import {TabsPage} from "../tabs/tabs";
-import {LoginPage} from "../login/login";
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { User } from "../../interfaces/user";
+import { UserDataProvider } from "../../providers/user-data/user-data";
+import { HttpErrorResponse } from "@angular/common/http";
 
 /**
  * Generated class for the SignupPage page.

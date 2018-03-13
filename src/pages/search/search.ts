@@ -1,7 +1,6 @@
 import { Component, ViewChild  } from '@angular/core';
 import { IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
-import { UserDataProvider } from "../../providers/user-data/user-data";
 import { LoginPage } from "../login/login";
 import { LoginTemplatePage } from "../login-template/login-template";
 import { CommentPage } from "../comment/comment";
@@ -31,7 +30,7 @@ export class SearchPage {
     return UserSession.isLoggedIn;
   }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private mediaData: MediaDataProvider, private userDataProvider: UserDataProvider, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private mediaData: MediaDataProvider, public modalCtrl: ModalController) {
   }
 
   ionViewDidLoad() {

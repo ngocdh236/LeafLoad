@@ -9,7 +9,6 @@ import { LoginTemplatePage } from "../login-template/login-template";
 
 const UserLoggedInEvent = "UserLoggedInEvent";
 const UserUpdatedInfoEvent = "UserUpdatedInfoEvent";
-const DidDeletePostEvent = "DidDeletePostEvent";
 
 export enum LayoutType {
   VerticalFlow,
@@ -45,11 +44,11 @@ export class UserProfilePage {
       this.userId = navParams.get("user_id");
     }
 
-    events.subscribe(UserLoggedInEvent, () => {
+    this.events.subscribe(UserLoggedInEvent, () => {
       this.reloadPostData();
     });
 
-    events.subscribe(UserUpdatedInfoEvent, () => {
+    this.events.subscribe(UserUpdatedInfoEvent, () => {
       this.reloadPostData();
     });
 

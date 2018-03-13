@@ -30,7 +30,7 @@ export class MyApp {
       splashScreen.hide();
 
       // Register Events
-      events.subscribe(LoginTemplatePageSkipTappedEvent, () => {
+      this.events.subscribe(LoginTemplatePageSkipTappedEvent, () => {
         this.rootPage = TabsPage;
         localStorage.setItem(FirstLaunchKey, FirstLaunchKey);
       });
