@@ -9,7 +9,7 @@ import { LoginTemplatePage } from "../pages/login-template/login-template";
 const FirstLaunchKey: string = 'LeafLoafFirstLaunch';
 const UserLoggedInEvent = "UserLoggedInEvent";
 const LoginTemplatePageSkipTappedEvent = "LoginTemplatePageSkipTappedEvent";
-
+const UserLoggedOutEvent = "UserLoggedOutEvent";
 @Component({
   templateUrl: 'app.html'
 })
@@ -42,6 +42,10 @@ export class MyApp {
           this.rootPage = TabsPage;
           localStorage.setItem(FirstLaunchKey, FirstLaunchKey);
         }
+      });
+
+      events.subscribe(UserLoggedOutEvent, () => {
+        this.rootPage = LoginTemplatePage;
       });
     });
   }
