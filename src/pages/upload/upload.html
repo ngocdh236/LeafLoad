@@ -5,6 +5,13 @@
 
 </ion-header>
 
+<ion-content *ngIf="!isUserLoggedIn">
+  <page-login-template (didSucceedToLogin)="onLogin($event)"
+                       (signUp)="onSignUp($event)"
+                       (skip)="onSkip($event)"
+                       [showSkipButton]='false'></page-login-template>
+</ion-content>
+
 <ion-content #uploadLayout text-center [hidden]="!isUserLoggedIn">
   <div class="page-content" [hidden]="!isUserLoggedIn">
     <img *ngIf="base64Image" [src]="base64Image" />
@@ -25,11 +32,4 @@
     <button [disabled]="!base64Image" id="upload-button" (click)="uploadMedia()">Upload</button>
   </div>
 
-</ion-content>
-
-<ion-content *ngIf="!isUserLoggedIn">
-  <page-login-template (didSucceedToLogin)="onLogin($event)"
-                       (signUp)="onSignUp($event)"
-                       (skip)="onSkip($event)"
-                       [showSkipButton]='false'></page-login-template>
 </ion-content>
