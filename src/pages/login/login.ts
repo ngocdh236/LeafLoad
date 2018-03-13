@@ -5,7 +5,6 @@ import { User } from "../../interfaces/user";
 import { HttpErrorResponse } from "@angular/common/http";
 import { SignupPage } from "../signup/signup";
 import { TabsPage } from "../tabs/tabs";
-import {UserSession} from "../../app/UserSession";
 
 /**
  * Generated class for the LoginPage page.

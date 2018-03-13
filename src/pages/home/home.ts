@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Events, Content } from 'ionic-angular';
+import { NavController, Events } from 'ionic-angular';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
 
 const DidDeletePostEvent = "DidDeletePostEvent";
@@ -20,7 +20,7 @@ export class HomePage {
     this.currentPage = 0;
     this.mediaArray = [];
 
-    events.subscribe(DidDeletePostEvent, (mediaFile) => {
+    this.events.subscribe(DidDeletePostEvent, (mediaFile) => {
       this.didDeleteMediaFile(mediaFile);
     });
   }
