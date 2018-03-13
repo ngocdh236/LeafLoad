@@ -14,7 +14,7 @@ const UserLoggedOutEvent = "UserLoggedOutEvent";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any;
+  rootPage:any;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private events: Events) {
     platform.ready().then(() => {
@@ -24,7 +24,6 @@ export class MyApp {
         this.rootPage = LoginTemplatePage;
       } else {
         this.rootPage = TabsPage;
-
       }
 
       statusBar.styleDefault();
@@ -49,4 +48,6 @@ export class MyApp {
       });
     });
   }
+
+
 }

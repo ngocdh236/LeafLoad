@@ -2,9 +2,10 @@
 
   <ion-navbar>
     <ion-buttons left>
-      <!--<button ion-button icon-only (click)="dismiss()">-->
-        <!--<ion-icon name="close"></ion-icon>-->
-      <!--</button>-->
+      <button ion-button (click)="dismiss()">Cancel</button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button ion-button [disabled]="shouldDisableUpdateButton" (click)="updateFileInfo()">Done</button>
     </ion-buttons>
     <ion-title>Edit Info</ion-title>
   </ion-navbar>
@@ -14,17 +15,14 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item no-lines>
+    <ion-item>
       <ion-label color="dark">Title</ion-label>
-      <ion-item><ion-input [(ngModel)]="media.title" #title="ngModel"></ion-input></ion-item>
+      <ion-input [(ngModel)]="media.title" #title="ngModel"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label color="dark">Description</ion-label>
       <ion-input [(ngModel)]="media.description" #description="ngModel"></ion-input>
     </ion-item>
-
   </ion-list>
-
-  <button ion-button color="primary" [disabled]="shouldDisableUpdateButton" (click)="updateFileInfo()">Update</button>
 </ion-content>

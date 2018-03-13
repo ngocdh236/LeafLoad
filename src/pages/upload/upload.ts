@@ -6,6 +6,7 @@ import {UserSession} from "../../app/UserSession";
 import {normalizeURL} from 'ionic-angular';
 
 const UserLoggedInEvent = "UserLoggedInEvent";
+const UserDidUploadMediaEvent = "UserDidUploadMediaEvent";
 
 @IonicPage()
 @Component({
@@ -16,10 +17,8 @@ export class UploadPage {
 
   @ViewChild('uploadLayout') content;
   public base64Image: string;
-  shouldLayoutUploadView: boolean = UserSession.isLoggedIn;
 
   public get isUserLoggedIn(): boolean {
-    console.log(UserSession.isLoggedIn);
     return UserSession.isLoggedIn;
   }
 
@@ -51,23 +50,28 @@ export class UploadPage {
     uploadingLoading.present();
 
     this.mediaProvider.uploadMediaFile(this.media).then((data) => {
-      uploadingLoading.dismiss();
+      setTimeout(() => {
 
-      // Clean up the form
-      this.base64Image = null;
-      this.media.title =  null;
-      this.media.description = null;
-      this.media.file = null;
-
-      this.navCtrl.popToRoot();
+        // Clean up the form
+        this.base64Image = null;
+        this.media = {
+          title: '',
+          description: '',
+          file: null
+        };
+        uploadingLoading.dismiss();
+        this.events.publish(UserDidUploadMediaEvent, {});
+      }, 4000);
     }, (err) => {
-      // Show error message
+      uploadingLoading.dismiss();
+      let errorMessage = this.displayLoadingActivityIndicator("An error occur while uploading post. Please try again", 1500);
+      errorMessage.present();
     });
 
   }
 
   selectCamera() {
-
+    this.camera.cleanup();
     const options: CameraOptions = {
       quality: 75,
       targetWidth: 720,
@@ -80,12 +84,16 @@ export class UploadPage {
     this.camera.getPicture(options).then((imageData) => {
 
       this.media.file = imageData;
-
+      let image;
       //get photo from the camera based on platform type
       if (this.platform.is('ios'))
-        this.base64Image = normalizeURL(imageData);
+        image = normalizeURL(imageData);
       else
-        this.base64Image = "data:image/jpeg;base64," + imageData;
+        image = "data:image/jpeg;base64," + imageData;
+      // Avoid ImageCache
+      this.base64Image = image + '?' + Math.random();
+      console.log(this.base64Image);
+      console.log(imageData);
 
     }, (error) => {
       console.debug("Unable to obtain picture: " + error, "app");
@@ -94,6 +102,7 @@ export class UploadPage {
   }
 
   selectGallery() {
+    this.camera.cleanup();
     let cameraOptions = {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: this.camera.DestinationType.FILE_URI,
@@ -107,21 +116,24 @@ export class UploadPage {
     this.camera.getPicture(cameraOptions).then((file_uri) => {
 
       this.media.file = file_uri;
-
+      let image;
       //get photo from the camera based on platform type
       if (this.platform.is('ios'))
-        this.base64Image = normalizeURL(file_uri);
+        image = normalizeURL(file_uri);
       else
-        this.base64Image = "data:image/jpeg;base64," + file_uri;
+        image = "data:image/jpeg;base64," + file_uri;
+      // Avoid ImageCache
+      this.base64Image = image + '?' + Math.random();
+      console.log(this.base64Image);
+      console.log(file_uri);
 
     }, (error) => {
-      console.debug("Unable to obtain picture: " + error, "app");
-      console.log(error);
+
+
     });
   }
 
   onLogin(ev: any) {
-    console.log("adfadfafd");
     this.content.resize();
   }
 

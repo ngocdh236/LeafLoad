@@ -88,13 +88,9 @@ export class ModifyUserDataPage {
 
     // Call the service to upload
     this.userDataProvider.updateUserInfo(newInfo).subscribe(res => {
-      console.log("Update user info successfully");
+
       // Stop loading indicator
       updateLoading.dismiss();
-
-      // Display new info downloading indicator
-      // let newInfoLoading = this.displayLoadingActivityIndicator("Loading new information...");
-      // newInfoLoading.present();
 
       // Download the newly updated user's info
       this.userDataProvider.requestCurrentUserInfo().subscribe(res => {
@@ -105,9 +101,6 @@ export class ModifyUserDataPage {
         // TODO: Move this line below to the service
         this.events.publish(UserUpdatedInfoEvent);
 
-        // Display the success indicator
-        // let successIndicator = this.displayLoadingActivityIndicator("Successfully updated user info", 1000);
-        // successIndicator.present();
         this.dismiss();
 
       });

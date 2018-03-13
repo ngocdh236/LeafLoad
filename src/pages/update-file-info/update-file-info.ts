@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, LoadingController, NavController, NavParams, ViewController} from 'ionic-angular';
 import {Media} from "../../interfaces/Media";
 import {MediaDataProvider} from "../../providers/media-data/media-data";
 
@@ -41,7 +41,9 @@ export class UpdateFileInfoPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
-              public mediaDataProvider: MediaDataProvider) {
+              public mediaDataProvider: MediaDataProvider,
+              public loadingCtrl: LoadingController,
+              public viewController: ViewController) {
     let file = navParams.data;
     console.log(`Data ${file}`);
     if (file) {
@@ -57,8 +59,34 @@ export class UpdateFileInfoPage {
   }
 
   updateFileInfo() {
+    let updateLoading = this.displayLoadingActivityIndicator("Updating information...");
+    updateLoading.present();
+
     this.mediaDataProvider.updateFileInfo(this.media.file_id, this.media).subscribe(res => {
-      this.navCtrl.pop();
+      this.dismiss();
+    }, err => {
+      updateLoading.dismiss();
+      let errorMessage = this.displayLoadingActivityIndicator("An error occur while editing post. Please try again", 1500);
+      errorMessage.present();
     });
+
+    updateLoading.dismiss();
+  }
+
+  private displayLoadingActivityIndicator(message: string, duration: number = 0) {
+    let config: any = {content: message};
+
+    if (duration != 0) {
+      config.duration = duration;
+      config.spinner = 'hide';
+    }
+
+    let loading = this.loadingCtrl.create(config);
+
+    return loading;
+  }
+
+  dismiss() {
+    this.viewController.dismiss();
   }
 }
