@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
-import { MediaDataProvider } from "../../providers/media-data/media-data";
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { HttpErrorResponse } from "@angular/common/http";
-import { UserSession } from "../../app/UserSession";
-import { normalizeURL } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, Platform, Events, LoadingController} from 'ionic-angular';
+import {MediaDataProvider} from "../../providers/media-data/media-data";
+import {Camera, CameraOptions} from '@ionic-native/camera';
+import {UserSession} from "../../app/UserSession";
+import {normalizeURL} from 'ionic-angular';
+
+const UserLoggedInEvent = "UserLoggedInEvent";
 
 @IonicPage()
 @Component({
@@ -13,9 +14,12 @@ import { normalizeURL } from 'ionic-angular';
 })
 export class UploadPage {
 
+  @ViewChild('uploadLayout') content;
   public base64Image: string;
+  shouldLayoutUploadView: boolean = UserSession.isLoggedIn;
 
   public get isUserLoggedIn(): boolean {
+    console.log(UserSession.isLoggedIn);
     return UserSession.isLoggedIn;
   }
 
@@ -23,11 +27,16 @@ export class UploadPage {
               public navParams: NavParams,
               private camera: Camera,
               public mediaProvider: MediaDataProvider,
-              public platform: Platform) {
+              public platform: Platform,
+              public events: Events,
+              public loadingCtrl: LoadingController) {
+    events.subscribe(UserLoggedInEvent, () => {
+      this.content.resize();
+    });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UploadPage');
+
   }
 
   media: any = {
@@ -37,22 +46,31 @@ export class UploadPage {
   };
 
   uploadMedia() {
+    // Show uploading message
+    let uploadingLoading = this.displayLoadingActivityIndicator("Uploading post...");
+    uploadingLoading.present();
+
     this.mediaProvider.uploadMediaFile(this.media).then((data) => {
-      // Show success message
+      uploadingLoading.dismiss();
 
       // Clean up the form
+      this.base64Image = null;
+      this.media.title =  null;
+      this.media.description = null;
+      this.media.file = null;
 
+      this.navCtrl.popToRoot();
     }, (err) => {
-      // SHow error message
+      // Show error message
     });
+
   }
 
   selectCamera() {
 
     const options: CameraOptions = {
-      //this.platform.is('ios') ? this.camera.DestinationType.FILE_URI : this.camera.DestinationType.DATA_URL,
       quality: 75,
-      targetWidth:720,
+      targetWidth: 720,
       correctOrientation: true,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
@@ -100,5 +118,31 @@ export class UploadPage {
       console.debug("Unable to obtain picture: " + error, "app");
       console.log(error);
     });
+  }
+
+  onLogin(ev: any) {
+    console.log("adfadfafd");
+    this.content.resize();
+  }
+
+  onSignUp(event: any) {
+
+  }
+
+  onSkip(ev: any) {
+
+  }
+
+  private displayLoadingActivityIndicator(message: string, duration: number = 0) {
+    let config: any = {content: message};
+
+    if (duration != 0) {
+      config.duration = duration;
+      config.spinner = 'hide';
+    }
+
+    let loading = this.loadingCtrl.create(config);
+
+    return loading;
   }
 }

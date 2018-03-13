@@ -32,7 +32,6 @@ const DidDeletePostEvent = "DidDeletePostEvent";
 export class PostTemplatePage {
 
   private _mediaData: any;
-  private _liked: boolean = false;
 
   get mediaData(): any {
     return this._mediaData;
@@ -145,9 +144,13 @@ export class PostTemplatePage {
   }
 
   emitCommentEvent() {
-    let commentModel = this.modalCtrl.create(CommentPage, this.mediaData);
-    commentModel.present();
-    this.comment.emit(this.mediaData);
+    if (UserSession.isLoggedIn) {
+      let commentModel = this.modalCtrl.create(CommentPage, this.mediaData);
+      commentModel.present();
+      this.comment.emit(this.mediaData);
+    } else {
+      this.presentLoginView();
+    }
   }
 
   emitDidDeleteMediaEvent() {
@@ -156,7 +159,7 @@ export class PostTemplatePage {
 
   // Helper methods
   private presentLoginView() {
-    let loginModel = this.modalCtrl.create(LoginTemplatePage, {});
+    let loginModel = this.modalCtrl.create(LoginTemplatePage, {modal: true});
     loginModel.present();
   }
 

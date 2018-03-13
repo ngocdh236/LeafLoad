@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, NavParams, Events } from 'ionic-angular';
+import { NavController, Events, Content } from 'ionic-angular';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
 
 const DidDeletePostEvent = "DidDeletePostEvent";
@@ -13,9 +13,10 @@ export class HomePage {
   currentPage = 0;
   numberOfFilesPerRequest = 10;
   infiniteScroll: any;
-  currentFile_id: number;
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public mediaData: MediaDataProvider, private events: Events) {
+  constructor(public navCtrl: NavController,
+              public mediaData: MediaDataProvider,
+              private events: Events) {
     this.currentPage = 0;
     this.mediaArray = [];
 

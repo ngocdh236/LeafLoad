@@ -91,9 +91,6 @@
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.16" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
-    <plugin name="cordova-plugin-photo-library" spec="^2.1.0">
-        <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="To choose photos" />
-    </plugin>
     <plugin name="com.synconset.imagepicker" spec="^2.1.10">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="your usage message" />
     </plugin>
@@ -101,4 +98,7 @@
     <plugin name="com-sarriaroman-photoviewer" spec="^1.1.16" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
     <engine name="ios" spec="4.5.4" />
+    <plugin name="cordova-plugin-photo-library" spec="^2.1.0">
+        <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="To choose photos" />
+    </plugin>
 </widget>

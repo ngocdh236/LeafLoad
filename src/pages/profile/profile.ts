@@ -6,7 +6,6 @@ import {UserSession} from "../../app/UserSession";
 import {LoginTemplatePage} from "../login-template/login-template";
 import {UserDataProvider} from "../../providers/user-data/user-data";
 import {SinglePostTemplatePage} from "../single-post-template/single-post-template";
-import {LoginPage} from "../login/login";
 
 const UserLoggedInEvent = "UserLoggedInEvent";
 const UserLoggedOutEvent = "UserLoggedOutEvent";
@@ -27,7 +26,7 @@ export enum LayoutType {
 export class ProfilePage {
 
   @ViewChild(LoginTemplatePage) loginTemplate;
-  @ViewChild(Content) content;
+  @ViewChild(Content) content: Content;
 
   layoutType: LayoutType = LayoutType.Grid;
 
@@ -90,6 +89,7 @@ export class ProfilePage {
       }
 
       this.mediaArray = res as any[];
+
       // WORKAROUND: Resize the content otherwise the navbar would overlap the content
       this.content.resize();
     });
@@ -116,7 +116,6 @@ export class ProfilePage {
         {
           text: 'Log Out',
           handler: () => {
-            // this.navCtrl.setRoot(LoginPage);
             UserSession.logout();
             UserSession.logout();
             this.events.publish(UserLoggedOutEvent);
@@ -152,9 +151,6 @@ export class ProfilePage {
 
   }
 
-  didSucceedToLogin(ev: any) {
-
-  }
 
   private didDeleteMediaFile(ev: any) {
     for (let i = 0; i < this.mediaArray.length; i++) {

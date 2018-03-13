@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { IonicApp, IonicModule, IonicErrorHandler, NavController } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -29,13 +29,13 @@ import { PhotoLibrary } from "@ionic-native/photo-library";
 import { ListTemplatePage } from "../pages/list-template/list-template";
 import { LikeListPage } from '../pages/like-list/like-list';
 import { UserProfilePage } from "../pages/user-profile/user-profile";
-import {CreatedDatePipe} from "../pipes/created-date/created-date";
-import {Camera, CameraOptions} from "@ionic-native/camera";
+import { CreatedDatePipe } from "../pipes/created-date/created-date";
+import { Camera } from "@ionic-native/camera";
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { GridTemplatePage } from "../pages/grid-template/grid-template";
 import { SinglePostTemplatePage } from "../pages/single-post-template/single-post-template";
-import {UpdateFileInfoPage} from "../pages/update-file-info/update-file-info";
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { UpdateFileInfoPage } from "../pages/update-file-info/update-file-info";
+import { FileTransfer } from '@ionic-native/file-transfer';
 
 @NgModule({
   declarations: [

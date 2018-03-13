@@ -1,4 +1,4 @@
-import { Component, ViewChild, ComponentFactoryResolver } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { UserProfilePage } from "../user-profile/user-profile";
 import { UserDataProvider } from "../../providers/user-data/user-data";
@@ -19,7 +19,9 @@ export class LikeListPage {
   @ViewChild(Content) content;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private resolver: ComponentFactoryResolver, private userDataProvider: UserDataProvider ) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              private userDataProvider: UserDataProvider ) {
     this._likes = this.navParams.data;
   }
 
@@ -45,14 +47,5 @@ export class LikeListPage {
     let liker = this.likers[index];
     this.navCtrl.push(UserProfilePage, liker);
   }
-
-  // private displayListOfLikers() {
-  //   this.container.clear();
-  //   const factory = this.resolver.resolveComponentFactory(ListTemplatePage);
-  //   this.listView = this.container.createComponent(factory);
-  //   this.listView.instance.dataList = this.likers;
-  //   this.listView.instance.parse = function(user) { return user.username };
-  //   this.content.resize();
-  // }
 
 }

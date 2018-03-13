@@ -1,5 +1,5 @@
 import { Component, ViewChild  } from '@angular/core';
-import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 import { MediaDataProvider } from "../../providers/media-data/media-data";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { LoginPage } from "../login/login";
@@ -35,8 +35,7 @@ export class SearchPage {
   }
 
   ionViewDidLoad() {
-    //this.isUserLoggedIn = this.userDataProvider.isUserLoggedIn();
-    //console.log(`Is user logged in: ${this.userDataProvider.isUserLoggedIn()}`);
+
   }
 
   onInput(ev: any) {
@@ -80,5 +79,4 @@ export class SearchPage {
     let profileModel = this.modalCtrl.create(CommentPage, ev);
     profileModel.present();
   }
-
 }

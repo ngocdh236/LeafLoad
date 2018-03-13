@@ -6,7 +6,6 @@ import { UserSession } from "../../app/UserSession";
 import { HttpErrorResponse } from "@angular/common/http";
 import { SignupPage } from "../signup/signup";
 import { User } from "../../interfaces/User";
-import {TabsPage} from "../tabs/tabs";
 
 /**
  * Generated class for the LoginTemplatePage page.
@@ -74,7 +73,6 @@ export class LoginTemplatePage {
 
       UserSession.loginSuccessfullyWithDictionary(response);
       this.didSucceedToLogin.emit(response);
-
       this.events.publish(UserLoggedInEvent);
 
       if (this.presentedModally) {

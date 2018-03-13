@@ -5,23 +5,31 @@
 
 </ion-header>
 
-<ion-content text-center *ngIf="isUserLoggedIn">
-  <img *ngIf="base64Image" [src]="base64Image" />
-  <button ion-button (click)="selectCamera()">Select Camera</button>
-  <button ion-button (click)="selectGallery()">Select Gallery</button>
-  <form>
-    <input id="file-input" type="file" name="file" (change)="setFile($event)">
-    <input [(ngModel)]="media.title" name="title" placeholder="Title">
-    <textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>
-  </form>
+<ion-content #uploadLayout text-center [hidden]="!isUserLoggedIn">
+  <div class="page-content" [hidden]="!shouldLayoutUploadView">
+    <img *ngIf="base64Image" [src]="base64Image" />
 
-  <button (click)="uploadMedia()">Upload</button>
+    <button class="option-buttons" icon-only (click)="selectCamera()">
+      <ion-icon name="ios-camera-outline"></ion-icon>
+    </button>
+
+    <button class="option-buttons" icon-only (click)="selectGallery()">
+      <ion-icon name ="ios-image-outline"></ion-icon>
+    </button>
+
+    <form>
+      <input [(ngModel)]="media.title" name="title" placeholder="Title">
+      <textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>
+    </form>
+
+    <button [disabled]="!base64Image" id="upload-button" (click)="uploadMedia()">Upload</button>
+  </div>
 
 </ion-content>
 
 <ion-content *ngIf="!isUserLoggedIn">
-  <page-login-template (login)="onLogin($event)"
+  <page-login-template (didSucceedToLogin)="onLogin($event)"
                        (signUp)="onSignUp($event)"
                        (skip)="onSkip($event)"
-                       (didSucceedToLogin)="didSucceedToLogin($event)" [showSkipButton]='false'></page-login-template>
+                       [showSkipButton]='false'></page-login-template>
 </ion-content>
