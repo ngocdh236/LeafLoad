@@ -81,7 +81,11 @@
     <allow-navigation href="http://10.0.1.20:8100" />
     <allow-navigation href="http://10.112.214.135:8101" />
     <allow-navigation href="http://10.112.214.135:8100" />
-    <engine name="ios" spec="4.5.4" />
+    <plugin name="cordova-plugin-camera" spec="^4.0.2">
+        <variable name="CAMERA_USAGE_DESCRIPTION" value="Leafload would like to access to your camera to take a photo" />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Leafload would like to access to your photo library in order to select an image" />
+    </plugin>
+    <plugin name="cordova-plugin-file" spec="^4.3.3" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-device" spec="^2.0.1" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
@@ -99,6 +103,9 @@
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Leafload would like to access to your photo library in order to select an image" />
     </plugin>
     <plugin name="com-sarriaroman-photoviewer" spec="^1.1.16" />
-    <plugin name="cordova-plugin-file" spec="^4.3.2" />
+    <plugin name="cordova-plugin-photo-library" spec="^2.1.0">
+        <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="To choose photos" />
+    </plugin>
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
+    <engine name="ios" spec="4.5.4" />
 </widget>
