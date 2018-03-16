@@ -1,0 +1,32 @@
+page-post-template {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+
+
+  .header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    h5 {
+      justify-self: flex-start;
+    }
+    button {
+      background-color: transparent;
+    }
+  }
+
+  .media {
+    width: 100%;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .media-content {
+    width: 100%;
+    padding-left: 10px;
+    margin: 8px;
+  }
+}

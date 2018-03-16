@@ -1,23 +1,17 @@
-<ion-header>
+<ion-header no-border>
   <ion-navbar>
-    <ion-title text-center>LeafLoad</ion-title>
+    <ion-title>LeafLoad</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-item no-lines *ngFor="let media of mediaArray">
-    <img [src]="media.thumbnail">
-    <h2>{{media.title}}</h2>
-    <p>{{media.description}}</p>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-    <button style="background: transparent">
-      <ion-icon name="heart-outline"></ion-icon>
-    </button>
-
-    <button style="background: transparent">
-      <ion-icon name="ios-text-outline"></ion-icon>
-    </button>
-  </ion-item>
+  <div *ngFor="let media of mediaArray">
+    <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
+  </div>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

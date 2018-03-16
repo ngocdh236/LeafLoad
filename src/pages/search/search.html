@@ -1,15 +1,17 @@
-<ion-header>
-
-  <ion-searchbar
-    [(ngModel)]="myInput"
-    [showCancelButton]="shouldShowCancel"
-    (ionInput)="onInput($event)"
-    (ionCancel)="onCancel($event)">
-  </ion-searchbar>
-
+<ion-header no-border *ngIf="isUserLoggedIn">
+  <ion-toolbar>
+    <ion-searchbar placeholder="Search" (ionInput)="onInput($event)" required></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
+<ion-content *ngIf="isUserLoggedIn">
+  <ion-spinner *ngIf="isLoading" class="loader" item-start name="ios"></ion-spinner>
+  <div *ngFor="let media of mediaArray">
+    <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
+  </div>
+</ion-content>
 
-<ion-content padding>
-
+<ion-content *ngIf="!isUserLoggedIn">
+  <page-login-template [showSkipButton]='false' (login)="onLogin($event)" (signUp)="onSignUp($event)"
+                       (skip)="onSkip($event)"></page-login-template>
 </ion-content>

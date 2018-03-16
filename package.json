@@ -12,7 +12,7 @@
     "ionic:serve": "ionic-app-scripts serve"
   },
   "config": {
-      "ionic_webpack": "./src/config/webpack.config.js"
+    "ionic_webpack": "./src/config/webpack.config.js"
   },
   "dependencies": {
     "@angular/common": "5.0.3",
@@ -23,15 +23,32 @@
     "@angular/http": "5.0.3",
     "@angular/platform-browser": "5.0.3",
     "@angular/platform-browser-dynamic": "5.0.3",
+    "@ionic-native/camera": "^4.5.3",
     "@ionic-native/core": "4.4.0",
+    "@ionic-native/file-transfer": "^4.5.3",
+    "@ionic-native/http": "^4.5.3",
+    "@ionic-native/image-picker": "^4.5.3",
+    "@ionic-native/photo-library": "^4.5.3",
+    "@ionic-native/photo-viewer": "^4.5.3",
     "@ionic-native/splash-screen": "4.4.0",
     "@ionic-native/status-bar": "4.4.0",
     "@ionic/storage": "2.1.3",
-    "cordova-ios": "^4.5.4",
+    "com-sarriaroman-photoviewer": "^1.1.16",
+    "com.synconset.imagepicker": "^2.1.10",
+    "cordova-android": "6.3.0",
+    "cordova-ios": "4.5.4",
+    "cordova-plugin-add-swift-support": "^1.6.0",
+    "cordova-plugin-advanced-http": "^1.11.0",
+    "cordova-plugin-camera": "^4.0.2",
+    "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^2.0.1",
+    "cordova-plugin-file": "^4.3.3",
+    "cordova-plugin-file-transfer": "^1.7.1",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.1.16",
+    "cordova-plugin-photo-library": "^2.1.0",
     "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-telerik-imagepicker": "^2.1.8",
     "cordova-plugin-whitelist": "^1.3.3",
     "emulate": "1.0.2",
     "exif-js": "^2.3.0",
@@ -52,7 +69,21 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-photo-library": {
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "To choose photos"
+      },
+      "com.synconset.imagepicker": {
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "your usage message"
+      },
+      "cordova-plugin-advanced-http": {},
+      "cordova-plugin-camera": {
+        "CAMERA_USAGE_DESCRIPTION": "Leafload would like to access to your camera to take a photo",
+        "PHOTOLIBRARY_USAGE_DESCRIPTION": "Leafload would like to access to your photo library in order to select an image"
+      },
+      "com-sarriaroman-photoviewer": {},
+      "cordova-plugin-file": {},
+      "cordova-plugin-file-transfer": {}
     },
     "platforms": [
       "ios"

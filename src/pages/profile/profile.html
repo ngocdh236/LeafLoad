@@ -1,25 +1,59 @@
-<ion-header>
+<ion-header no-border *ngIf="isUserLoggedIn">
 
   <ion-navbar>
-    <ion-title text-center>Username</ion-title>
+    <ion-title>{{username}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
+<ion-content *ngIf="isUserLoggedIn">
 
-<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="user-info">
+    <div class="figures">
+      <p>{{mediaArray.length}}</p>
+      <ion-note>posts</ion-note>
 
-  <ion-list>
-    <ion-item no-lines *ngFor="let media of mediaArray">
-      <p>username</p>
-      <img [src]="media.thumbnail">
-      <h4>{{media.title}}</h4>
-      <p>{{media.description}}</p>
-    </ion-item>
-  </ion-list>
+    </div>
 
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+    <button id="modify-user-data-button" (click)="modifyUserData($event)">Edit Profile</button>
+    <button id="log-out-button" icon-only (click)="presentLogoutAlert()">
+      <ion-icon name="ios-log-out"></ion-icon>
+    </button>
+  </div>
 
+  <ion-item no-padding></ion-item>
+
+  <ion-item class="layout-options" no-padding>
+
+    <button ion-button color="dark" clear (click)="switchLayoutGridLayout()">
+      <ion-icon *ngIf="shouldDisplayGridLayout" name="ios-grid"></ion-icon>
+      <ion-icon *ngIf="shouldDisplayVerticalFlowLayout" name="ios-grid-outline"></ion-icon>
+    </button>
+
+    <button ion-button color="dark" clear (click)="switchLayoutToVerticalFlowLayout()">
+      <ion-icon *ngIf="shouldDisplayVerticalFlowLayout" name="ios-list-box"></ion-icon>
+      <ion-icon *ngIf="shouldDisplayGridLayout" name="ios-list-box-outline"></ion-icon>
+    </button>
+
+  </ion-item>
+
+  <div *ngIf="shouldDisplayGridLayout">
+    <page-grid-template [mediaArray]="mediaArray" (didSelectItem)="didSelectItem($event)"></page-grid-template>
+  </div>
+
+  <div *ngIf="shouldDisplayVerticalFlowLayout">
+    <div *ngFor="let media of mediaArray">
+      <page-post-template [mediaData]="media" (like)="like($event)" (comment)="comment($event)"></page-post-template>
+    </div>
+  </div>
+</ion-content>
+
+<ion-content *ngIf="!isUserLoggedIn">
+  <page-login-template (login)="onLogin($event)"
+                       (signUp)="onSignUp($event)"
+                       (skip)="onSkip($event)"
+                       [showSkipButton]='false'></page-login-template>
 </ion-content>

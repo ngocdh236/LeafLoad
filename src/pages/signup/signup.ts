@@ -1,11 +1,8 @@
-import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
-import {User} from "../../interfaces/user";
-import {UserDataProvider} from "../../providers/user-data/user-data";
-import {HttpErrorResponse} from "@angular/common/http";
-import {HomePage} from "../home/home";
-import {TabsPage} from "../tabs/tabs";
-import {LoginPage} from "../login/login";
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { User } from "../../interfaces/user";
+import { UserDataProvider } from "../../providers/user-data/user-data";
+import { HttpErrorResponse } from "@angular/common/http";
 
 /**
  * Generated class for the SignupPage page.
@@ -24,7 +21,8 @@ export class SignupPage {
     username: '',
     password: '',
     email: '',
-    full_name: ''
+    full_name: '',
+    user_id: 0
   };
   status: string;
 
@@ -37,18 +35,9 @@ export class SignupPage {
 
   signUp() {
     this.userData.signUp(this.user).subscribe(response => {
-      console.log(response);
-      this.navCtrl.push(HomePage);
+      this.navCtrl.pop();
     }, (error: HttpErrorResponse) => {
       this.status = error.error.message;
     });
-  }
-
-  login() {
-    this.navCtrl.push(LoginPage);
-  }
-
-  skip() {
-    this.navCtrl.push(TabsPage);
   }
 }

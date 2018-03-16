@@ -1,0 +1,23 @@
+page-user-profile {
+
+  .user-info {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    .figures {
+      p {
+        margin-bottom: 5px;
+      }
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  .layout-options {
+    width: 100%;
+    button {
+      width: 50%;
+    }
+  }
+}

@@ -1,8 +1,35 @@
-<ion-header>
+<ion-header no-border *ngIf="isUserLoggedIn">
+  <ion-navbar>
+    <ion-title>Upload</ion-title>
+  </ion-navbar>
 
 </ion-header>
 
+<ion-content *ngIf="!isUserLoggedIn">
+  <page-login-template (didSucceedToLogin)="onLogin($event)"
+                       (signUp)="onSignUp($event)"
+                       (skip)="onSkip($event)"
+                       [showSkipButton]='false'></page-login-template>
+</ion-content>
 
-<ion-content padding>
+<ion-content #uploadLayout text-center [hidden]="!isUserLoggedIn">
+  <div class="page-content" [hidden]="!isUserLoggedIn">
+    <img *ngIf="base64Image" [src]="base64Image" />
+
+    <form *ngIf="base64Image">
+      <input [(ngModel)]="media.title" name="title" placeholder="Title">
+      <textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>
+    </form>
+
+    <button class="option-buttons" icon-only (click)="selectCamera()">
+      <ion-icon name="ios-camera-outline"></ion-icon>
+    </button>
+
+    <button class="option-buttons" icon-only (click)="selectGallery()">
+      <ion-icon name ="ios-image-outline"></ion-icon>
+    </button>
+
+    <button [disabled]="!base64Image" id="upload-button" (click)="uploadMedia()">Upload</button>
+  </div>
 
 </ion-content>

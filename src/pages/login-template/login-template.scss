@@ -1,0 +1,28 @@
+page-login-template {
+  .logo {
+    margin-top: 15%;
+    margin-bottom: 20px;
+    img {
+      width: 40%;
+      height: auto;
+    }
+  }
+
+  input {
+    background-color: #fafafa;
+    border-radius: 5px;
+    border: $default-border;
+    padding: 20px;
+    width: 65%;
+    height: 30px;
+    margin-bottom: 10px;
+  }
+
+  button {
+    @extend %default-button;
+    color: white;
+    background-color: #50A050;
+    width: 65%;
+    height: 40px;
+  }
+}

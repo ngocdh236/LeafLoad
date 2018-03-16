@@ -1,0 +1,34 @@
+<div class="header">
+  <h5 class="media-content" *ngIf="username" (click)="usernameClicked()">{{username}}</h5>
+
+  <button icon-only (click)="showMediaOptions()">
+    <ion-icon name="more"></ion-icon>
+  </button>
+</div>
+
+<div class="media">
+  <img [src]="(mediaData.filename | thumbnail: 'large')" (click)="displayPhotoViewer()">
+</div>
+
+
+<button *ngIf="!liked" ion-button color="dark" clear (click)="emitLikeEvent()"
+        [disabled]="isLoadingLikes">
+  <ion-icon name="ios-leaf-outline"></ion-icon>
+</button>
+
+<button *ngIf="liked" ion-button clear (click)="emitUnLikeEvent()"
+        [disabled]="isLoadingLikes">
+  <ion-icon name="ios-leaf"></ion-icon>
+</button>
+
+<button ion-button color="dark" clear (click)="emitCommentEvent()"
+        [disabled]="isLoadingComments">
+  <ion-icon name="ios-text-outline"></ion-icon>
+</button>
+
+<h6 class="media-content" *ngIf="likes.length > 0" (click)="likeCountingLabelClicked()">{{likes.length}} likes</h6>
+<h6 class="media-content" *ngIf="mediaData.title">{{mediaData.title}}</h6>
+<p class="media-content" *ngIf="mediaData.description">{{mediaData.description}}</p>
+<ion-note class="media-content">{{mediaData.time_added | createdDate}}</ion-note>
+
+

@@ -1,3 +1,35 @@
 page-upload {
 
+  .page-content {
+    input, textarea {
+      border-radius: 5px;
+      border: $default-border;
+      padding: 20px;
+      width: 80%;
+      height: 30px;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      height: auto;
+    }
+
+    #upload-button {
+      @extend %default-button;
+      background-color: #50A050;
+      color: white;
+      width: 80%;
+      height: 40px;
+
+    }
+
+    .option-buttons {
+      @extend %default-button;
+      border: none;
+      width: 45%;
+      height: 40px;
+      font-size: 120%;
+    }
+  }
+
 }

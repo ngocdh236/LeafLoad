@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import {MediaDataProvider} from "../../providers/media-data/media-data";
+import { NavController, Events } from 'ionic-angular';
+import { MediaDataProvider } from "../../providers/media-data/media-data";
+
+const DidDeletePostEvent = "DidDeletePostEvent";
+const UserDidUploadMediaEvent = "UserDidUploadMediaEvent";
 
 @Component({
   selector: 'page-home',
@@ -12,23 +15,34 @@ export class HomePage {
   numberOfFilesPerRequest = 10;
   infiniteScroll: any;
 
-  constructor(public navCtrl: NavController, public mediaData: MediaDataProvider) {
+  constructor(public navCtrl: NavController,
+              public mediaData: MediaDataProvider,
+              private events: Events) {
     this.currentPage = 0;
     this.mediaArray = [];
+
+    this.events.subscribe(DidDeletePostEvent, (mediaFile) => {
+      this.didDeleteMediaFile(mediaFile);
+    });
+
+    events.subscribe(UserDidUploadMediaEvent, () => {
+      this.doRefresh(null);
+    });
   }
 
   ionViewDidLoad() {
-    this.loadMediaFiles(this.currentPage);
+    this.loadMediaFiles(this.currentPage, null);
   }
 
-  loadMediaFiles(page: number) {
-    this.mediaData.getMediaFiles(this.currentPage, this.numberOfFilesPerRequest).subscribe(res => {
-      console.log(res);
+  loadMediaFiles(page: number, completionHandler: ((succeeded: boolean) => void) = null) {
+    this.mediaData.getMediaFiles(page, this.numberOfFilesPerRequest).subscribe(res => {
+
+      if (completionHandler) {
+        completionHandler(true);
+      }
+
       const newFiles: any = res;
       newFiles.map(media => {
-        const temp = media.filename.split('.');
-        const thumbName = temp[0] + '-tn320.png';
-        media.thumbnail = this.mediaData.mediaURL + thumbName;
         this.mediaArray.push(media);
       });
 
@@ -46,6 +60,37 @@ export class HomePage {
 
   doInfinite(infiniteScroll) {
     this.infiniteScroll = infiniteScroll;
-    this.loadMediaFiles(this.currentPage);
+    this.loadMediaFiles(this.currentPage, null);
+  }
+
+  like(event: any) {
+  }
+
+  comment(event: any) {
+  }
+
+  doRefresh(refresher) {
+    // Load the first page (page number 0) of 10 items.
+    this.loadMediaFiles(0, (succeeded) => {
+      if (succeeded) {
+        this.currentPage = 0;
+        this.mediaArray = [];
+      }
+
+      if (refresher) {
+        refresher.complete();
+      }
+    });
+  }
+
+  // TODO: Refactor this. This seems an heavy operation.
+  private didDeleteMediaFile(ev: any) {
+    for (let i = 0; i < this.mediaArray.length ; i++) {
+      if (this.mediaArray[i].file_id == ev.file_id) {
+
+        this.mediaArray.splice(i, 1);
+      }
+    }
+    this.mediaArray = this.mediaArray;
   }
 }
